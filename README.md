@@ -12,7 +12,12 @@ Edit `js/config.js`:
   - `email`: the form opens the visitor's mail app with the answers filled in.
   - Leave both empty and the form shows the answers as a message to copy and send you another way.
 
-Text lives in `index.html` (plain words, easy to edit). The small feature tiles are in `js/tiles.js`. `js/pad.js` is the draw-it-yourself pen demo, and it uses `js/ink.js`, a copy of the board's real shape recogniser. Colours are at the top of `css/site.css`.
+Text lives in `index.html` (plain words, easy to edit; the "Why I built this" letter has an `EDIT ME` comment). Other files:
+- `js/showcase.js`: the scroll-driven feature scenes (write, ask, read, fix, draw, worksheets) and the little animated pictures reused in the tool popups.
+- `js/tiles.js`: the tool cards and their popups. The periodic table and calculator are looping videos recorded from the real board (`assets/shots/`).
+- `js/pad.js`: the draw-it-yourself pen demo.
+- `js/demo.js`: the pinned "watch Atlas work it out" scene.
+- Colours and fonts are at the top of `css/site.css`.
 
 ## Put it online
 **GitHub Pages (free)**

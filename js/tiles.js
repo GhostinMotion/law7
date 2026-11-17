@@ -1,19 +1,78 @@
-/* "And all the small things that add up": the tiles are drawn from this list. Edit the words here. */
+/* The tools grid and its popups. Each tool is one object below: change the words here, not in the HTML.
+   "video" tools play a short recording of the real board. "scene" tools play one of the hand-drawn pages from js/showcase.js. */
 (function(){
-  var g=document.getElementById("tiles");if(!g)return;
-  var I="#0F1B3D",C="#2A44F5",Y="#FFD93D",R="#E8456B",M="#12A184",L="#E9EEFB",W="#fff";
-  var S='stroke="'+I+'" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"';
+  var g=document.getElementById("tiles"),dlg=document.getElementById("toolDlg");if(!g||!dlg)return;
+  var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var T=[
-    ["Periodic table","Tap any element for its mass, configuration, electronegativity and common oxidation states.","#E7E0FF",'<rect x="5" y="6" width="16" height="16" rx="3" fill="'+Y+'" '+S+'/><rect x="27" y="6" width="16" height="16" rx="3" fill="'+W+'" '+S+'/><rect x="5" y="27" width="16" height="16" rx="3" fill="'+W+'" '+S+'/><rect x="27" y="27" width="16" height="16" rx="3" fill="'+C+'" '+S+'/><path d="M10 14h6" stroke="'+I+'" stroke-width="3" stroke-linecap="round"/>'],
-    ["Scientific calculator","Brackets, powers, sin, cos, log, degrees or radians. Nothing leaves the board.","#DCE5FF",'<rect x="8" y="5" width="32" height="38" rx="6" fill="'+W+'" '+S+'/><rect x="13" y="10" width="22" height="9" rx="2" fill="'+L+'" '+S+'/><path d="M15 27h4M29 27h4M15 35h4M29 35h4M22 25v12" stroke="'+C+'" stroke-width="3" stroke-linecap="round"/>'],
-    ["Molar mass & moles","Type a formula and get the molar mass and percent composition. Claude uses the same numbers.","#D4F4EC",'<path d="M24 5l15 9v18l-15 9-15-9V14z" fill="'+W+'" '+S+'/><circle cx="24" cy="24" r="4" fill="'+M+'"/><path d="M24 12v8M24 28v8M13 18l7 4M28 26l7 4" stroke="'+I+'" stroke-width="3" stroke-linecap="round"/>'],
-    ["Graphs & diagrams","Ask for a graph, a flowchart or a force diagram and Claude draws it next to your work.","#FFF3A8",'<path d="M7 6v34h35" fill="none" '+S+'/><path d="M12 33c6-2 8-14 14-14s7 10 14 4" fill="none" stroke="'+R+'" stroke-width="4" stroke-linecap="round"/><circle cx="26" cy="19" r="3" fill="'+C+'"/>'],
-    ["PDFs & photos","Open a worksheet or past paper as a page and write straight on it. Export pages back to PDF.","#FFD9E2",'<path d="M12 5h17l9 9v27a3 3 0 0 1-3 3H12a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3z" fill="'+W+'" '+S+'/><path d="M29 5v9h9" fill="'+L+'" '+S+'/><rect x="13" y="26" width="22" height="11" rx="3" fill="'+R+'"/><path d="M17 31h14" stroke="'+W+'" stroke-width="3" stroke-linecap="round"/>'],
-    ["Study packs","Drop in a practice pack and every question becomes its own page. Folders keep each subject apart.","#DCE5FF",'<path d="M5 12a3 3 0 0 1 3-3h10l4 5h18a3 3 0 0 1 3 3v21a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3z" fill="'+Y+'" '+S+'/><path d="M5 20h38" '+S+'/>']
+    {id:"periodic",t:"Periodic table",s:"All 118 elements. Search, tap, colour by type or state.",tint:"#E7E0FF",video:"assets/shots/periodic",
+     lead:"Every element one tap away. Search by name, symbol or number and the rest of the table fades out.",
+     can:["Find an element by name, symbol or atomic number","See its mass, electron configuration, electronegativity, oxidation states, melting and boiling point","Colour the table by type, or by state at room temperature","Put the table on your page with your picked elements highlighted"],
+     atlas:"Atlas looks element numbers up here too, so it never has to remember an atomic mass."},
+    {id:"calc",t:"Scientific calculator",s:"Brackets, powers, sin, log. It never leaves the board.",tint:"#DCE5FF",video:"assets/shots/calculator",
+     lead:"A proper scientific calculator, one tap from your page. The answer updates as you type.",
+     can:["Brackets, powers, roots, factorial and percent","sin, cos, tan and their inverses, plus ln and log","Degrees or radians, and Ans to reuse your last answer","Write the result straight onto your page"],
+     atlas:"Atlas checks its own arithmetic with a calculator too, instead of doing sums in its head."},
+    {id:"lookup",t:"Chemistry lookups",s:"Molar mass and percent composition, calculated, not guessed.",tint:"#D4F4EC",scene:"lookup",
+     lead:"Ask Atlas for a molar mass or a percent composition and it works it out from verified element data.",
+     can:["Molar mass of any formula, brackets included","What each element contributes","Percent composition","Atomic mass, configuration, electronegativity and states"],
+     atlas:"It never guesses an atomic mass. Every mole, mass and percentage question uses these numbers."},
+    {id:"draw",t:"Graphs and diagrams",s:"Atlas draws them on your page, then checks them.",tint:"#FFF3A8",scene:"draw",
+     lead:"Ask for a picture and Atlas draws it by hand next to your notes.",
+     can:["Flowcharts, force diagrams, cells and labelled pictures","Graphs of functions, plotted on your page","A worked solution, written step by step","A method animated step by step, so you can follow it"],
+     atlas:"After it draws, Atlas looks at the board and fixes anything that overlaps. You can move, erase or write over everything it draws."},
+    {id:"pages",t:"Worksheets and study packs",s:"Write on your real PDFs and photos. Export to PDF.",tint:"#FFD9E2",scene:"pages",
+     lead:"Bring your real homework in and write on it.",
+     can:["Open a PDF or a past paper: every page is a page you can write on","Paste a screenshot or add a photo of a worksheet","Drop in a study pack and each question becomes its own page","Folders keep each subject apart","Export the pages you pick as one PDF with bookmarks"],
+     atlas:"Atlas sees the page and your writing together, so it can answer about the exact question you're on."},
+    {id:"together",t:"Study together",s:"Two people, one page, Atlas helping both.",tint:"#FFE9C7",scene:"together",
+     lead:"Study with a friend on the same page, with Atlas helping both of you.",
+     can:["Write on the same page together","See each other's writing appear","Ask Atlas on the shared page","I link the two of you up myself"],
+     atlas:"It already works, but I switch it on by hand. Ask me and tell me who you want to study with."}
   ];
-  T.forEach(function(t){
-    var d=document.createElement("article");d.className="tile";
-    d.innerHTML='<div class="ti" style="background:'+t[2]+'"><svg viewBox="0 0 48 48" aria-hidden="true">'+t[3]+'</svg></div><div><h3>'+t[0]+'</h3><p>'+t[1]+'</p></div>';
-    g.appendChild(d);
+  var cur=0,raf=0,tl=0;
+  var ICON={periodic:"▦",calc:"＝",lookup:"⚗",draw:"✎",pages:"▤",together:"⇄"};
+
+  /* ---------- the grid ---------- */
+  T.forEach(function(t,i){
+    var b=document.createElement("button");b.type="button";b.className="tile";b.setAttribute("aria-haspopup","dialog");
+    b.innerHTML='<span class="tmedia" style="background:'+t.tint+'"></span><span class="tbody"><strong>'+t.t+'</strong><span>'+t.s+'</span></span><span class="tgo" aria-hidden="true">See it</span>';
+    var m=b.firstChild;
+    if(t.video){var im=new Image();im.src=t.video+".jpg";im.alt="";im.loading="lazy";im.decoding="async";m.appendChild(im);m.classList.add("shot")}
+    else if(window.Law7Scene&&Law7Scene.has(t.scene)){var h=document.createElement("span");h.className="tsc";m.appendChild(h);t._thumb=Law7Scene.make(t.scene,h,"");m.classList.add("scn")}
+    b.addEventListener("click",function(){open(i,b)});
+    g.appendChild(b);
   });
+  function thumbs(){T.forEach(function(t){if(t._thumb){t._thumb.parts=null;Law7Scene.paint(t._thumb,1)}})}
+  (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(thumbs);
+  thumbs();
+
+  /* ---------- the popup ---------- */
+  var M=document.getElementById("tdM"),opener=null;
+  function stop(){cancelAnimationFrame(raf);raf=0}
+  function show(i){
+    cur=i;var t=T[i];stop();M.innerHTML="";M.style.background=t.tint;
+    document.getElementById("tdT").textContent=t.t;document.getElementById("tdL").textContent=t.lead;
+    document.getElementById("tdU").innerHTML=t.can.map(function(x){return "<li>"+x+"</li>"}).join("");
+    document.getElementById("tdA").innerHTML="<b>How Atlas uses it.</b> "+t.atlas;
+    document.getElementById("tdN").textContent="Next: "+T[(i+1)%T.length].t;
+    if(t.video){
+      var v=document.createElement("video");v.muted=true;v.loop=true;v.playsInline=true;v.setAttribute("playsinline","");v.setAttribute("aria-label",t.t+" in use");v.poster=t.video+".jpg";v.src=t.video+".mp4";v.preload="auto";
+      if(reduce){v.controls=true}else{v.autoplay=true}
+      M.appendChild(v);if(!reduce){var pr=v.play();if(pr&&pr.catch)pr.catch(function(){v.controls=true})}
+    }else if(window.Law7Scene){
+      var c=Law7Scene.make(t.scene,M,t.t+", animated");M.classList.add("sc-m");
+      var start=performance.now(),LEN=6200,HOLD=1800;
+      (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(function(){c.parts=null});
+      var tick=function(now){var e=(now-start)%(LEN+HOLD),p=Math.min(1,e/LEN);Law7Scene.paint(c,reduce?1:p);if(!reduce)raf=requestAnimationFrame(tick)};
+      raf=requestAnimationFrame(tick);
+    }
+    M.classList.toggle("sc-m",!t.video);
+  }
+  function open(i,btn){opener=btn||opener;show(i);if(dlg.showModal){if(!dlg.open)dlg.showModal()}else dlg.setAttribute("open","");document.documentElement.classList.add("lock")}
+  function close(){stop();var v=M.querySelector("video");if(v)v.pause();if(dlg.close)dlg.close();else dlg.removeAttribute("open");document.documentElement.classList.remove("lock");if(opener)try{opener.focus({preventScroll:true})}catch(e){}}
+  document.getElementById("tdX").addEventListener("click",close);
+  document.getElementById("tdN").addEventListener("click",function(){show((cur+1)%T.length)});
+  dlg.addEventListener("click",function(e){if(e.target===dlg)close()});
+  dlg.addEventListener("close",function(){stop();document.documentElement.classList.remove("lock")});
+  dlg.addEventListener("keydown",function(e){if(e.key==="ArrowRight")show((cur+1)%T.length);else if(e.key==="ArrowLeft")show((cur+T.length-1)%T.length)});
 })();

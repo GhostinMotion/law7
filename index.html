@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Law7: write it by hand, ask Claude when you're stuck</title>
-<meta name="description" content="Law7 is a hand-written study notebook where Claude explains the part you circled, right on your page. Join the test: only 10 spots.">
-<meta property="og:title" content="Law7: write it by hand, ask Claude when you're stuck">
-<meta property="og:description" content="Law7: a study notebook where Claude answers on your page. Only 10 test spots.">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Law7: write it by hand, ask Atlas when you're stuck</title>
+<meta name="description" content="Law7 is a hand-written study notebook where Atlas explains the part you circled, right on your page. Join the test: only 10 spots.">
+<meta property="og:title" content="Law7: write it by hand, ask Atlas when you're stuck">
+<meta property="og:description" content="Law7: a study notebook where Atlas answers on your page. Only 10 test spots.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#F4F7FD">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -20,9 +20,11 @@
 <header class="bar" id="bar">
   <div class="wrap">
     <a class="logo" href="#top"><img src="assets/favicon.svg" alt="" width="32" height="32"><span>Law<b>7</b></span></a>
-    <nav aria-label="Sections"><a href="#watch">Watch it work</a><a href="#try">Try the pen</a><a href="#how">Features</a><a href="#projects">My projects</a><a href="#test">The test</a><a href="#faq">Questions</a></nav>
+    <nav aria-label="Sections"><a href="#watch">Watch it work</a><a href="#how">Features</a><a href="#small">Tools</a><a href="#story">Why I built it</a><a href="#projects">My projects</a><a href="#test">The test</a></nav>
     <a class="btn main small" href="#apply">Apply to test</a>
+    <button type="button" class="menub" id="menuB" aria-expanded="false" aria-controls="menuP" aria-label="Menu"><i></i><i></i></button>
   </div>
+  <div class="menup" id="menuP" hidden><a href="#watch">Watch it work</a><a href="#how">Features</a><a href="#try">Try the pen</a><a href="#small">Tools</a><a href="#projects">My projects</a><a href="#test">The test</a><a href="#faq">Questions</a></div>
 </header>
 
 <main id="top">
@@ -30,15 +32,15 @@
 <section class="hero" aria-labelledby="h1">
   <div class="wrap">
     <div>
-      <h1 id="h1"><span>Write it by hand.</span><span>Ask Claude when you're stuck.</span></h1>
-      <p class="lede">I made Law7 because I wanted to study on my tablet like I do on paper, but with something to ask when I get stuck. Circle the bit you don't get and Claude explains it right on your page.</p>
+      <h1 id="h1"><span>Write it by hand.</span><span>Ask Atlas when you're stuck.</span></h1>
+      <p class="lede">I made Law7 because I wanted to study on my tablet like I do on paper, but with something to ask when I get stuck. Circle the bit you don't get and Atlas explains it right on your page.</p>
       <div class="ctas"><a class="btn main" href="#apply">Apply to test</a><a class="btn" href="#watch">Watch it work</a></div>
       <div class="slots"><span class="dots" data-dots aria-hidden="true"></span><span data-slots-text>Only 10 testers</span></div>
       <p class="aside">made between exams, so go easy on me</p>
     </div>
 
     <div class="deck" aria-hidden="true">
-      <svg class="board" viewBox="0 0 520 440" role="img" aria-label="A physics page with handwritten notes and Claude's answer">
+      <svg class="board" viewBox="0 0 520 440" role="img" aria-label="A physics page with handwritten notes and Atlas's answer">
         <rect x="2" y="2" width="516" height="436" rx="20" fill="#fff" stroke="#0F1B3D" stroke-width="4"/>
         <g stroke="#E1E8F7" stroke-width="2"><path d="M20 86H500M20 146H500M20 206H500M20 266H500M20 326H500M20 386H500"/></g>
         <text class="scribble pop" style="--d:.2s" x="34" y="62" font-size="36" font-weight="700" fill="#2A44F5">Newton's second law</text>
@@ -55,7 +57,7 @@
           <path d="M190 330H214" stroke="#2A44F5" stroke-width="3" stroke-dasharray="5 5"/>
           <rect x="214" y="270" width="284" height="132" rx="12" fill="#fff" stroke="#0F1B3D" stroke-width="3.5"/>
           <rect x="214" y="270" width="12" height="132" rx="6" fill="#2A44F5"/>
-          <rect x="242" y="284" width="64" height="24" rx="12" fill="#0F1B3D"/><text x="274" y="301" font-family="Instrument,sans-serif" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">Claude</text>
+          <rect x="242" y="284" width="64" height="24" rx="12" fill="#0F1B3D"/><text x="274" y="301" font-family="Instrument,sans-serif" font-size="13" font-weight="700" fill="#fff" text-anchor="middle">Atlas</text>
           <text class="scribble" x="242" y="338" font-size="27" font-weight="500" fill="#0F1B3D">Net force 12 N, mass 3 kg.</text>
           <text class="scribble" x="242" y="376" font-size="30" font-weight="700" fill="#12A184">a = F ÷ m = 4 m/s²</text>
         </g>
@@ -70,21 +72,21 @@
         <text class="scribble" x="22" y="62" font-size="34" font-weight="700" fill="#0F1B3D">circle it,</text><text class="scribble" x="22" y="100" font-size="34" font-weight="700" fill="#0F1B3D">then ask</text></svg>
     </div>
   </div>
-  <a class="cue" href="#watch" aria-label="Scroll down to watch it work"><span class="mouse" aria-hidden="true"><i></i></span><span>Scroll to watch Claude work</span></a>
+  <a class="cue" href="#watch" aria-label="Scroll down to watch it work"><span class="mouse" aria-hidden="true"><i></i></span><span>Scroll to watch Atlas work</span></a>
 </section>
 
 <!-- PINNED SCENE -->
 <section class="pin" id="watch" style="--steps:5" aria-labelledby="watchH">
   <div class="pin-stick">
     <div class="pin-head">
-      <h2 id="watchH">Watch Claude work it out.</h2>
+      <h2 id="watchH">Watch Atlas work it out.</h2>
     </div>
     <div class="stage">
       <svg id="demo" viewBox="0 0 900 400" role="img" aria-labelledby="demoTitle demoDesc">
         <title id="demoTitle">Solving 2x + 6 = 14 step by step</title>
-        <desc id="demoDesc">Claude circles the +6, moves it across the equals sign so it becomes minus 6, combines 14 minus 6 into 8, moves the 2 across so it divides, and finds x equals 4.</desc>
+        <desc id="demoDesc">Atlas circles the +6, moves it across the equals sign so it becomes minus 6, combines 14 minus 6 into 8, moves the 2 across so it divides, and finds x equals 4.</desc>
       </svg>
-      <div class="note"><b>Claude</b><span id="noteText" aria-hidden="true"></span></div>
+      <div class="note"><b>Atlas</b><span id="noteText" aria-hidden="true"></span></div>
       <div class="bigscroll" id="bigScroll" aria-hidden="true"><b>Scroll</b><svg viewBox="0 0 48 64" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6v44M8 36l16 16 16-16"/></svg></div>
     </div>
     <div class="ctl" role="group" aria-label="Playback">
@@ -96,96 +98,121 @@
   </div>
 </section>
 
+<!-- WHAT IT DOES -->
+<section class="how" id="how" aria-labelledby="howH">
+  <div class="wrap how-head">
+    <h2 id="howH">Everything a study session needs, and nothing that gets in the way.</h2>
+    <p>Scroll slowly. Each page below writes itself, the way it does in Law7.</p>
+  </div>
+  <div class="chaps">
+    <article class="chap" data-scene="write" style="--tint:#FFF3A8">
+      <div class="chap-in">
+        <div class="ct"><h3>Write like it's paper.</h3><p>Pen, finger or trackpad. On a tablet it ignores your palm, so you can rest your hand like you do on paper. No keyboard, no stopping to type out your sums.</p><ul class="chips"><li>Apple Pencil ready</li><li>Palm ignored</li><li>Pinch to zoom</li></ul></div>
+        <div class="sc" data-alt="A page where Newton's second law, F equals m times a, is written by hand, with a pencil beside it."></div>
+      </div>
+    </article>
+    <article class="chap" data-scene="ask" style="--tint:#DCE5FF">
+      <div class="chap-in">
+        <div class="ct"><h3>Circle what you don't get.</h3><p>Draw a box around the exact line you're stuck on and press Ask. Atlas only looks inside the box, so the answer is about that one bit and not your whole page.</p><ul class="chips"><li>Ask about a box</li><li>or the whole page</li><li>Type it, or say it</li></ul></div>
+        <div class="sc" data-alt="Two lines of algebra with the second one boxed, and an ask bar underneath reading: why did the 4 change sign?"></div>
+      </div>
+    </article>
+    <article class="chap" data-scene="read" style="--tint:#FFD9E2">
+      <div class="chap-in">
+        <div class="ct"><h3>Atlas reads your handwriting.</h3><p>It reads your pen, even when it's messy. If one word is too scribbled it tells you which one instead of guessing, and numbers like atomic masses are looked up, never made up.</p><ul class="chips"><li>Reads your pen</li><li>Says what it can't read</li><li>No invented numbers</li></ul></div>
+        <div class="sc" data-alt="A chemistry line with a smudged number. Atlas shows what it read and asks whether the unclear number is 58.44, then confirms the looked-up value."></div>
+      </div>
+    </article>
+    <article class="chap" data-scene="fix" style="--tint:#D4F4EC">
+      <div class="chap-in">
+        <div class="ct"><h3>It finds your mistake. It doesn't just hand you the answer.</h3><p>Show your working and ask if it's right. Atlas finds the first line that goes wrong, tells you why, and lets you fix it yourself. Want the full solution? Just ask. You choose how it teaches.</p><ul class="chips"><li>Hints first</li><li>Short answers</li><li>Exam tips</li><li>Plain words</li><li>Easier ways, checked</li></ul></div>
+        <div class="sc" data-alt="Four lines of algebra with the second circled as a mistake. Atlas explains the sign error with Hint, Next step and Full buttons, and the student rewrites the line correctly."></div>
+      </div>
+    </article>
+    <article class="chap" data-scene="draw" style="--tint:#E7E0FF">
+      <div class="chap-in">
+        <div class="ct"><h3>Atlas draws it for you.</h3><p>Ask for a flowchart, a graph, a force diagram or a cell. Atlas draws it by hand on your page next to your notes, then checks that nothing overlaps. It can write out a whole worked solution too, step by step.</p><ul class="chips"><li>Flowcharts</li><li>Graphs</li><li>Force diagrams</li><li>Worked solutions</li></ul></div>
+        <div class="sc" data-alt="A hand-drawn flowchart from light to glucose to oxygen, and a graph of y equals x squared minus 4, both drawn by Atlas."></div>
+      </div>
+    </article>
+    <article class="chap" data-scene="pages" style="--tint:#FFF3A8">
+      <div class="chap-in">
+        <div class="ct"><h3>Write straight on your homework.</h3><p>Open a worksheet, a past paper or a photo of a textbook page and write right on it. Every page keeps your ink. When you're done, pick the pages you want and export them as one PDF with bookmarks.</p><ul class="chips"><li>PDFs and photos</li><li>Folders per subject</li><li>Export to PDF</li></ul></div>
+        <div class="sc" data-alt="A PDF worksheet with a balanced chemical equation written by hand, and an arrow to a single exported PDF."></div>
+      </div>
+    </article>
+  </div>
+</section>
+
 <!-- TRY THE PEN -->
 <section class="try" id="try" aria-labelledby="tryH">
   <div class="wrap">
     <div class="try-copy">
-      <h2 id="tryH">Try the pen.</h2>
-      <p>This is the same pen that's in Law7, running right here. Write your name, sketch something, or solve a quick sum. It should feel like paper, even on a phone.</p>
-      
-      <p class="try-fine">On a tablet it ignores your palm, so you can rest your hand like normal.</p>
+      <h2 id="tryH">Your turn. Pick up the pen.</h2>
+      <p>This is the same pen that's inside Law7. Write your name, work a sum, doodle a cell. It should feel like paper, even on a phone.</p>
+      <p class="try-fine">On a tablet it ignores your palm, so rest your hand like you would on a desk.</p>
     </div>
     <div class="padwrap">
-      <div class="padbar" role="toolbar" aria-label="Pen tools">
-        <button type="button" class="tl on" data-tool="pen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1-4L16.5 4.5a2.1 2.1 0 013 3L8 19l-4 1z"/></svg>Pen</button>
+      <div class="padbar" role="toolbar" aria-label="Pen">
         <span class="sw" id="padSw" role="group" aria-label="Colour"></span>
+        <span class="padspace"></span>
+        <button type="button" class="tl ghost" id="padUndo">Undo</button>
         <button type="button" class="tl ghost" id="padClear">Clear</button>
       </div>
       <div class="padbox">
-        <canvas id="pad" width="800" height="520" aria-label="A drawing pad: draw with a mouse, finger or pen"></canvas>
-        <div class="padbadge" id="padBadge" aria-live="polite">Write or draw anything</div>
-        <div class="padghost" id="padGhost" aria-hidden="true"><i></i><span>watch</span></div>
+        <canvas id="pad" width="800" height="520" aria-label="A drawing pad: write or draw with a mouse, finger or pen"></canvas>
+        <div class="padhint" id="padHint" aria-hidden="true"><span>Write here</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- WHAT IT DOES -->
-<section class="how" id="how" aria-labelledby="howH">
-  <div class="wrap">
-    <h2 id="howH">Everything a study session needs, and nothing that gets in the way.</h2>
-    <div class="rows">
-      <article class="row">
-        <div><h3>Write the way you already do.</h3><p>Pen, finger or trackpad, no typing needed. Claude reads your handwriting, even when it's messy, and if it can't read a bit it tells you which bit instead of guessing.</p><span class="tag">it reads your handwriting</span></div>
-        <div class="vis" data-depth="-0.05" aria-hidden="true">
-          <svg viewBox="0 0 480 340"><rect x="4" y="4" width="472" height="332" rx="22" fill="#fff" stroke="#0F1B3D" stroke-width="4"/><g stroke="#E1E8F7" stroke-width="2"><path d="M24 80H456M24 140H456M24 200H456M24 260H456"/></g>
-            <text class="scribble" x="40" y="68" font-size="52" font-weight="700" fill="#0F1B3D">photosynthesis</text>
-            <path d="M40 84C150 96 250 74 410 86" fill="none" stroke="#12A184" stroke-width="6" stroke-linecap="round"/>
-            <path d="M40 150C100 130 140 170 200 150S300 130 360 152" fill="none" stroke="#2A44F5" stroke-width="5" stroke-linecap="round"/>
-            <path d="M40 214H300" fill="none" stroke="#E8456B" stroke-width="5" stroke-linecap="round"/><circle cx="300" cy="214" r="7" fill="#E8456B"/>
-            <g font-family="Instrument,sans-serif" font-size="15" font-weight="700"><rect x="40" y="276" width="62" height="32" rx="16" fill="#0F1B3D"/><text x="71" y="297" fill="#fff" text-anchor="middle">pen</text><rect x="112" y="276" width="70" height="32" rx="16" fill="none" stroke="#0F1B3D" stroke-width="3"/><text x="147" y="297" fill="#0F1B3D" text-anchor="middle">finger</text><rect x="192" y="276" width="100" height="32" rx="16" fill="none" stroke="#0F1B3D" stroke-width="3"/><text x="242" y="297" fill="#0F1B3D" text-anchor="middle">trackpad</text></g></svg></div>
-      </article>
-      <article class="row">
-        <div><h3>Circle it, then ask.</h3><p>Draw a box around the thing you're stuck on and press Ask. Claude only looks at what's inside, so it answers about that bit and not your whole page.</p><span class="tag">ask about just that bit</span></div>
-        <div class="vis" data-depth="0.06" aria-hidden="true">
-          <svg viewBox="0 0 480 340"><rect x="4" y="4" width="472" height="332" rx="22" fill="#fff" stroke="#0F1B3D" stroke-width="4"/><g stroke="#E1E8F7" stroke-width="2"><path d="M24 80H456M24 140H456M24 200H456"/></g>
-            <text class="scribble" x="40" y="68" font-size="44" font-weight="700" fill="#0F1B3D">3x − 4 = 2x + 9</text>
-            <text class="scribble" x="40" y="128" font-size="44" font-weight="700" fill="#0F1B3D">3x − 2x = 9 − 4</text>
-            <rect x="26" y="88" width="330" height="62" rx="6" fill="rgba(42,68,245,.07)" stroke="#2A44F5" stroke-width="3.5" stroke-dasharray="10 7"/>
-            <g fill="#fff" stroke="#2A44F5" stroke-width="3"><rect x="20" y="82" width="12" height="12"/><rect x="350" y="82" width="12" height="12"/><rect x="20" y="144" width="12" height="12"/><rect x="350" y="144" width="12" height="12"/></g>
-            <rect x="26" y="60" width="0" height="0"/>
-            <rect x="40" y="226" width="400" height="64" rx="32" fill="#fff" stroke="#0F1B3D" stroke-width="4"/><text font-family="Instrument,sans-serif" font-size="19" fill="#46526F" x="68" y="265">Why did the 4 change sign?</text><circle cx="406" cy="258" r="22" fill="#2A44F5"/><path d="M398 258H414M408 250L416 258L408 266" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      </article>
-      <article class="row">
-        <div><h3>It teaches. It doesn't just answer.</h3><p>Ask if your working is right and it finds the first line that goes wrong and nudges you, instead of rewriting your page. Want the full solution? Ask and it gives it. You can also set it to hints first, short answers, exam tips or plain words.</p><span class="tag">your page, not a chat log</span></div>
-        <div class="vis" data-depth="-0.06" aria-hidden="true">
-          <svg viewBox="0 0 480 340"><rect x="4" y="4" width="472" height="332" rx="22" fill="#fff" stroke="#0F1B3D" stroke-width="4"/><g stroke="#E1E8F7" stroke-width="2"><path d="M24 80H456M24 140H456M24 200H456M24 260H456"/></g>
-            <text class="scribble" x="40" y="68" font-size="44" font-weight="700" fill="#0F1B3D">3x − 2x = 9 − 4</text><text class="scribble" x="40" y="128" font-size="44" font-weight="700" fill="#0F1B3D">x = 5</text>
-            <g transform="rotate(-3 300 230)"><rect x="150" y="160" width="290" height="140" rx="12" fill="#fff" stroke="#0F1B3D" stroke-width="3.5"/><rect x="150" y="160" width="12" height="140" rx="6" fill="#2A44F5"/><rect x="178" y="174" width="64" height="24" rx="12" fill="#0F1B3D"/><text font-family="Instrument,sans-serif" font-size="13" font-weight="700" fill="#fff" x="210" y="191" text-anchor="middle">Claude</text>
-              <text class="scribble" x="178" y="232" font-size="26" font-weight="500" fill="#0F1B3D">Moving a term across</text><text class="scribble" x="178" y="264" font-size="26" font-weight="500" fill="#0F1B3D">the = flips its sign.</text><text class="scribble" x="178" y="292" font-size="26" font-weight="700" fill="#12A184">+ 4 → − 4 ✓</text>
-              <circle cx="300" cy="158" r="10" fill="#E8456B" stroke="#0F1B3D" stroke-width="3"/></g></svg></div>
-      </article>
-      <article class="row">
-        <div><h3>Bring your own pages.</h3><p>Open a PDF, paste a screenshot, add a photo of a worksheet, or start blank. I keep one folder per subject so chemistry doesn't end up under Arabic.</p><span class="tag">worksheets welcome</span></div>
-        <div class="vis" data-depth="0.05" aria-hidden="true">
-          <svg viewBox="0 0 480 340"><g stroke="#0F1B3D" stroke-width="4" stroke-linejoin="round"><rect x="70" y="40" width="230" height="270" rx="14" fill="#E9EEFB" transform="rotate(-9 185 175)"/><rect x="120" y="34" width="230" height="270" rx="14" fill="#FFF3A8" transform="rotate(5 235 169)"/><rect x="170" y="28" width="236" height="280" rx="14" fill="#fff"/></g>
-            <g stroke="#E1E8F7" stroke-width="3"><path d="M192 90H384M192 130H384M192 170H384M192 210H340"/></g>
-            <rect x="192" y="48" width="70" height="26" rx="13" fill="#E8456B"/><text font-family="Instrument,sans-serif" font-size="14" font-weight="700" fill="#fff" x="227" y="66" text-anchor="middle">PDF</text>
-            <path d="M192 250C230 232 262 266 300 248S360 238 384 252" fill="none" stroke="#2A44F5" stroke-width="5" stroke-linecap="round"/></svg></div>
-      </article>
-      <article class="row">
-        <div><h3>Claude draws, too.</h3><p>Ask for a flowchart, a force diagram or a cell and Claude draws it next to your work, then checks nothing overlaps. It can write a whole solution out step by step too.</p><span class="tag">diagrams on your page</span></div>
-        <div class="vis" data-depth="-0.05" aria-hidden="true">
-          <svg viewBox="0 0 480 340"><rect x="4" y="4" width="472" height="332" rx="22" fill="#fff" stroke="#0F1B3D" stroke-width="4"/><g stroke="#E1E8F7" stroke-width="2"><path d="M24 80H456M24 140H456M24 200H456M24 260H456"/></g>
-            <g fill="none" stroke="#0F1B3D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="38" y="52" width="120" height="64" rx="12" fill="#E9EEFB"/><rect x="180" y="52" width="120" height="64" rx="12" fill="#FFF3A8"/><rect x="322" y="52" width="120" height="64" rx="12" fill="#D4F4EC"/>
-              <path d="M158 84H178M170 76L180 84L170 92" stroke="#2A44F5"/><path d="M300 84H320M312 76L322 84L312 92" stroke="#2A44F5"/>
-              <path d="M240 116V176M232 166L240 178L248 166" stroke="#E8456B"/><rect x="150" y="190" width="180" height="64" rx="12" fill="#fff"/>
-            </g>
-            <g class="scribble" font-size="26" font-weight="700" fill="#0F1B3D" text-anchor="middle"><text x="98" y="92">light</text><text x="240" y="92">glucose</text><text x="382" y="92">O₂</text><text x="240" y="230">energy</text></g>
-            <g transform="translate(290 272)"><rect width="160" height="34" rx="17" fill="#2A44F5"/><text x="80" y="22" text-anchor="middle" font-family="Instrument,sans-serif" font-size="14" font-weight="700" fill="#fff">✦ drawn by Claude</text></g></svg></div>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-<!-- SMALL THINGS -->
+<!-- TOOLS -->
 <section class="small" id="small" aria-labelledby="smallH">
   <div class="wrap">
     <h2 id="smallH">The tools are already in there.</h2>
-    <p class="small-sub">No switching apps in the middle of homework. Claude uses these too, so the numbers are looked up, not guessed.</p>
+    <p class="small-sub">No switching apps in the middle of homework. Tap one to see it work.</p>
     <div class="tiles" id="tiles"></div>
+  </div>
+</section>
+<dialog class="tdlg" id="toolDlg" aria-labelledby="tdT">
+  <div class="tdlg-in">
+    <button type="button" class="tdlg-x" id="tdX" aria-label="Close">✕</button>
+    <div class="tdlg-media" id="tdM"></div>
+    <div class="tdlg-txt">
+      <h3 id="tdT"></h3><p class="tdlg-lead" id="tdL"></p>
+      <h4>What you can do</h4><ul id="tdU"></ul>
+      <p class="tdlg-atlas" id="tdA"></p>
+      <button type="button" class="btn small tdlg-next" id="tdN">Next tool</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- WHY I BUILT IT -->
+<section class="story" id="story" aria-labelledby="whoH">
+  <div class="wrap">
+    <div class="letter" data-depth="0.03">
+      <i class="tape" aria-hidden="true"></i>
+      <h2 id="whoH">Why I built this.</h2>
+      <!-- EDIT ME: this is Ghost's own story. Change anything that isn't true to you. -->
+      <p>Hi, I'm Ghost.</p>
+      <p>I'm a high-school student. The night before a test I'm usually alone with a worksheet, a pen and one question I can't get past.</p>
+      <p>Asking a chatbot meant leaving my notes, typing the problem out and copying the answer back. Half the time I copied it without understanding it.</p>
+      <p>So I built what I wanted: a notebook where I write by hand, circle the bit I'm stuck on, and Atlas answers right there on the page. It points at my mistake instead of just handing me the answer.</p>
+      <p>I built it for me. Now I want to see if it helps you too. That's what the test is for. If something confuses you or breaks, tell me. I read everything.</p>
+      <p class="sign">Ghost</p>
+    </div>
+    <div class="story-side">
+      <h3>What I promise</h3>
+      <ul class="promise">
+        <li><b>Your boards are yours.</b> Every tester has a private code and a private space. Other testers can't open yours.</li>
+        <li><b>Atlas teaches, it doesn't think for you.</b> Hints first if you want them, the full answer whenever you ask.</li>
+        <li><b>I read your feedback.</b> It comes straight to me, and I fix what confuses you.</li>
+        <li><b>You can leave any time.</b> Tell me and I close your code.</li>
+      </ul>
+      <p class="made">I made it while studying</p>
+      <ul class="subjects"><li>Chemistry</li><li>Physics</li><li>Biology</li><li>Environmental science</li><li>Arabic</li><li>Islamic studies</li><li>English</li></ul>
+    </div>
   </div>
 </section>
 
@@ -196,30 +223,19 @@
     <p class="small-sub">Law7 is a test right now. If it helps people, this is the plan. The testers decide the order.</p>
     <div class="road">
       <article><b>Now</b><h3>The test</h3><p>10 testers, their own private boards, and me fixing whatever confuses you.</p></article>
-      <article><b>Next</b><h3>Study together</h3><p>Two people on one shared page with Claude helping both, for the friend you revise with.</p></article>
-      <article><b>Then</b><h3>Its own app</h3><p>A proper app for tablets and phones, not just a link.</p></article>
-      <article><b>Later</b><h3>For schools</h3><p>Something a class and a teacher can actually use. A student project that grows up.</p></article>
+      <article><b>Now</b><h3>Study together</h3><p>Two people on one shared page, Atlas helping both. It already works. Ask me and I'll switch it on for you.</p></article>
+      <article><b>Next</b><h3>Its own app</h3><p>A proper app for tablets and phones, not just a link.</p></article>
+      <article><b>Later</b><h3>For schools</h3><p>Something a whole class and a teacher can use. A student project that grows up.</p></article>
     </div>
   </div>
 </section>
 
-<!-- WHO -->
-<section class="who" aria-labelledby="whoH">
-  <div class="wrap">
-    <div>
-      <h2 id="whoH">I made it for me. Now it's for you too.</h2>
-      <p>I'm a high-school student, so Law7 is built around high-school work. It's good for anything you can write or draw, and I made it while studying these:</p>
-      <ul class="subjects"><li>Chemistry</li><li>Physics</li><li>Biology</li><li>Environmental science</li><li>Arabic</li><li>Islamic studies</li><li>English</li></ul>
-    </div>
-    <div class="scrawl" data-depth="0.05">Made by a student, for the night before the test.<small>It's early and a bit rough. You, the testers, decide what it becomes.</small></div>
-  </div>
-</section>
 
 <!-- MY OTHER PROJECTS -->
 <section class="projects" id="projects" aria-labelledby="projH">
   <div class="wrap">
     <h2 id="projH">My other projects</h2>
-    <p class="sub">Law7 is one of the things I build. These are the rest: some running, some half-built, one still just a plan.</p>
+    <p class="sub">Law7 is one of the things I build. These are the rest: most of them work already, one is still a prototype and one is just a plan.</p>
     <div class="pgrid" id="pgrid"></div>
   </div>
 </section>
@@ -228,12 +244,12 @@
 <section class="test" id="test" aria-labelledby="testH">
   <div class="wrap">
     <h2 id="testH">Be one of the first 10 people to try it.</h2>
-    <p class="sub">Law7 is in a small test, just 10 people, so I can actually fix what's confusing. Every tester gets their own private code, their own boards and a daily allowance of Claude questions.</p>
+    <p class="sub">Law7 is in a small test, just 10 people, so I can actually fix what's confusing. Every tester gets their own private code, their own boards and a daily allowance of Atlas questions.</p>
     <div class="spots"><span class="dots" data-dots aria-hidden="true"></span><strong data-open-text>10 of 10 spots open</strong></div>
     <ol class="path">
       <li><h3>Apply</h3><p>Fill in the short form below. Tell me what you study and what device you use.</p></li>
       <li><h3>Get your code</h3><p>If there's a spot, I send you a private code. It opens your own boards.</p></li>
-      <li><h3>Study as usual</h3><p>Use it for real homework and revision. You start with 30 Claude questions a day.</p></li>
+      <li><h3>Study as usual</h3><p>Use it for real homework and revision. You start with 30 Atlas questions a day.</p></li>
       <li><h3>Tell me what's confusing</h3><p>Tap Send feedback in the board when something's unclear or breaks. That's the whole job.</p></li>
     </ol>
   </div>
@@ -272,20 +288,20 @@
     <details><summary>Does it cost anything?</summary><p>Testing is free.</p></details>
     <details><summary>What do I need?</summary><p>A modern browser. A tablet with a pen is the best fit, but a finger, a mouse or a laptop trackpad also work.</p></details>
     <details><summary>Who can see my boards?</summary><p>Your boards are saved under your own code and other testers can't open them.</p></details>
-    <details><summary>Will Claude just do my homework?</summary><p>It shows its steps on your page so you can follow them. How much you ask for is up to you. I'd say use it when you're stuck, not instead of trying first.</p></details>
-    <details><summary>Why only 10 people?</summary><p>I'm paying for the Claude questions myself, and a small group lets me fix things fast and keeps everyone's daily allowance generous.</p></details>
+    <details><summary>Will Atlas just do my homework?</summary><p>It shows its steps on your page so you can follow them. How much you ask for is up to you. I'd say use it when you're stuck, not instead of trying first.</p></details>
+    <details><summary>Why only 10 people?</summary><p>I'm paying for the Atlas questions myself, and a small group lets me fix things fast and keeps everyone's daily allowance generous.</p></details>
     <details><summary>How do I leave the test?</summary><p>Stop using it whenever you like. If you want your code closed, message me and I'll do it.</p></details>
   </div></div>
 </section>
 </main>
 
-<footer><div class="wrap"><span>Law7: an early test, made by Ghost. Claude is made by Anthropic; Law7 is an independent project.<br>© 2026 GhostlyMatters</span><a href="#top">Back to top</a></div></footer>
+<footer><div class="wrap"><span>Law7: an early test, made by Ghost. Atlas runs on Claude, made by Anthropic; Law7 is an independent project.<br>© 2026 GhostlyMatters</span><a href="#top">Back to top</a></div></footer>
 
 <script src="js/config.js"></script>
 <script src="js/demo.js"></script>
 <script src="js/projects.js"></script>
-<script src="js/ink.js"></script>
 <script src="js/pad.js"></script>
+<script src="js/showcase.js"></script>
 <script src="js/tiles.js"></script>
 <script src="js/main.js"></script>
 </body>

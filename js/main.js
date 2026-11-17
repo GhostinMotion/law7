@@ -11,6 +11,16 @@
 
   /* top bar */
   var bar=$("#bar"),cue=$(".cue");
+  /* phone / tablet menu */
+  var mb=$("#menuB"),mp=$("#menuP");
+  if(mb&&mp){
+    var shut=function(){mp.hidden=true;mb.setAttribute("aria-expanded","false")};
+    mb.addEventListener("click",function(){var o=mp.hidden;mp.hidden=!o;mb.setAttribute("aria-expanded",o?"true":"false")});
+    mp.addEventListener("click",function(e){if(e.target.closest("a"))shut()});
+    document.addEventListener("keydown",function(e){if(e.key==="Escape")shut()});
+    document.addEventListener("pointerdown",function(e){if(!mp.hidden&&!e.target.closest("#menuP,#menuB"))shut()});
+    window.addEventListener("resize",function(){if(window.innerWidth>1020)shut()});
+  }
   /* drifting paper + parallax objects */
   var grid=$("#paperGrid"),floats=$$("[data-depth]"),hero=$(".hero"),ticking=false;
   function parallax(){
