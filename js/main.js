@@ -35,8 +35,8 @@
       var rot=el.style.transform.match(/rotate\([^)]*\)/);var rt=el.dataset.rot||(rot?rot[0]:"");el.dataset.rot=rt;
       var dy;
       if(el.classList.contains("float")){
-        /* hero objects start exactly where they were drawn and drift a little as you scroll away. On phones and tablets the picture sits under the text, so they stay glued to their page */
-        dy=window.innerWidth<=900?0:-y*d;
+        /* hero objects start exactly where they were drawn and drift a little as you scroll away. On phones and tablets (any size, either way up) they stay glued to the page, so nothing slides off it */
+        dy=(window.innerWidth<=1100||(window.matchMedia&&matchMedia("(hover:none)").matches))?0:-y*d;
       }else dy=-mid*d;
       el.style.transform="translate3d(0,"+dy.toFixed(1)+"px,0) "+rt;
     });
