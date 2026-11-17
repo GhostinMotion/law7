@@ -1,5 +1,5 @@
 (function(){
-  var cfg=window.INKBOARD||{},reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var cfg=window.LAW7||{},reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
 
   /* tester spots */
@@ -10,12 +10,13 @@
   $$("[data-board]").forEach(function(a){a.href=cfg.boardUrl||"#";a.target="_blank";a.rel="noopener"});
 
   /* top bar */
-  var bar=$("#bar");
+  var bar=$("#bar"),cue=$(".cue");
   /* drifting paper + parallax objects */
   var grid=$("#paperGrid"),floats=$$("[data-depth]"),hero=$(".hero"),ticking=false;
   function parallax(){
     ticking=false;var y=window.scrollY||0,vh=window.innerHeight;
     bar.classList.toggle("solid",y>12);
+    if(cue)cue.classList.toggle("gone",y>60);
     if(reduce)return;
     grid.style.transform="translate3d(0,"+(-(y*.22)%40).toFixed(1)+"px,0)";
     floats.forEach(function(el){
@@ -34,10 +35,24 @@
   if(reduce)document.documentElement.classList.add("no-pin");
   var scrub=$("#scrub"),bPlay=$("#bPlay"),icoPlay=$("#icoPlay"),icoPause=$("#icoPause");
   function range(){var top=pin.getBoundingClientRect().top+(window.scrollY||0);return {top:top,len:pin.offsetHeight-window.innerHeight}}
-  function show(p){P=Math.max(0,Math.min(5,p));demo.render(P);scrub.value=P}
+  /* the big SCROLL word covers the picture until the first scroll, click or Play */
+  var stage=$(".stage",pin),touched=false;
+  function paintGuide(){if(P>.03&&!touched){touched=true;stage.classList.add("go")}}
+  function show(p){P=Math.max(0,Math.min(5,p));demo.render(P);scrub.value=P;paintGuide()}
   function pinned(){return !reduce&&getComputedStyle($(".pin-stick",pin)).position==="sticky"}
-  function fromScroll(){if(!pinned()||drive)return;var r=range(),p=((window.scrollY||0)-r.top)/r.len*5;show(p)}
-  window.addEventListener("scroll",fromScroll,{passive:true});window.addEventListener("resize",fromScroll);
+  /* the page scroll sets a target, and the picture eases towards it: a wheel click or a flick never makes the scene jump */
+  var target=0,ez=0,ezLast=0;
+  function ease(t){
+    ez=0;var dt=Math.min(.05,(t-ezLast)/1000);ezLast=t;if(drive)return;
+    var d=target-P;if(Math.abs(d)<.0015){show(target);return}
+    show(P+d*(1-Math.exp(-dt*11)));ez=requestAnimationFrame(ease);
+  }
+  function fromScroll(now){
+    if(!pinned()||drive)return;var r=range();target=Math.max(0,Math.min(5,((window.scrollY||0)-r.top)/r.len*5));
+    if(now===true){show(target);return}
+    if(!ez){ezLast=performance.now();ez=requestAnimationFrame(ease)}
+  }
+  window.addEventListener("scroll",function(){fromScroll()},{passive:true});window.addEventListener("resize",function(){fromScroll(true)});
   var gl=0;
   function syncScroll(p){if(pinned()){var r=range();window.scrollTo({top:r.top+r.len*p/5,behavior:"auto"})}}
   function endGlide(){cancelAnimationFrame(gl);gl=0}
@@ -62,17 +77,14 @@
     show(np);raf=requestAnimationFrame(tick);
   }
   function stop(){if(playing)setPlaying(false)}
-  ["wheel","touchstart","keydown"].forEach(function(ev){window.addEventListener(ev,function(){endGlide();stop()},{passive:true})});
+  ["wheel","touchstart","keydown"].forEach(function(ev){window.addEventListener(ev,function(){endGlide();stop();drive=false},{passive:true})});
   bPlay.addEventListener("click",function(){
     if(playing){setPlaying(false);return}
     if(P>=4.99){show(0)}
-    setPlaying(true);
+    touched=true;stage.classList.add("go");setPlaying(true);
   });
-  $("#bReset").addEventListener("click",function(){setPlaying(false);goto(0,true)});
-  $("#bBack").addEventListener("click",function(){setPlaying(false);goto(Math.max(0,Math.ceil(P-.001)-1),true)});
-  $("#bFwd").addEventListener("click",function(){setPlaying(false);goto(Math.min(5,Math.floor(P+.001)+1),true)});
-  scrub.addEventListener("input",function(){setPlaying(false);goto(parseFloat(scrub.value),false)});
-  fromScroll();
+  scrub.addEventListener("input",function(){setPlaying(false);touched=true;stage.classList.add("go");goto(parseFloat(scrub.value),false)});
+  fromScroll(true);
 
   /* apply form */
   var form=$("#applyForm"),msg=$("#formMsg"),btn=$("#sendBtn");
@@ -84,12 +96,12 @@
     spam.hidden=none||!isMail(cIn.value);
   }
   cIn.addEventListener("input",syncContact);nc.addEventListener("change",syncContact);syncContact();
-  var SPAM='<div class="spamnote"><strong>Check your spam or junk folder.</strong> Our reply can land there. If you see it, press “Not spam”.</div>';
+  var SPAM='<div class="spamnote"><strong>Check your spam or junk folder.</strong> My reply can land there. If you see it, press “Not spam”.</div>';
   form.addEventListener("submit",function(e){
     e.preventDefault();var f=new FormData(form),name=(f.get("name")||"").trim(),contact=(f.get("contact")||"").trim();
     if(nc.checked)contact="None: you already have my contact"+((wi.value||"").trim()?" ("+wi.value.trim()+")":"");
     if(!name||!contact){msg.innerHTML='<div class="msg warn">Add your first name and how we can reach you.</div>';return}
-    var lines=["Ink Board tester application","Name: "+name,"Reach me at: "+contact,"I study: "+(f.get("study")||"").trim(),"Device: "+f.get("device"),"I'd use it for: "+(f.get("why")||"").trim()],text=lines.join("\n");
+    var lines=["Law7 tester application","Name: "+name,"Reach me at: "+contact,"I study: "+(f.get("study")||"").trim(),"Device: "+f.get("device"),"I'd use it for: "+(f.get("why")||"").trim()],text=lines.join("\n");
     var ap=cfg.apply||{};
     if(ap.emailjs&&ap.emailjs.key&&ap.emailjs.service&&ap.emailjs.notify){
       btn.disabled=true;var ej=ap.emailjs;
@@ -97,17 +109,17 @@
         return fetch("https://api.emailjs.com/api/v1.0/email/send",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({service_id:ej.service,template_id:tpl,user_id:ej.key,template_params:pr})}).then(function(r){if(!r.ok)throw 0})};
       var jobs=[send(ej.notify,{})];
       if(ej.reply&&/^\S+@\S+\.\S+$/.test(contact))jobs.push(send(ej.reply,{to_email:contact}).catch(function(){}));
-      Promise.all(jobs).then(function(){msg.innerHTML='<div class="msg ok">Thanks, '+esc(name)+'. '+(jobs.length>1?"A confirmation is on its way to your email. ":"")+'We read every application and will reply if there is a spot.'+(jobs.length>1?SPAM:"")+'</div>';form.reset();syncContact()})
+      Promise.all(jobs).then(function(){msg.innerHTML='<div class="msg ok">Thanks, '+esc(name)+'. '+(jobs.length>1?"A confirmation is on its way to your email. ":"")+'I read every application and will reply if there is a spot.'+(jobs.length>1?SPAM:"")+'</div>';form.reset();syncContact()})
         .catch(function(){msg.innerHTML='<div class="msg warn">That did not send. Check your connection and try again.</div>'})
         .then(function(){btn.disabled=false});
     }else if(ap.formEndpoint){
       btn.disabled=true;
       fetch(ap.formEndpoint,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({name:name,contact:contact,study:f.get("study"),device:f.get("device"),why:f.get("why"),message:text})})
-        .then(function(r){if(!r.ok)throw 0;msg.innerHTML='<div class="msg ok">Thanks, '+esc(name)+'. We read every application and will reply if there is a spot.</div>';form.reset()})
+        .then(function(r){if(!r.ok)throw 0;msg.innerHTML='<div class="msg ok">Thanks, '+esc(name)+'. I read every application and will reply if there is a spot.</div>';form.reset()})
         .catch(function(){msg.innerHTML='<div class="msg warn">That did not send. Check your connection and try again.</div>'})
         .then(function(){btn.disabled=false});
     }else if(ap.email){
-      location.href="mailto:"+ap.email+"?subject="+encodeURIComponent("Ink Board tester application")+"&body="+encodeURIComponent(text);
+      location.href="mailto:"+ap.email+"?subject="+encodeURIComponent("Law7 tester application")+"&body="+encodeURIComponent(text);
       msg.innerHTML='<div class="msg ok">Your mail app should open with your answers filled in. Press send there to finish.</div>';
     }else{
       var done=function(ok){msg.innerHTML='<div class="msg ok">'+(ok?"Copied. ":"")+'Send this message to the person who shared this page:<pre>'+esc(text)+'</pre></div>'};

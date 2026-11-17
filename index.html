@@ -3,13 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ink Board: write it by hand, ask Claude when you're stuck</title>
-<meta name="description" content="Ink Board is a hand-written study notebook where Claude explains the part you circled, right on your page. Join the test: only 10 spots.">
-<meta property="og:title" content="Ink Board: write it by hand, ask Claude when you're stuck">
-<meta property="og:description" content="A study notebook where Claude answers on your page. Only 10 test spots.">
+<title>Law7: write it by hand, ask Claude when you're stuck</title>
+<meta name="description" content="Law7 is a hand-written study notebook where Claude explains the part you circled, right on your page. Join the test: only 10 spots.">
+<meta property="og:title" content="Law7: write it by hand, ask Claude when you're stuck">
+<meta property="og:description" content="Law7: a study notebook where Claude answers on your page. Only 10 test spots.">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#F4F7FD">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <link rel="preload" href="assets/fonts/display.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/site.css">
 </head>
@@ -18,8 +19,8 @@
 
 <header class="bar" id="bar">
   <div class="wrap">
-    <a class="logo" href="#top"><img src="assets/favicon.svg" alt="" width="30" height="30">Ink Board</a>
-    <nav aria-label="Sections"><a href="#watch">Watch it work</a><a href="#how">What it does</a><a href="#test">The test</a><a href="#faq">Questions</a></nav>
+    <a class="logo" href="#top"><img src="assets/favicon.svg" alt="" width="32" height="32"><span>Law<b>7</b></span></a>
+    <nav aria-label="Sections"><a href="#watch">Watch it work</a><a href="#try">Try the pen</a><a href="#how">Features</a><a href="#projects">My projects</a><a href="#test">The test</a><a href="#faq">Questions</a></nav>
     <a class="btn main small" href="#apply">Apply to test</a>
   </div>
 </header>
@@ -30,9 +31,10 @@
   <div class="wrap">
     <div>
       <h1 id="h1"><span>Write it by hand.</span><span>Ask Claude when you're stuck.</span></h1>
-      <p class="lede">Ink Board is a notebook for your tablet or laptop. Circle the part you don't get, and Claude explains it right on your page.</p>
+      <p class="lede">I made Law7 because I wanted to study on my tablet like I do on paper, but with something to ask when I get stuck. Circle the bit you don't get and Claude explains it right on your page.</p>
       <div class="ctas"><a class="btn main" href="#apply">Apply to test</a><a class="btn" href="#watch">Watch it work</a></div>
       <div class="slots"><span class="dots" data-dots aria-hidden="true"></span><span data-slots-text>Only 10 testers</span></div>
+      <p class="aside">made between exams, so go easy on me</p>
     </div>
 
     <div class="deck" aria-hidden="true">
@@ -68,14 +70,14 @@
         <text class="scribble" x="22" y="62" font-size="34" font-weight="700" fill="#0F1B3D">circle it,</text><text class="scribble" x="22" y="100" font-size="34" font-weight="700" fill="#0F1B3D">then ask</text></svg>
     </div>
   </div>
+  <a class="cue" href="#watch" aria-label="Scroll down to watch it work"><span class="mouse" aria-hidden="true"><i></i></span><span>Scroll to watch Claude work</span></a>
 </section>
 
 <!-- PINNED SCENE -->
 <section class="pin" id="watch" style="--steps:5" aria-labelledby="watchH">
   <div class="pin-stick">
     <div class="pin-head">
-      <h2 id="watchH">Watch Claude work it out, one step at a time.</h2>
-      <p>Scroll through it, or use the buttons. Pause, go back a step, start over, as often as you like.</p>
+      <h2 id="watchH">Watch Claude work it out.</h2>
     </div>
     <div class="stage">
       <svg id="demo" viewBox="0 0 900 400" role="img" aria-labelledby="demoTitle demoDesc">
@@ -83,16 +85,43 @@
         <desc id="demoDesc">Claude circles the +6, moves it across the equals sign so it becomes minus 6, combines 14 minus 6 into 8, moves the 2 across so it divides, and finds x equals 4.</desc>
       </svg>
       <div class="note"><b>Claude</b><span id="noteText" aria-hidden="true"></span></div>
+      <div class="bigscroll" id="bigScroll" aria-hidden="true"><b>Scroll</b><svg viewBox="0 0 48 64" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6v44M8 36l16 16 16-16"/></svg></div>
     </div>
     <div class="ctl" role="group" aria-label="Playback">
-      <button id="bReset" type="button" aria-label="Start over"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 1 0 3-6.2"/><path d="M4 3v5h5"/></svg></button>
-      <button id="bBack" type="button" aria-label="Back one step"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 5v14L8 12z"/><rect x="5" y="5" width="3" height="14" rx="1"/></svg></button>
       <button id="bPlay" class="play" type="button" aria-label="Play"><svg id="icoPlay" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg><svg id="icoPause" viewBox="0 0 24 24" fill="currentColor" hidden><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></button>
-      <button id="bFwd" type="button" aria-label="Forward one step"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5v14l10-7z"/><rect x="16" y="5" width="3" height="14" rx="1"/></svg></button>
       <input id="scrub" type="range" min="0" max="5" step="0.001" value="0" aria-label="Position in the walkthrough">
       <span class="count" id="count" aria-live="polite">Step 1 of 6</span>
     </div>
     <ol class="sr" id="stepsText"></ol>
+  </div>
+</section>
+
+<!-- TRY THE PEN -->
+<section class="try" id="try" aria-labelledby="tryH">
+  <div class="wrap">
+    <div class="try-copy">
+      <h2 id="tryH">Go on, draw something.</h2>
+      <p>This is my real pen code, running right here. Draw a circle, a box or a line, then <strong>hold still for a sec</strong>. It snaps clean, and if you keep the pen down you can resize it. I added this because my circles always came out like potatoes.</p>
+      <ol class="try-steps">
+        <li><i>1</i><span>Draw a circle, box, triangle or line</span></li>
+        <li><i>2</i><span>Hold still. Law7 tidies it up</span></li>
+        <li><i>3</i><span>Switch to the highlighter and mark it up</span></li>
+      </ol>
+      <p class="try-fine">It never touches your handwriting. I'd be annoyed too.</p>
+    </div>
+    <div class="padwrap">
+      <div class="padbar" role="toolbar" aria-label="Pen tools">
+        <button type="button" class="tl on" data-tool="pen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1-4L16.5 4.5a2.1 2.1 0 013 3L8 19l-4 1z"/></svg>Pen</button>
+        <button type="button" class="tl" data-tool="hl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4l9 9-5 5-9-9z" fill="currentColor" fill-opacity=".25"/><path d="M13 18l-2.5 2.5H4V19l5-5"/></svg>Highlighter</button>
+        <span class="sw" id="padSw" role="group" aria-label="Colour"></span>
+        <button type="button" class="tl ghost" id="padClear">Clear</button>
+      </div>
+      <div class="padbox">
+        <canvas id="pad" width="800" height="520" aria-label="A drawing pad: draw with a mouse, finger or pen"></canvas>
+        <div class="padbadge" id="padBadge" aria-live="polite">Draw a shape, then hold still</div>
+        <div class="padghost" id="padGhost" aria-hidden="true"><i></i><span>watch</span></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -102,7 +131,7 @@
     <h2 id="howH">Everything a study session needs, and nothing that gets in the way.</h2>
     <div class="rows">
       <article class="row">
-        <div><h3>Write the way you already do.</h3><p>Pen, finger or trackpad. Hold a line for three seconds and it snaps straight. Scribble over a mistake and it disappears.</p><span class="tag">no typing needed</span></div>
+        <div><h3>Write the way you already do.</h3><p>Pen, finger or trackpad. Hold a line, circle or box still and it snaps clean. There's a highlighter too, and if you scribble over a mistake it just disappears.</p><span class="tag">no typing needed</span></div>
         <div class="vis" data-depth="-0.05" aria-hidden="true">
           <svg viewBox="0 0 480 340"><rect x="4" y="4" width="472" height="332" rx="22" fill="#fff" stroke="#0F1B3D" stroke-width="4"/><g stroke="#E1E8F7" stroke-width="2"><path d="M24 80H456M24 140H456M24 200H456M24 260H456"/></g>
             <text class="scribble" x="40" y="68" font-size="52" font-weight="700" fill="#0F1B3D">photosynthesis</text>
@@ -112,7 +141,7 @@
             <g font-family="Instrument,sans-serif" font-size="15" font-weight="700"><rect x="40" y="276" width="62" height="32" rx="16" fill="#0F1B3D"/><text x="71" y="297" fill="#fff" text-anchor="middle">pen</text><rect x="112" y="276" width="70" height="32" rx="16" fill="none" stroke="#0F1B3D" stroke-width="3"/><text x="147" y="297" fill="#0F1B3D" text-anchor="middle">finger</text><rect x="192" y="276" width="100" height="32" rx="16" fill="none" stroke="#0F1B3D" stroke-width="3"/><text x="242" y="297" fill="#0F1B3D" text-anchor="middle">trackpad</text></g></svg></div>
       </article>
       <article class="row">
-        <div><h3>Circle it, then ask.</h3><p>Use the Ask box on anything: a line of working, a diagram, a whole question. Claude looks at that part of your page and answers about it.</p><span class="tag">ask about just that bit</span></div>
+        <div><h3>Circle it, then ask.</h3><p>Draw a box around the thing you're stuck on and press Ask. Claude only looks at what's inside, so it answers about that bit and not your whole page.</p><span class="tag">ask about just that bit</span></div>
         <div class="vis" data-depth="0.06" aria-hidden="true">
           <svg viewBox="0 0 480 340"><rect x="4" y="4" width="472" height="332" rx="22" fill="#fff" stroke="#0F1B3D" stroke-width="4"/><g stroke="#E1E8F7" stroke-width="2"><path d="M24 80H456M24 140H456M24 200H456"/></g>
             <text class="scribble" x="40" y="68" font-size="44" font-weight="700" fill="#0F1B3D">3x − 4 = 2x + 9</text>
@@ -123,7 +152,7 @@
             <rect x="40" y="226" width="400" height="64" rx="32" fill="#fff" stroke="#0F1B3D" stroke-width="4"/><text font-family="Instrument,sans-serif" font-size="19" fill="#46526F" x="68" y="265">Why did the 4 change sign?</text><circle cx="406" cy="258" r="22" fill="#2A44F5"/><path d="M398 258H414M408 250L416 258L408 266" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </article>
       <article class="row">
-        <div><h3>Answers land on your page.</h3><p>Claude writes its steps next to your working, so you can keep what helps and ignore the rest. Your notes and its answers stay in one place.</p><span class="tag">your page, not a chat log</span></div>
+        <div><h3>Answers land on your page.</h3><p>Claude writes its steps right next to your working, in its own colour. Keep what helps, ignore the rest. It's one page, not a chat log you have to scroll back through.</p><span class="tag">your page, not a chat log</span></div>
         <div class="vis" data-depth="-0.06" aria-hidden="true">
           <svg viewBox="0 0 480 340"><rect x="4" y="4" width="472" height="332" rx="22" fill="#fff" stroke="#0F1B3D" stroke-width="4"/><g stroke="#E1E8F7" stroke-width="2"><path d="M24 80H456M24 140H456M24 200H456M24 260H456"/></g>
             <text class="scribble" x="40" y="68" font-size="44" font-weight="700" fill="#0F1B3D">3x − 2x = 9 − 4</text><text class="scribble" x="40" y="128" font-size="44" font-weight="700" fill="#0F1B3D">x = 5</text>
@@ -132,14 +161,47 @@
               <circle cx="300" cy="158" r="10" fill="#E8456B" stroke="#0F1B3D" stroke-width="3"/></g></svg></div>
       </article>
       <article class="row">
-        <div><h3>Bring your own pages.</h3><p>Open a PDF, paste a screenshot, add a photo of a worksheet, or start blank. Folders keep each subject apart.</p><span class="tag">worksheets welcome</span></div>
+        <div><h3>Bring your own pages.</h3><p>Open a PDF, paste a screenshot, add a photo of a worksheet, or start blank. I keep one folder per subject so chemistry doesn't end up under Arabic.</p><span class="tag">worksheets welcome</span></div>
         <div class="vis" data-depth="0.05" aria-hidden="true">
           <svg viewBox="0 0 480 340"><g stroke="#0F1B3D" stroke-width="4" stroke-linejoin="round"><rect x="70" y="40" width="230" height="270" rx="14" fill="#E9EEFB" transform="rotate(-9 185 175)"/><rect x="120" y="34" width="230" height="270" rx="14" fill="#FFF3A8" transform="rotate(5 235 169)"/><rect x="170" y="28" width="236" height="280" rx="14" fill="#fff"/></g>
             <g stroke="#E1E8F7" stroke-width="3"><path d="M192 90H384M192 130H384M192 170H384M192 210H340"/></g>
             <rect x="192" y="48" width="70" height="26" rx="13" fill="#E8456B"/><text font-family="Instrument,sans-serif" font-size="14" font-weight="700" fill="#fff" x="227" y="66" text-anchor="middle">PDF</text>
             <path d="M192 250C230 232 262 266 300 248S360 238 384 252" fill="none" stroke="#2A44F5" stroke-width="5" stroke-linecap="round"/></svg></div>
       </article>
+      <article class="row">
+        <div><h3>Claude draws, too.</h3><p>Ask for a flowchart, a force diagram or a cell and Claude draws it next to your work, then checks nothing overlaps. It can write a whole solution out step by step too.</p><span class="tag">diagrams on your page</span></div>
+        <div class="vis" data-depth="-0.05" aria-hidden="true">
+          <svg viewBox="0 0 480 340"><rect x="4" y="4" width="472" height="332" rx="22" fill="#fff" stroke="#0F1B3D" stroke-width="4"/><g stroke="#E1E8F7" stroke-width="2"><path d="M24 80H456M24 140H456M24 200H456M24 260H456"/></g>
+            <g fill="none" stroke="#0F1B3D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="38" y="52" width="120" height="64" rx="12" fill="#E9EEFB"/><rect x="180" y="52" width="120" height="64" rx="12" fill="#FFF3A8"/><rect x="322" y="52" width="120" height="64" rx="12" fill="#D4F4EC"/>
+              <path d="M158 84H178M170 76L180 84L170 92" stroke="#2A44F5"/><path d="M300 84H320M312 76L322 84L312 92" stroke="#2A44F5"/>
+              <path d="M240 116V176M232 166L240 178L248 166" stroke="#E8456B"/><rect x="150" y="190" width="180" height="64" rx="12" fill="#fff"/>
+            </g>
+            <g class="scribble" font-size="26" font-weight="700" fill="#0F1B3D" text-anchor="middle"><text x="98" y="92">light</text><text x="240" y="92">glucose</text><text x="382" y="92">O₂</text><text x="240" y="230">energy</text></g>
+            <g transform="translate(290 272)"><rect width="160" height="34" rx="17" fill="#2A44F5"/><text x="80" y="22" text-anchor="middle" font-family="Instrument,sans-serif" font-size="14" font-weight="700" fill="#fff">✦ drawn by Claude</text></g></svg></div>
+      </article>
+      <article class="row">
+        <div><h3>Take it offline.</h3><p>Pick the pages you want, hit Export, and get one PDF with your writing on it and a bookmark for every page. For when the Wi-Fi dies the night before the test.</p><span class="tag">your notes, anywhere</span></div>
+        <div class="vis" data-depth="0.05" aria-hidden="true">
+          <svg viewBox="0 0 480 340"><g stroke="#0F1B3D" stroke-width="4" stroke-linejoin="round">
+            <rect x="34" y="70" width="140" height="190" rx="12" fill="#E9EEFB" transform="rotate(-8 104 165)"/><rect x="58" y="60" width="140" height="190" rx="12" fill="#FFF3A8" transform="rotate(3 128 155)"/><rect x="82" y="52" width="140" height="196" rx="12" fill="#fff"/>
+            <path d="M232 150H300M284 132L304 150L284 168" fill="none" stroke="#2A44F5" stroke-width="6" stroke-linecap="round"/>
+            <path d="M318 56H392L430 94V282a12 12 0 0 1-12 12H318a12 12 0 0 1-12-12V68a12 12 0 0 1 12-12Z" fill="#fff"/><path d="M392 56V94H430" fill="#E9EEFB"/></g>
+            <g stroke="#E1E8F7" stroke-width="3"><path d="M100 100H206M100 130H206M100 160H170"/></g>
+            <path d="M100 200C130 184 150 214 180 198S206 192 206 200" fill="none" stroke="#2A44F5" stroke-width="5" stroke-linecap="round"/><rect x="100" y="222" width="80" height="14" rx="3" fill="#FFD93D" opacity=".7"/>
+            <rect x="318" y="190" width="100" height="40" rx="10" fill="#E8456B"/><text x="368" y="217" text-anchor="middle" font-family="Instrument,sans-serif" font-size="20" font-weight="700" fill="#fff">PDF</text>
+            <g fill="none" stroke="#0F1B3D" stroke-width="3.5" stroke-linecap="round"><path d="M330 120H400M330 144H384M330 168H396"/></g>
+            <g transform="translate(366 262)" fill="none" stroke="#0F1B3D" stroke-width="3.5" stroke-linecap="round"><path d="M-14 -2a20 20 0 0 1 28 0M-8 5a12 12 0 0 1 16 0"/><circle cy="12" r="2" fill="#0F1B3D"/><path d="M-20 -14L20 18" stroke="#E8456B" stroke-width="4"/></g></svg></div>
+      </article>
     </div>
+  </div>
+</section>
+
+<!-- SMALL THINGS -->
+<section class="small" id="small" aria-labelledby="smallH">
+  <div class="wrap">
+    <h2 id="smallH">The small stuff I kept adding.</h2>
+    <div class="tiles" id="tiles"></div>
   </div>
 </section>
 
@@ -147,11 +209,20 @@
 <section class="who" aria-labelledby="whoH">
   <div class="wrap">
     <div>
-      <h2 id="whoH">Made for students who study with a pen in hand.</h2>
-      <p>Right now Ink Board is built for high-school students. It works for any subject you can write or draw, and it was made while studying these:</p>
+      <h2 id="whoH">I made it for me. Now it's for you too.</h2>
+      <p>I'm a high-school student, so Law7 is built around high-school work. It's good for anything you can write or draw, and I made it while studying these:</p>
       <ul class="subjects"><li>Chemistry</li><li>Physics</li><li>Biology</li><li>Environmental science</li><li>Arabic</li><li>Islamic studies</li><li>English</li></ul>
     </div>
-    <div class="scrawl" data-depth="0.05">Made by a student, for the night before the test.<small>It's an early version. The people who test it decide what it becomes.</small></div>
+    <div class="scrawl" data-depth="0.05">Made by a student, for the night before the test.<small>It's early and a bit rough. You, the testers, decide what it becomes.</small></div>
+  </div>
+</section>
+
+<!-- MY OTHER PROJECTS -->
+<section class="projects" id="projects" aria-labelledby="projH">
+  <div class="wrap">
+    <h2 id="projH">My other projects</h2>
+    <p class="sub">Law7 is one of the things I build. These are the rest: some running, some half-built, one still just a plan.</p>
+    <div class="pgrid" id="pgrid"></div>
   </div>
 </section>
 
@@ -159,13 +230,13 @@
 <section class="test" id="test" aria-labelledby="testH">
   <div class="wrap">
     <h2 id="testH">Be one of the first 10 people to try it.</h2>
-    <p class="sub">Ink Board is in a small test. Every tester gets their own private code, their own boards and a daily allowance of Claude questions, so nobody is rushed.</p>
+    <p class="sub">Law7 is in a small test, just 10 people, so I can actually fix what's confusing. Every tester gets their own private code, their own boards and a daily allowance of Claude questions.</p>
     <div class="spots"><span class="dots" data-dots aria-hidden="true"></span><strong data-open-text>10 of 10 spots open</strong></div>
     <ol class="path">
-      <li><h3>Apply</h3><p>Fill in the short form below. Tell us what you study and which device you use.</p></li>
-      <li><h3>Get your code</h3><p>If there's a spot, you get a private code. It opens your own boards.</p></li>
+      <li><h3>Apply</h3><p>Fill in the short form below. Tell me what you study and what device you use.</p></li>
+      <li><h3>Get your code</h3><p>If there's a spot, I send you a private code. It opens your own boards.</p></li>
       <li><h3>Study as usual</h3><p>Use it for real homework and revision. You start with 30 Claude questions a day.</p></li>
-      <li><h3>Tell us what's confusing</h3><p>Tap Send feedback in the board whenever something is unclear or breaks. That's the whole job.</p></li>
+      <li><h3>Tell me what's confusing</h3><p>Tap Send feedback in the board when something's unclear or breaks. That's the whole job.</p></li>
     </ol>
   </div>
 </section>
@@ -175,7 +246,7 @@
   <div class="wrap"><div class="card">
     <div>
       <h2 id="applyH">Apply to test</h2>
-      <p>It takes about a minute. We read every application and reply to the people we can fit in.</p>
+      <p>It takes about a minute. I read every application myself and reply to the people I can fit in.</p>
       <p style="margin-top:28px"><a class="btn small" data-board href="#">I already have a code: open the board</a></p>
     </div>
     <form id="applyForm" novalidate>
@@ -183,15 +254,15 @@
         <label>First name<input name="name" autocomplete="given-name" required></label>
         <label>How can we reach you?<input name="contact" id="contactIn" autocomplete="email" placeholder="Email or phone" required></label>
       </div>
-      <div id="spamNote" class="spamnote" hidden><strong>Check your spam or junk folder.</strong> Our reply and your code can land there. If you see it, press “Not spam”.</div>
+      <div id="spamNote" class="spamnote" hidden><strong>Check your spam or junk folder.</strong> My reply and your code can land there. If you see it, press “Not spam”.</div>
       <label class="check"><input type="checkbox" name="nocontact" id="noContact"><span>None: you already have my contact<small>Tick this if we talk somewhere else, like Instagram, WhatsApp, school or in person.</small></span></label>
-      <label id="whereRow" hidden>Where should we find you?<small>Optional. Leave it empty and we will already know.</small><input name="where" id="whereIn" placeholder="For example: Instagram @name, or we are in the same class"></label>
+      <label id="whereRow" hidden>Where should we find you?<small>Optional. Leave it empty and I'll already know.</small><input name="where" id="whereIn" placeholder="For example: Instagram @name, or we are in the same class"></label>
       <label>What do you study?<small>Your year and the subjects you most want help with.</small><input name="study" placeholder="Grade 11: chemistry, physics, Arabic"></label>
       <label>Your device<select name="device"><option>Tablet with a pen</option><option>Tablet, finger only</option><option>Laptop</option><option>Phone</option><option>Something else</option></select></label>
       <label>What would you use it for?<textarea name="why" placeholder="For example: working through chemistry problems before a test"></textarea></label>
       <button class="btn main" type="submit" id="sendBtn">Send my application</button>
       <div id="formMsg" role="status" aria-live="polite"></div>
-      <p class="fine">We only use this to choose testers and send you a code.</p>
+      <p class="fine">I only use this to pick testers and send you a code.</p>
     </form>
   </div></div>
 </section>
@@ -202,18 +273,22 @@
     <h2 id="faqH">Questions</h2>
     <details><summary>Does it cost anything?</summary><p>Testing is free.</p></details>
     <details><summary>What do I need?</summary><p>A modern browser. A tablet with a pen is the best fit, but a finger, a mouse or a laptop trackpad also work.</p></details>
-    <details><summary>Who can see my boards?</summary><p>Your boards are saved under your own code and aren't shared with other testers.</p></details>
-    <details><summary>Will Claude just do my homework?</summary><p>It's built to show its steps on your page so you can follow them. You decide how much to ask for.</p></details>
-    <details><summary>Why only 10 people?</summary><p>A small group lets us fix what's confusing quickly, and keeps everyone's daily allowance generous.</p></details>
-    <details><summary>How do I leave the test?</summary><p>Stop using it whenever you like. If you want your code closed, tell us and we'll do it.</p></details>
+    <details><summary>Who can see my boards?</summary><p>Your boards are saved under your own code and other testers can't open them.</p></details>
+    <details><summary>Will Claude just do my homework?</summary><p>It shows its steps on your page so you can follow them. How much you ask for is up to you. I'd say use it when you're stuck, not instead of trying first.</p></details>
+    <details><summary>Why only 10 people?</summary><p>I'm paying for the Claude questions myself, and a small group lets me fix things fast and keeps everyone's daily allowance generous.</p></details>
+    <details><summary>How do I leave the test?</summary><p>Stop using it whenever you like. If you want your code closed, message me and I'll do it.</p></details>
   </div></div>
 </section>
 </main>
 
-<footer><div class="wrap"><span>Ink Board with Claude: an early test. Claude is made by Anthropic; Ink Board is an independent project.</span><a href="#top">Back to top</a></div></footer>
+<footer><div class="wrap"><span>Law7: an early test, made by Ghost. Claude is made by Anthropic; Law7 is an independent project.<br>© 2026 GhostlyMatters</span><a href="#top">Back to top</a></div></footer>
 
 <script src="js/config.js"></script>
 <script src="js/demo.js"></script>
+<script src="js/projects.js"></script>
+<script src="js/ink.js"></script>
+<script src="js/pad.js"></script>
+<script src="js/tiles.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
