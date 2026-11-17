@@ -33,7 +33,11 @@
       var r=el.getBoundingClientRect();if(r.bottom<-200||r.top>vh+200)return;
       var d=parseFloat(el.getAttribute("data-depth"))||0,mid=r.top+r.height/2-vh/2;
       var rot=el.style.transform.match(/rotate\([^)]*\)/);var rt=el.dataset.rot||(rot?rot[0]:"");el.dataset.rot=rt;
-      var dy=el.classList.contains("float")?-y*d:-mid*d;   /* hero objects start exactly where they were drawn, the rest are level when centred on screen */
+      var dy;
+      if(el.classList.contains("float")){
+        /* hero objects start exactly where they were drawn and drift a little as you scroll away. On phones and tablets the picture sits under the text, so they stay glued to their page */
+        dy=window.innerWidth<=900?0:-y*d;
+      }else dy=-mid*d;
       el.style.transform="translate3d(0,"+dy.toFixed(1)+"px,0) "+rt;
     });
   }

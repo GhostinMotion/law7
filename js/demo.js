@@ -28,7 +28,7 @@
   var bar=mk("line",{x1:340,x2:432,y1:Y+16,y2:Y+16,stroke:INK,"stroke-width":6,"stroke-linecap":"round",opacity:0});
   var chk=tx("check: 2(4) + 6 = 14  ✓",300,338,52,MINT);
   var cur=mk("g",{});mk("circle",{r:19,fill:"rgba(42,68,245,.18)"},cur);mk("circle",{r:8,fill:BLUE},cur);
-  var tag=mk("g",{transform:"translate(14 12)"},cur);mk("rect",{width:72,height:26,rx:13,fill:INK},tag);var tl=mk("text",{x:36,y:14,"text-anchor":"middle","dominant-baseline":"central","font-family":"Instrument, sans-serif","font-size":13,"font-weight":700,fill:"#fff"},tag);tl.textContent="Claude";
+  var tag=mk("g",{transform:"translate(14 12)"},cur);mk("rect",{width:72,height:26,rx:13,fill:INK},tag);var tl=mk("text",{x:36,y:14,"text-anchor":"middle","dominant-baseline":"central","font-family":"Instrument, sans-serif","font-size":13,"font-weight":700,fill:"#fff"},tag);tl.textContent="Atlas";
 
   var last=new WeakMap();
   function op(e,o){o=Math.round(o*200)/200;if(last.get(e)!==o){last.set(e,o);e.setAttribute("opacity",o)}}

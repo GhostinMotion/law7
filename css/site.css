@@ -63,8 +63,8 @@ p{margin:0}
 .deck .f-hl{width:36%;left:-8%;bottom:4%;z-index:3}
 .deck .f-note{width:25%;right:-8%;top:27%;z-index:3}
 @media(max-width:900px){
-  .hero{padding-top:96px}.hero .wrap{grid-template-columns:1fr}.deck{justify-self:center;max-width:520px;margin-top:20px}
-  .deck .f-pen{right:-2%}.deck .f-hl{left:-2%}.deck .f-note{right:-3%}
+  .hero{padding:96px 0 100px;min-height:0}.hero .wrap{grid-template-columns:1fr}.deck{justify-self:center;max-width:520px;margin-top:20px}
+  .deck .f-pen{right:-2%;top:-9%;width:40%}.deck .f-hl{left:-2%;bottom:-5%;width:30%}.deck .f-note{left:-3%;right:auto;top:-13%;width:21%}
 }
 /* the one orchestrated moment: the page writes itself */
 .draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw .9s cubic-bezier(.5,.1,.2,1) forwards;animation-delay:var(--d,0s)}
