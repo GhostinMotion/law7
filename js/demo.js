@@ -14,7 +14,8 @@
   ];
   var root=document.createElementNS(NS,"g");root.setAttribute("transform","translate(150 0)");svg.appendChild(root);
   function mk(n,a,p){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);(p||root).appendChild(e);return e}
-  function tx(t,x,y,size,fill){var e=mk("text",{x:x,y:y,"text-anchor":"middle","dominant-baseline":"central","font-family":"Hand, 'Segoe Print', cursive","font-weight":700,"font-size":size||92,fill:fill||INK});e.textContent=t;return e}
+  root.setAttribute("text-rendering","geometricPrecision");
+  function tx(t,x,y,size,fill){var e=mk("text",{x:0,y:0,transform:"translate("+x+" "+y+")","text-anchor":"middle","dominant-baseline":"central","font-family":"Hand, 'Segoe Print', cursive","font-weight":700,"font-size":size||92,fill:fill||INK});e.textContent=t;return e}
   var clamp=function(v,a,b){return Math.max(a==null?0:a,Math.min(b==null?1:b,v))},lerp=function(a,b,t){return a+(b-a)*t},sm=function(u){return u*u*(3-2*u)};
   var Y=190;
 
@@ -23,13 +24,15 @@
   var arc1=mk("path",{d:"M270 "+Y+" Q365 "+(Y-150)+" 462 "+Y,fill:"none",stroke:BLUE,"stroke-width":3,"stroke-dasharray":"8 8","stroke-linecap":"round",opacity:0});
   var arc2=mk("path",{d:"M120 "+Y+" Q250 "+(Y-170)+" 392 262",fill:"none",stroke:BLUE,"stroke-width":3,"stroke-dasharray":"8 8","stroke-linecap":"round",opacity:0});
   var ring=mk("ellipse",{cx:270,cy:Y,rx:66,ry:58,fill:"none",stroke:BLUE,"stroke-width":6,"stroke-linecap":"round",pathLength:1,"stroke-dasharray":1,"stroke-dashoffset":1,opacity:0});
-  var two=tx("2",120,Y),ex=tx("x",178,Y),p6=tx("+6",270,Y),eq=tx("=",370,Y),n14=tx("14",470,Y),n8=tx("8",385,Y),n4=tx("4",385,Y,92,MINT);
+  var two=tx("2",120,Y),ex=tx("x",178,Y),p6=tx("+6",270,Y),m6=tx("\u22126",270,Y,92,RED),eq=tx("=",370,Y),n14=tx("14",470,Y),n8=tx("8",385,Y),n4=tx("4",385,Y,92,MINT);
   var bar=mk("line",{x1:340,x2:432,y1:Y+16,y2:Y+16,stroke:INK,"stroke-width":6,"stroke-linecap":"round",opacity:0});
   var chk=tx("check: 2(4) + 6 = 14  ✓",300,338,52,MINT);
   var cur=mk("g",{});mk("circle",{r:19,fill:"rgba(42,68,245,.18)"},cur);mk("circle",{r:8,fill:BLUE},cur);
   var tag=mk("g",{transform:"translate(14 12)"},cur);mk("rect",{width:72,height:26,rx:13,fill:INK},tag);var tl=mk("text",{x:36,y:14,"text-anchor":"middle","dominant-baseline":"central","font-family":"Instrument, sans-serif","font-size":13,"font-weight":700,fill:"#fff"},tag);tl.textContent="Claude";
 
-  function set(e,x,y,o){e.setAttribute("x",x);e.setAttribute("y",y);e.setAttribute("opacity",o==null?1:o)}
+  var last=new WeakMap();
+  function op(e,o){o=Math.round(o*200)/200;if(last.get(e)!==o){last.set(e,o);e.setAttribute("opacity",o)}}
+  function set(e,x,y,o){e.setAttribute("transform","translate("+x.toFixed(2)+" "+y.toFixed(2)+")");op(e,o==null?1:o)}
   function seg(k,P){return sm(clamp((P-k-.12)/.76))}
 
   function pos(P){
@@ -71,14 +74,14 @@
   var lastIdx=-1,typed="";
   function render(P){
     P=clamp(P,0,5);var o=pos(P);
-    ring.setAttribute("stroke-dashoffset",o.ring.d);ring.setAttribute("opacity",P<=0?0:o.ring.op);
+    ring.setAttribute("stroke-dashoffset",o.ring.d.toFixed(3));op(ring,P<=0?0:o.ring.op);
     set(two,o.two.x,o.two.y,o.two.op);set(ex,o.ex.x,o.ex.y,1);set(eq,o.eq.x,o.eq.y,1);
     set(n14,o.n14.x,o.n14.y,o.n14.op);set(n8,o.n8.x,o.n8.y,o.n8.op);set(n4,o.n4.x,o.n4.y,o.n4.op);
-    p6.textContent=o.p6.t;p6.setAttribute("fill",o.p6.c);set(p6,o.p6.x,o.p6.y,o.p6.op);
-    bar.setAttribute("opacity",o.bar);hiBar.setAttribute("opacity",o.hi);chk.setAttribute("opacity",o.chk);
-    arc1.setAttribute("opacity",o.arc1*.55);arc2.setAttribute("opacity",o.arc2*.55);
+    var sw=clamp((o.e1-.42)/.16);set(p6,o.p6.x,o.p6.y,o.p6.op*(1-sw));set(m6,o.p6.x,o.p6.y,o.p6.op*sw);
+    op(bar,o.bar);op(hiBar,o.hi);op(chk,o.chk);
+    op(arc1,o.arc1*.55);op(arc2,o.arc2*.55);
     var c=cursorAt(P);cur.setAttribute("transform","translate("+c[0].toFixed(1)+" "+c[1].toFixed(1)+")");
-    cur.setAttribute("opacity",P>=4.98?0:1);
+    op(cur,P>=4.98?0:1);
     /* the comment: shown for the step we are in, typed out as we move through it */
     var idx=P>=4.98?5:(P<=0?0:Math.min(4,Math.ceil(P)-1)),f=(idx===5||P<=0)?1:P-idx;
     var full=COMMENTS[idx],n=idx===5?full.length:Math.ceil(full.length*clamp(f/.45));

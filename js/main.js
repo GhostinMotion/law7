@@ -38,29 +38,34 @@
   function pinned(){return !reduce&&getComputedStyle($(".pin-stick",pin)).position==="sticky"}
   function fromScroll(){if(!pinned()||drive)return;var r=range(),p=((window.scrollY||0)-r.top)/r.len*5;show(p)}
   window.addEventListener("scroll",fromScroll,{passive:true});window.addEventListener("resize",fromScroll);
+  var gl=0;
+  function syncScroll(p){if(pinned()){var r=range();window.scrollTo({top:r.top+r.len*p/5,behavior:"auto"})}}
+  function endGlide(){cancelAnimationFrame(gl);gl=0}
+  /* glide: our own easing from the current spot to p, then the page scroll is set once at the end */
   function goto(p,smooth){
-    p=Math.max(0,Math.min(5,p));
-    if(pinned()){var r=range();window.scrollTo({top:r.top+r.len*p/5,behavior:smooth?"smooth":"auto"});if(!smooth)show(p)}
-    else show(p);
+    p=Math.max(0,Math.min(5,p));endGlide();
+    if(!smooth||reduce){show(p);syncScroll(p);return}
+    var from=P,t0=performance.now(),dur=Math.max(350,Math.min(900,Math.abs(p-from)*520));drive=true;
+    (function step(t){var k=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-k,3);show(from+(p-from)*e);
+      if(k<1){gl=requestAnimationFrame(step)}else{gl=0;syncScroll(p);setTimeout(function(){if(!playing&&!gl)drive=false},120)}})(t0);
   }
   function setPlaying(v){
     playing=v;icoPlay.hidden=v;icoPause.hidden=!v;bPlay.setAttribute("aria-label",v?"Pause":(P>=5?"Replay":"Play"));
-    cancelAnimationFrame(raf);drive=v;
+    cancelAnimationFrame(raf);if(v){endGlide();drive=true}else{syncScroll(P);setTimeout(function(){if(!playing&&!gl)drive=false},120)}
     if(v){last=performance.now();raf=requestAnimationFrame(tick)}
   }
+  /* playing never touches the page scroll, so nothing else is competing for the frame */
   function tick(t){
     var dt=Math.min(.05,(t-last)/1000);last=t;
     var np=P+dt/2.4;
-    if(np>=5){np=5;goto(5);setPlaying(false);return}
-    if(pinned()){var r=range();window.scrollTo(0,r.top+r.len*np/5)}
+    if(np>=5){show(5);setPlaying(false);return}
     show(np);raf=requestAnimationFrame(tick);
   }
   function stop(){if(playing)setPlaying(false)}
-  ["wheel","touchstart","keydown"].forEach(function(ev){window.addEventListener(ev,stop,{passive:true})});
+  ["wheel","touchstart","keydown"].forEach(function(ev){window.addEventListener(ev,function(){endGlide();stop()},{passive:true})});
   bPlay.addEventListener("click",function(){
     if(playing){setPlaying(false);return}
-    if(P>=4.99){goto(0);P=0}
-    if(pinned()){var r=range();window.scrollTo({top:r.top+r.len*P/5,behavior:"auto"})}
+    if(P>=4.99){show(0)}
     setPlaying(true);
   });
   $("#bReset").addEventListener("click",function(){setPlaying(false);goto(0,true)});
