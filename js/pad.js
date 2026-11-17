@@ -49,7 +49,7 @@
       var hx=Math.abs(last[0]-x0)<Math.abs(last[0]-x1)?x0:x1,hy=Math.abs(last[1]-y0)<Math.abs(last[1]-y1)?y0:y1;
       s.sh={lock:sh.lock,fixed:!sh.axis,base:Q,bb:[x0,y0,x1,y1],ax:hx===x0?x1:x0,ay:hy===y0?y1:y0};s.pts=Q.map(function(q){return q.slice()});
     }
-    say("Snapped: a clean "+(NAME[sh.type]||"shape")+(sh.type==="line"?". Move to adjust it.":". Keep the pen down to resize."),true);
+    say("Hold a stroke still and it tidies up: here, a clean "+(NAME[sh.type]||"shape")+".",true);
     box.classList.remove("flash");void box.offsetWidth;box.classList.add("flash");
     try{if(navigator.vibrate)navigator.vibrate(8)}catch(e){}
     draw();return true;
@@ -75,7 +75,7 @@
     if(e.button!==undefined&&e.button>0)return;
     e.preventDefault();endDemo();touched=true;
     try{cv.setPointerCapture(e.pointerId)}catch(x){}
-    cur={hl:tool==="hl",c:col,pts:[pt(e)]};say(tool==="hl"?"Highlighting. Hold a straight stroke still to make it a line.":"Hold still when you finish and it snaps clean.");arm();draw();
+    cur={hl:tool==="hl",c:col,pts:[pt(e)]};say("Write anything.");arm();draw();
   });
   cv.addEventListener("pointermove",function(e){
     if(!cur)return;e.preventDefault();var p=pt(e),l=cur.pts[cur.pts.length-1];
@@ -88,7 +88,7 @@
     if(!cur.snapped&&cur.pts.length>=8)snap(cur,cur.pts[cur.pts.length-1]);   // lifting the pen on a clean shape is also fine, but only if it was held: so undo the snap below when it was not
     if(cur.pts.length>1)strokes.push(cur);
     var wasSnap=cur.snapped;cur=null;draw();
-    if(!wasSnap&&strokes.length)say("Nice. Draw a circle or a box and hold still to see it snap.");
+    if(!wasSnap&&strokes.length)say("Nice. Try your name, a sum, or a quick sketch.");
   }
   /* a stroke released while still moving must NOT snap: only a held pen snaps */
   cv.addEventListener("pointerup",function(){if(cur&&!cur.snapped){clearTimeout(timer);if(cur.pts.length>1)strokes.push(cur);cur=null;draw();say("Not snapped, because you kept moving. Draw it again and hold still at the end.")}else up()});
@@ -109,7 +109,7 @@
       swatches();say(tool==="hl"?"Highlighter on. Drag across your shape, or hold a straight stroke still.":"Pen on. Draw a shape and hold still.");
     });
   });
-  document.getElementById("padClear").addEventListener("click",function(){endDemo();strokes=[];cur=null;draw();say("Draw a shape, then hold still")});
+  document.getElementById("padClear").addEventListener("click",function(){endDemo();strokes=[];cur=null;draw();say("Write or draw anything")});
   window.addEventListener("resize",draw);swatches();draw();
 
   /* ---- the scripted first look: a circle draws itself, holds, and snaps ---- */
@@ -129,12 +129,12 @@
       setTimeout(function(){
         if(!demoOn)return;
         if(snap(cur,cur.pts[cur.pts.length-1])){strokes.push(cur);cur=null;draw()}
-        setTimeout(function(){if(!demoOn)return;ghost.classList.remove("on");demoOn=false;say("Your turn. Draw something and hold still.")},1400);
+        setTimeout(function(){if(!demoOn)return;ghost.classList.remove("on");demoOn=false;say("Your turn. Write anything.")},1400);
       },900);
     })(performance.now());
   }
   if("IntersectionObserver" in window&&!reduce){
-    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting&&en.intersectionRatio>=.6){io.disconnect();setTimeout(runDemo,350)}})},{threshold:[.6]});
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){io.disconnect()}})},{threshold:[.6]});
     io.observe(box);
   }
 })();

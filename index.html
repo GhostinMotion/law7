@@ -100,25 +100,20 @@
 <section class="try" id="try" aria-labelledby="tryH">
   <div class="wrap">
     <div class="try-copy">
-      <h2 id="tryH">Go on, draw something.</h2>
-      <p>This is my real pen code, running right here. Draw a circle, a box or a line, then <strong>hold still for a sec</strong>. It snaps clean, and if you keep the pen down you can resize it. I added this because my circles always came out like potatoes.</p>
-      <ol class="try-steps">
-        <li><i>1</i><span>Draw a circle, box, triangle or line</span></li>
-        <li><i>2</i><span>Hold still. Law7 tidies it up</span></li>
-        <li><i>3</i><span>Switch to the highlighter and mark it up</span></li>
-      </ol>
-      <p class="try-fine">It never touches your handwriting. I'd be annoyed too.</p>
+      <h2 id="tryH">Try the pen.</h2>
+      <p>This is the same pen that's in Law7, running right here. Write your name, sketch something, or solve a quick sum. It should feel like paper, even on a phone.</p>
+      
+      <p class="try-fine">On a tablet it ignores your palm, so you can rest your hand like normal.</p>
     </div>
     <div class="padwrap">
       <div class="padbar" role="toolbar" aria-label="Pen tools">
         <button type="button" class="tl on" data-tool="pen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1-4L16.5 4.5a2.1 2.1 0 013 3L8 19l-4 1z"/></svg>Pen</button>
-        <button type="button" class="tl" data-tool="hl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4l9 9-5 5-9-9z" fill="currentColor" fill-opacity=".25"/><path d="M13 18l-2.5 2.5H4V19l5-5"/></svg>Highlighter</button>
         <span class="sw" id="padSw" role="group" aria-label="Colour"></span>
         <button type="button" class="tl ghost" id="padClear">Clear</button>
       </div>
       <div class="padbox">
         <canvas id="pad" width="800" height="520" aria-label="A drawing pad: draw with a mouse, finger or pen"></canvas>
-        <div class="padbadge" id="padBadge" aria-live="polite">Draw a shape, then hold still</div>
+        <div class="padbadge" id="padBadge" aria-live="polite">Write or draw anything</div>
         <div class="padghost" id="padGhost" aria-hidden="true"><i></i><span>watch</span></div>
       </div>
     </div>
@@ -131,7 +126,7 @@
     <h2 id="howH">Everything a study session needs, and nothing that gets in the way.</h2>
     <div class="rows">
       <article class="row">
-        <div><h3>Write the way you already do.</h3><p>Pen, finger or trackpad. Hold a line, circle or box still and it snaps clean. There's a highlighter too, and if you scribble over a mistake it just disappears.</p><span class="tag">no typing needed</span></div>
+        <div><h3>Write the way you already do.</h3><p>Pen, finger or trackpad, no typing needed. Claude reads your handwriting, even when it's messy, and if it can't read a bit it tells you which bit instead of guessing.</p><span class="tag">it reads your handwriting</span></div>
         <div class="vis" data-depth="-0.05" aria-hidden="true">
           <svg viewBox="0 0 480 340"><rect x="4" y="4" width="472" height="332" rx="22" fill="#fff" stroke="#0F1B3D" stroke-width="4"/><g stroke="#E1E8F7" stroke-width="2"><path d="M24 80H456M24 140H456M24 200H456M24 260H456"/></g>
             <text class="scribble" x="40" y="68" font-size="52" font-weight="700" fill="#0F1B3D">photosynthesis</text>
@@ -152,7 +147,7 @@
             <rect x="40" y="226" width="400" height="64" rx="32" fill="#fff" stroke="#0F1B3D" stroke-width="4"/><text font-family="Instrument,sans-serif" font-size="19" fill="#46526F" x="68" y="265">Why did the 4 change sign?</text><circle cx="406" cy="258" r="22" fill="#2A44F5"/><path d="M398 258H414M408 250L416 258L408 266" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       </article>
       <article class="row">
-        <div><h3>Answers land on your page.</h3><p>Claude writes its steps right next to your working, in its own colour. Keep what helps, ignore the rest. It's one page, not a chat log you have to scroll back through.</p><span class="tag">your page, not a chat log</span></div>
+        <div><h3>It teaches. It doesn't just answer.</h3><p>Ask if your working is right and it finds the first line that goes wrong and nudges you, instead of rewriting your page. Want the full solution? Ask and it gives it. You can also set it to hints first, short answers, exam tips or plain words.</p><span class="tag">your page, not a chat log</span></div>
         <div class="vis" data-depth="-0.06" aria-hidden="true">
           <svg viewBox="0 0 480 340"><rect x="4" y="4" width="472" height="332" rx="22" fill="#fff" stroke="#0F1B3D" stroke-width="4"/><g stroke="#E1E8F7" stroke-width="2"><path d="M24 80H456M24 140H456M24 200H456M24 260H456"/></g>
             <text class="scribble" x="40" y="68" font-size="44" font-weight="700" fill="#0F1B3D">3x − 2x = 9 − 4</text><text class="scribble" x="40" y="128" font-size="44" font-weight="700" fill="#0F1B3D">x = 5</text>
@@ -180,19 +175,7 @@
             <g class="scribble" font-size="26" font-weight="700" fill="#0F1B3D" text-anchor="middle"><text x="98" y="92">light</text><text x="240" y="92">glucose</text><text x="382" y="92">O₂</text><text x="240" y="230">energy</text></g>
             <g transform="translate(290 272)"><rect width="160" height="34" rx="17" fill="#2A44F5"/><text x="80" y="22" text-anchor="middle" font-family="Instrument,sans-serif" font-size="14" font-weight="700" fill="#fff">✦ drawn by Claude</text></g></svg></div>
       </article>
-      <article class="row">
-        <div><h3>Take it offline.</h3><p>Pick the pages you want, hit Export, and get one PDF with your writing on it and a bookmark for every page. For when the Wi-Fi dies the night before the test.</p><span class="tag">your notes, anywhere</span></div>
-        <div class="vis" data-depth="0.05" aria-hidden="true">
-          <svg viewBox="0 0 480 340"><g stroke="#0F1B3D" stroke-width="4" stroke-linejoin="round">
-            <rect x="34" y="70" width="140" height="190" rx="12" fill="#E9EEFB" transform="rotate(-8 104 165)"/><rect x="58" y="60" width="140" height="190" rx="12" fill="#FFF3A8" transform="rotate(3 128 155)"/><rect x="82" y="52" width="140" height="196" rx="12" fill="#fff"/>
-            <path d="M232 150H300M284 132L304 150L284 168" fill="none" stroke="#2A44F5" stroke-width="6" stroke-linecap="round"/>
-            <path d="M318 56H392L430 94V282a12 12 0 0 1-12 12H318a12 12 0 0 1-12-12V68a12 12 0 0 1 12-12Z" fill="#fff"/><path d="M392 56V94H430" fill="#E9EEFB"/></g>
-            <g stroke="#E1E8F7" stroke-width="3"><path d="M100 100H206M100 130H206M100 160H170"/></g>
-            <path d="M100 200C130 184 150 214 180 198S206 192 206 200" fill="none" stroke="#2A44F5" stroke-width="5" stroke-linecap="round"/><rect x="100" y="222" width="80" height="14" rx="3" fill="#FFD93D" opacity=".7"/>
-            <rect x="318" y="190" width="100" height="40" rx="10" fill="#E8456B"/><text x="368" y="217" text-anchor="middle" font-family="Instrument,sans-serif" font-size="20" font-weight="700" fill="#fff">PDF</text>
-            <g fill="none" stroke="#0F1B3D" stroke-width="3.5" stroke-linecap="round"><path d="M330 120H400M330 144H384M330 168H396"/></g>
-            <g transform="translate(366 262)" fill="none" stroke="#0F1B3D" stroke-width="3.5" stroke-linecap="round"><path d="M-14 -2a20 20 0 0 1 28 0M-8 5a12 12 0 0 1 16 0"/><circle cy="12" r="2" fill="#0F1B3D"/><path d="M-20 -14L20 18" stroke="#E8456B" stroke-width="4"/></g></svg></div>
-      </article>
+
     </div>
   </div>
 </section>
@@ -200,8 +183,23 @@
 <!-- SMALL THINGS -->
 <section class="small" id="small" aria-labelledby="smallH">
   <div class="wrap">
-    <h2 id="smallH">The small stuff I kept adding.</h2>
+    <h2 id="smallH">The tools are already in there.</h2>
+    <p class="small-sub">No switching apps in the middle of homework. Claude uses these too, so the numbers are looked up, not guessed.</p>
     <div class="tiles" id="tiles"></div>
+  </div>
+</section>
+
+<!-- WHERE IT'S GOING -->
+<section class="next" id="next" aria-labelledby="nextH">
+  <div class="wrap">
+    <h2 id="nextH">Where I want to take it.</h2>
+    <p class="small-sub">Law7 is a test right now. If it helps people, this is the plan. The testers decide the order.</p>
+    <div class="road">
+      <article><b>Now</b><h3>The test</h3><p>10 testers, their own private boards, and me fixing whatever confuses you.</p></article>
+      <article><b>Next</b><h3>Study together</h3><p>Two people on one shared page with Claude helping both, for the friend you revise with.</p></article>
+      <article><b>Then</b><h3>Its own app</h3><p>A proper app for tablets and phones, not just a link.</p></article>
+      <article><b>Later</b><h3>For schools</h3><p>Something a class and a teacher can actually use. A student project that grows up.</p></article>
+    </div>
   </div>
 </section>
 
