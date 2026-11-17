@@ -11,5 +11,12 @@ window.INKBOARD = {
      formEndpoint: a form service address, for example "https://formspree.io/f/xxxxxxx"
      email:        an email address; the form opens the visitor's mail app with the answers filled in
      If both are empty the form shows the answers as a message to copy and send you another way. */
-  apply: { formEndpoint: "", email: "Ima.gghost7@gmail.com" }
+  apply: {
+    formEndpoint: "",
+    email: "Ima.gghost7@gmail.com",
+    /* Free automatic mail with EmailJS (emailjs.com). Fill all four and the form sends you the application
+       and emails the applicant a confirmation, with no mail app opening. The key is a public key, safe here.
+       service: your Email Service ID. notify: template that goes to you. reply: template that goes to the applicant. */
+    emailjs: { key: "3v8tbkRQrHzUXsJg7", service: "service_ww57hl5", notify: "application-notify-law7", reply: "reply-to-applicant-law7" }
+  }
 };

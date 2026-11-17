@@ -173,3 +173,11 @@ footer a{color:#fff}
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}.draw{animation:none;stroke-dashoffset:0}.pop{animation:none;opacity:1;transform:none}.btn,.ctl button{transition:none}
 }
+
+.spamnote{background:#FFE24A;color:#3a2e00;border:3px solid #1b1b1b;border-radius:14px;padding:16px 18px;font-size:1.05rem;line-height:1.45;box-shadow:0 4px 0 #1b1b1b}
+.spamnote strong{display:block;font-size:1.2rem;margin-bottom:4px}
+.spamnote[hidden],#whereRow[hidden]{display:none}
+label.check{display:flex;gap:12px;align-items:flex-start;font-weight:600;cursor:pointer}
+label.check input{width:22px;height:22px;margin-top:2px;flex:none}
+label.check small{display:block;margin-top:2px}
+.msg.ok .spamnote{margin-top:12px}

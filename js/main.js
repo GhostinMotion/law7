@@ -77,12 +77,30 @@
   /* apply form */
   var form=$("#applyForm"),msg=$("#formMsg"),btn=$("#sendBtn");
   function esc(s){return String(s).replace(/[&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c]})}
+  var cIn=$("#contactIn"),spam=$("#spamNote"),nc=$("#noContact"),wr=$("#whereRow"),wi=$("#whereIn");
+  var isMail=function(v){return /^\S+@\S+\.\S+$/.test(String(v||"").trim())};
+  function syncContact(){
+    var none=nc.checked;cIn.required=!none;cIn.disabled=none;wr.hidden=!none;
+    spam.hidden=none||!isMail(cIn.value);
+  }
+  cIn.addEventListener("input",syncContact);nc.addEventListener("change",syncContact);syncContact();
+  var SPAM='<div class="spamnote"><strong>Check your spam or junk folder.</strong> Our reply can land there. If you see it, press “Not spam”.</div>';
   form.addEventListener("submit",function(e){
     e.preventDefault();var f=new FormData(form),name=(f.get("name")||"").trim(),contact=(f.get("contact")||"").trim();
+    if(nc.checked)contact="None: you already have my contact"+((wi.value||"").trim()?" ("+wi.value.trim()+")":"");
     if(!name||!contact){msg.innerHTML='<div class="msg warn">Add your first name and how we can reach you.</div>';return}
     var lines=["Ink Board tester application","Name: "+name,"Reach me at: "+contact,"I study: "+(f.get("study")||"").trim(),"Device: "+f.get("device"),"I'd use it for: "+(f.get("why")||"").trim()],text=lines.join("\n");
     var ap=cfg.apply||{};
-    if(ap.formEndpoint){
+    if(ap.emailjs&&ap.emailjs.key&&ap.emailjs.service&&ap.emailjs.notify){
+      btn.disabled=true;var ej=ap.emailjs;
+      var send=function(tpl,extra){var pr={name:name,contact:contact,study:f.get("study")||"",device:f.get("device")||"",why:f.get("why")||"",message:text};for(var k in extra)pr[k]=extra[k];
+        return fetch("https://api.emailjs.com/api/v1.0/email/send",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({service_id:ej.service,template_id:tpl,user_id:ej.key,template_params:pr})}).then(function(r){if(!r.ok)throw 0})};
+      var jobs=[send(ej.notify,{})];
+      if(ej.reply&&/^\S+@\S+\.\S+$/.test(contact))jobs.push(send(ej.reply,{to_email:contact}).catch(function(){}));
+      Promise.all(jobs).then(function(){msg.innerHTML='<div class="msg ok">Thanks, '+esc(name)+'. '+(jobs.length>1?"A confirmation is on its way to your email. ":"")+'We read every application and will reply if there is a spot.'+(jobs.length>1?SPAM:"")+'</div>';form.reset();syncContact()})
+        .catch(function(){msg.innerHTML='<div class="msg warn">That did not send. Check your connection and try again.</div>'})
+        .then(function(){btn.disabled=false});
+    }else if(ap.formEndpoint){
       btn.disabled=true;
       fetch(ap.formEndpoint,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({name:name,contact:contact,study:f.get("study"),device:f.get("device"),why:f.get("why"),message:text})})
         .then(function(r){if(!r.ok)throw 0;msg.innerHTML='<div class="msg ok">Thanks, '+esc(name)+'. We read every application and will reply if there is a spot.</div>';form.reset()})

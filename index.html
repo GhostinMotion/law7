@@ -181,8 +181,11 @@
     <form id="applyForm" novalidate>
       <div class="two">
         <label>First name<input name="name" autocomplete="given-name" required></label>
-        <label>How can we reach you?<input name="contact" autocomplete="email" placeholder="Email or phone" required></label>
+        <label>How can we reach you?<input name="contact" id="contactIn" autocomplete="email" placeholder="Email or phone" required></label>
       </div>
+      <div id="spamNote" class="spamnote" hidden><strong>Check your spam or junk folder.</strong> Our reply and your code can land there. If you see it, press “Not spam”.</div>
+      <label class="check"><input type="checkbox" name="nocontact" id="noContact"><span>None: you already have my contact<small>Tick this if we talk somewhere else, like Instagram, WhatsApp, school or in person.</small></span></label>
+      <label id="whereRow" hidden>Where should we find you?<small>Optional. Leave it empty and we will already know.</small><input name="where" id="whereIn" placeholder="For example: Instagram @name, or we are in the same class"></label>
       <label>What do you study?<small>Your year and the subjects you most want help with.</small><input name="study" placeholder="Grade 11: chemistry, physics, Arabic"></label>
       <label>Your device<select name="device"><option>Tablet with a pen</option><option>Tablet, finger only</option><option>Laptop</option><option>Phone</option><option>Something else</option></select></label>
       <label>What would you use it for?<textarea name="why" placeholder="For example: working through chemistry problems before a test"></textarea></label>
