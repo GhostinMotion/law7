@@ -21,9 +21,9 @@ window.LAW7 = {
   },
 
   /* "My other projects" on the page. Order = order on the page.
-     layout: base (big dark block on top) | wide | half | third | old
-     media: optional picture or video in assets/projects/ (drop a file in, put its name here; it is used as is)
-     art: illustrated stand-in used when there is no media (screen | tools | matter | gate)
+     layout: base (big dark block on top, no picture) | wide | half | five | four | three | old
+     media: optional REAL screenshot or video in assets/projects/ (drop a file in, put its name here; it is used as is)
+     Real pictures or videos only. No media means a text-only card, never a drawing.
      status: Running | Working | In testing | Early development | Old (any other word is shown as is)
      url: optional. Leave it out and the card is not a link. */
   projects: [
@@ -37,19 +37,19 @@ window.LAW7 = {
       url: "https://ghostlyapps.duckdns.org/welcome", go: "See the app" },
     { name: "GhostlyMatters", layout: "half", status: "Running", tint: "lilac",
       blurb: "My little community: a Discord server for Valorant and Overwatch with a bot and a website. Game nights, a squad finder, voice rooms that tidy up after themselves, your own Valorant shop and a rewards system.",
-      tags: ["Discord bot", "Website", "Valorant", "Overwatch"], media: "assets/projects/ghostlymatters-1.jpg", alt: "The GhostlyMatters site: a game night countdown and a squad finder",
+      tags: ["Discord bot", "Website", "Valorant", "Overwatch"], media: "assets/projects/ghostlymatters-1.jpg", alt: "The top of the GhostlyMatters site: Come haunt the lobby with us, next to a card of the voice channels",
       url: "https://ghostlymatters.duckdns.org/building-a-community", go: "Visit the site" },
-    { name: "GhostlyScreen", layout: "third", status: "In testing", tint: "yellow", art: "screen",
+    { name: "GhostlyScreen", layout: "five", status: "In testing", tint: "yellow",
       blurb: "A screensaver that doubles as a lock, only on my PC for now. Ctrl+Shift+Alt+L starts it, a small ghost shows a 15 second cooldown before a password is needed, and it locks by itself after 5 minutes. Pulls videos or backgrounds from Wallpaper Engine.",
       tags: ["Windows", "Not public yet"] },
-    { name: "GhostlyTools", layout: "third", status: "In testing", tint: "blue", art: "tools",
+    { name: "GhostlyTools", layout: "four", status: "In testing", tint: "blue",
       blurb: "The control panel behind GhostlyScreen and my other little apps: every cooldown, timer and hotkey is a setting here. Also holds my Spicetify installer and the USB toolbox.",
       tags: ["Windows", "Not public yet"] },
-    { name: "Matter", layout: "third", status: "Early development", tint: "pink", art: "matter",
+    { name: "Matter", layout: "three", status: "Early development", tint: "pink",
       blurb: "The big one I want to build: my own full-power assistant, named from GhostlyMatters. Smart, personal, and mine. It's at the very start, so this is a promise, not a product.",
       tags: ["Assistant", "Just started"] },
-    { name: "AAPS Study Hub", layout: "old", status: "Old", tint: "blue", art: "gate",
+    { name: "AAPS Study Hub", layout: "old", status: "Old", tint: "blue",
       blurb: "My old school project: a password-protected hub of IGCSE and O-Level notes, materials and flashcards for students at my old school. It's out of date now that I'm on the American curriculum, but it's where I learned to build things people actually use.",
-      tags: ["IGCSE", "School project", "Students only"] }
+      tags: ["IGCSE", "School project", "Students only"], media: "assets/projects/aaps-home.jpg", alt: "The AAPS Study Hub home page: Study smarter, together, with Browse Resources and Check Updates buttons" }
   ]
 };

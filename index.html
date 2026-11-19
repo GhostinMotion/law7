@@ -42,11 +42,11 @@ if(document.readyState==="complete")go();else addEventListener("load",go);setTim
 <header class="bar" id="bar">
   <div class="wrap">
     <a class="logo" href="#top"><img src="assets/favicon.svg" alt="" width="32" height="32"><span>Law<b>7</b></span></a>
-    <nav aria-label="Sections"><a href="#watch">Watch it work</a><a href="#how">Features</a><a href="#small">Tools</a><a href="#story">Why I built it</a><a href="#projects">My projects</a><a href="#test">The test</a></nav>
+    <nav aria-label="Sections"><a href="#watch">Watch it work</a><a href="#how">Features</a><a href="#small">Tools</a><a href="#story">Why I built it</a><a href="projects.html">My projects</a><a href="#test">The test</a></nav>
     <a class="btn main small" href="#apply">Apply to test</a>
     <button type="button" class="menub" id="menuB" aria-expanded="false" aria-controls="menuP" aria-label="Menu"><i></i><i></i></button>
   </div>
-  <div class="menup" id="menuP" hidden><a href="#watch">Watch it work</a><a href="#how">Features</a><a href="#try">Try the pen</a><a href="#small">Tools</a><a href="#projects">My projects</a><a href="#test">The test</a><a href="#faq">Questions</a></div>
+  <div class="menup" id="menuP" hidden><a href="#watch">Watch it work</a><a href="#how">Features</a><a href="#try">Try the pen</a><a href="#small">Tools</a><a href="projects.html">My projects</a><a href="#test">The test</a><a href="#faq">Questions</a></div>
 </header>
 
 <main id="top">
@@ -254,14 +254,6 @@ if(document.readyState==="complete")go();else addEventListener("load",go);setTim
 
 
 <!-- MY OTHER PROJECTS -->
-<section class="projects" id="projects" aria-labelledby="projH">
-  <div class="wrap">
-    <h2 id="projH">My other projects</h2>
-    <p class="sub">Law7 is one of the things I build. These are the rest. Some are live, some are only on my own PC, and one is still just an idea.</p>
-    <div class="pgrid" id="pgrid"></div>
-  </div>
-</section>
-
 <!-- THE TEST -->
 <section class="test" id="test" aria-labelledby="testH">
   <div class="wrap">
@@ -315,13 +307,17 @@ if(document.readyState==="complete")go();else addEventListener("load",go);setTim
     <details><summary>How do I leave the test?</summary><p>Stop using it whenever you like. If you want your code closed, message me and I'll do it.</p></details>
   </div></div>
 </section>
+<aside class="door" aria-labelledby="doorH"><div class="wrap">
+  <div><span class="hand">psst, one more thing</span><h2 id="doorH">I build other stuff too</h2><p>A home server, a Discord community, a screensaver that locks my PC and more. They live in their own room, away from Law7.</p></div>
+  <a class="btn" href="projects.html">See my other projects</a>
+</div></aside>
+
 </main>
 
 <footer><div class="wrap"><span>Law7: an early test, made by Ghost. Atlas runs on Claude, made by Anthropic; Law7 is an independent project.<br>© 2026 GhostlyMatters</span><a href="#top">Back to top</a></div></footer>
 
 <script src="js/config.js"></script>
 <script src="js/demo.js"></script>
-<script src="js/projects.js"></script>
 <script src="js/pad.js"></script>
 <script src="js/showcase.js"></script>
 <script src="js/tiles.js"></script>
