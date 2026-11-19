@@ -49,6 +49,6 @@ window.LAW7 = {
     { name: "AAPS Study Hub", layout: "old", status: "Old", tint: "blue",
       url: "https://ghostinmotion.github.io/AAPS-Resources", go: "Open it (students only)",
       blurb: "My old school hub of IGCSE and O-Level notes. Out of date now.",
-      media: "assets/projects/aaps-home.jpg", bg: "#0f0e1c", alt: "The AAPS Study Hub home page: Study smarter, together, with Browse Resources and Check Updates buttons" }
+      media: "assets/projects/aaps-home.jpg", hover: "assets/projects/aaps-hover.webp", bg: "#0f0e1c", alt: "The AAPS Study Hub home page: Study smarter, together, with Browse Resources and Check Updates buttons" }
   ]
 };
