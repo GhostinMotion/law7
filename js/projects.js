@@ -9,7 +9,7 @@
   function media(p){
     if(p.media){
       if(/\.(mp4|webm)$/i.test(p.media))return '<video src="'+esc(p.media)+'" autoplay muted loop playsinline aria-label="'+esc(p.alt||p.name)+'"></video>';
-      return '<img src="'+esc(p.media)+'" alt="'+esc(p.alt||p.name)+'" decoding="async">';
+      return '<img src="'+esc(p.media)+'"'+(p.hover?' data-poster="'+esc(p.media)+'" data-hover="'+esc(p.hover)+'"':'')+' alt="'+esc(p.alt||p.name)+'" decoding="async">';
     }
     return "";
   }
@@ -26,8 +26,25 @@
       el.innerHTML='<div class="pbody">'+head+'<p>'+esc(p.blurb)+'</p>'+tags+'</div>'
         +'<div class="bbus" aria-hidden="true"><span class="core">Server</span><ul>'+serves+'<li class="more">+ the rest</li></ul></div>';
     }else{
-      var m=media(p);if(!m)el.className+=" nopic";el.innerHTML=(m?'<div class="pmedia">'+m+'</div>':"")+'<div class="pbody">'+head+'<p>'+esc(p.blurb)+'</p>'+tags+go+'</div>';
+      var m=media(p);if(!m)el.className+=" nopic";el.innerHTML=(m?'<div class="pmedia"'+(p.bg?' style="background:'+esc(p.bg)+'"':"")+'>'+m+'</div>':"")+'<div class="pbody">'+head+'<p>'+esc(p.blurb)+'</p>'+tags+go+'</div>';
     }
+    if(p.hover)el.className+=" hasgif";
     grid.appendChild(el);
   });
+
+  /* hover pictures: the still shows first; the moving one plays while you hover (or, on touch, while the card is on screen) */
+  var cards=[].slice.call(grid.querySelectorAll(".hasgif"));
+  function play(card,on){var im=card.querySelector("img[data-hover]");if(!im)return;
+    var want=on?im.getAttribute("data-hover"):im.getAttribute("data-poster");
+    if(im.getAttribute("src")!==want)im.src=want;card.classList.toggle("playing",!!on)}
+  function warm(){cards.forEach(function(c){var im=c.querySelector("img[data-hover]");if(im){var x=new Image();x.src=im.getAttribute("data-hover")}})}
+  if("requestIdleCallback" in window)requestIdleCallback(warm,{timeout:3000});else setTimeout(warm,1500);
+  var touch=window.matchMedia&&matchMedia("(hover:none)").matches;
+  if(!touch){cards.forEach(function(c){
+    c.addEventListener("mouseenter",function(){play(c,true)});c.addEventListener("mouseleave",function(){play(c,false)});
+    c.addEventListener("focus",function(){play(c,true)});c.addEventListener("blur",function(){play(c,false)});
+  })}else if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){play(e.target,e.isIntersecting&&e.intersectionRatio>=0.6)})},{threshold:[0,0.6,1]});
+    cards.forEach(function(c){io.observe(c)});
+  }
 })();

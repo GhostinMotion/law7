@@ -518,3 +518,42 @@ body.pj{background:var(--night);color:#fff}
 @media(prefers-reduced-motion:reduce){.pullpanel,.pullcurtain{display:none}.popin main,.popin .door{animation:none}}
 .pj .pcard.old .pgo{color:var(--hi);margin-top:14px}
 .pcard.old .pbody{justify-content:center;gap:0}
+
+/* pictures are shown whole: no cropping, matching background fills any spare space */
+.pmedia img,.pmedia video{aspect-ratio:16/10;object-fit:contain!important;object-position:center!important;background:transparent}
+.pcard.old .pmedia img{object-fit:contain!important;object-position:center!important}
+.pcard.link.hasgif:hover .pmedia img{transform:none}
+.pcard.hasgif .pmedia::after{content:"";position:absolute;right:10px;bottom:10px;width:30px;height:30px;border-radius:50%;background:rgba(15,27,61,.72) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 7l9 5-9 5z' fill='%23fff'/%3E%3C/svg%3E") center/16px no-repeat;transition:opacity .25s;pointer-events:none}
+.pcard.hasgif .pmedia{position:relative}
+.pcard.hasgif.playing .pmedia::after{opacity:0}
+@media(hover:none){.pcard.hasgif .pmedia::after{display:none}}
+
+/* ---------- stretchy pull v2 ---------- */
+.pullpanel{height:100vh;--h:0px}
+.pullpanel.bottom{transform:translateY(calc(100% - var(--pull,0px)));
+  border-radius:50% 50% 0 0 / calc(var(--pull,0px)*.42) calc(var(--pull,0px)*.42) 0 0}
+.pullpanel.top{transform:translateY(calc(var(--pull,0px) - 100%));
+  border-radius:0 0 50% 50% / 0 0 calc(var(--pull,0px)*.42) calc(var(--pull,0px)*.42)}
+.pullpanel.pop{transform:translateY(0)!important;border-radius:0!important;transition:transform .28s cubic-bezier(.2,1.3,.4,1),border-radius .28s}
+.pullpanel.back{transition:transform .5s cubic-bezier(.3,1.6,.5,1),border-radius .5s}
+.pullpanel.bottom .pp-in{top:26px}.pullpanel.top .pp-in{bottom:26px}
+/* the page itself stretches along with the pull */
+html.pulling body>*:not(.pullpanel):not(.pullcurtain):not(.pullcue){transform:translateY(calc(var(--pull,0px)*-.28)) scaleY(calc(1 + var(--ps,0)*.07));transform-origin:50% 100%}
+html.pulling.top-pull body>*:not(.pullpanel):not(.pullcurtain):not(.pullcue){transform-origin:50% 0}
+body.pj{--dir:1}
+html.pulling body.pj>*:not(.pullpanel):not(.pullcurtain):not(.pullcue){transform:translateY(calc(var(--pull,0px)*.28)) scaleY(calc(1 + var(--ps,0)*.07));transform-origin:50% 0}
+html.snap body>*:not(.pullpanel):not(.pullcurtain):not(.pullcue){transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+html.popping body>*:not(.pullpanel):not(.pullcurtain):not(.pullcue){transition:transform .28s}
+/* the pill that tells you the pull exists */
+.pullcue{position:fixed;left:50%;z-index:250;transform:translate(-50%,24px);opacity:0;pointer-events:none;display:flex;align-items:center;gap:10px;
+  padding:.75em 1.3em;border-radius:99px;font:700 1rem/1 var(--body);text-decoration:none;white-space:nowrap;
+  transition:opacity .35s,transform .45s cubic-bezier(.3,1.6,.5,1)}
+.pullcue.show{opacity:1;pointer-events:auto;transform:translate(-50%,0)}
+.pullcue.down{bottom:20px;background:var(--night);color:#fff;border:2px solid var(--hi);box-shadow:0 8px 28px rgba(11,18,48,.45)}
+.pullcue.up{top:76px;background:var(--paper);color:var(--ink);border:2px solid var(--ink);box-shadow:0 8px 28px rgba(0,0,0,.4);transform:translate(-50%,-24px)}
+.pullcue.up.show{transform:translate(-50%,0)}
+.pc-a{display:inline-block;animation:pcb 1.1s ease-in-out infinite;color:var(--hi);font-size:1.15em}
+.pullcue.up .pc-a{color:var(--cobalt);animation-name:pct}
+@keyframes pcb{50%{transform:translateY(5px)}}@keyframes pct{50%{transform:translateY(-5px)}}
+html.pulling .pullcue{opacity:0}
+@media(prefers-reduced-motion:reduce){.pc-a{animation:none}}
