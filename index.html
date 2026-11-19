@@ -292,7 +292,8 @@ if(document.readyState==="complete")go();else addEventListener("load",go);setTim
     <div>
       <h2 id="applyH">Apply to test</h2>
       <p>It takes about a minute. I read every application myself and reply to the people I can fit in.</p>
-      <p style="margin-top:28px"><a class="btn small" data-board href="#">I already have access: open the board</a></p>
+      <p class="need"><b>You need a Claude.ai account.</b> The email you enter must be the one you sign in to Claude.ai with, because that is where the invitation works.</p>
+      <p style="margin-top:22px"><a class="btn small" data-board href="#">I already have access: open the board</a></p>
     </div>
     <form id="applyForm" novalidate>
       <div class="two">
@@ -300,7 +301,7 @@ if(document.readyState==="complete")go();else addEventListener("load",go);setTim
         <label>Email of your Claude.ai account<small>The email you sign in to Claude.ai with. Your invitation link is sent here.</small><input name="contact" id="contactIn" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required></label>
       </div>
       <div id="spamNote" class="spamnote" hidden><strong>Check your spam or junk folder.</strong> My reply and your invitation link can land there. If you see them, press “Not spam”.</div>
-      <label class="check"><input type="checkbox" name="confirm" id="confirmAcct" required><span>This is the email of my own Claude.ai account<small>No Claude.ai account yet? Create one at claude.ai with this email first, then apply.</small></span></label>
+      <label class="check confirm"><input type="checkbox" name="confirm" id="confirmAcct" required><span>This is the email of my own Claude.ai account<small>No Claude.ai account yet? Create one at claude.ai with this email first, then apply.</small></span></label>
       <label>Another way to reach you<small>Optional. For example Instagram or WhatsApp, in case email fails.</small><input name="where" id="whereIn" placeholder="For example: Instagram @name"></label>
       <label>What do you study?<small>Your year and the subjects you most want help with.</small><input name="study" placeholder="Grade 11: chemistry, physics, Arabic"></label>
       <label>Your device<select name="device"><option>Tablet with a pen</option><option>Tablet, finger only</option><option>Laptop</option><option>Phone</option><option>Something else</option></select></label>
