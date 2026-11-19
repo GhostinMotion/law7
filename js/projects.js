@@ -1,5 +1,5 @@
 /* "My other projects": cards are drawn from window.LAW7.projects (js/config.js).
-   layout: base | wide | half | five | four | three | old.  media = real picture/video file; no media = text-only card. */
+   layout: base | wide | half | six | strip | old.  media = real picture/video file; no media = text-only card. */
 (function(){
   var cfg=window.LAW7||{},list=cfg.projects||[],grid=document.getElementById("pgrid");
   if(!grid||!list.length)return;
@@ -19,7 +19,7 @@
     el.style.setProperty("--tint",TINT[p.tint]||TINT.blue);el.style.setProperty("--tilt",(i%2?1:-1)*0.6+"deg");
     if(p.url){el.href=p.url;el.target="_blank";el.rel="noopener"}
     var head='<div class="ptop"><h3>'+esc(p.name)+'</h3><span class="pst '+st+'">'+esc(p.status||"Building")+'</span></div>';
-    var tags=p.tags&&p.tags.length?'<ul class="ptags">'+p.tags.map(function(t){return "<li>"+esc(t)+"</li>"}).join("")+'</ul>':"";
+    var tags="";
     var go=p.url?'<span class="pgo">'+esc(p.go||"Open")+' ↗</span>':"";
     if(lay==="base"){
       var serves=(p.serves||[]).map(function(n){return '<li>'+esc(n)+'</li>'}).join("");
