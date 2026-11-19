@@ -36,8 +36,8 @@
     <h3 id="acctH">Use the email of your Claude.ai account</h3>
     <p class="acct-typed">You typed: <b id="acctMail"></b></p>
     <div id="acctB">
-      <p>If I have a spot for you, <b>Claude.ai itself sends an invitation</b> to this exact address. You accept it on claude.ai, it opens the board, and the board knows it is you.</p>
-      <p class="acct-warn"><b>This email must be connected to a Claude.ai account that you own.</b> If it is not, the invitation will not reach your account and you will not be able to open the board.</p>
+      <p>If I have a spot for you, <b>I email an invitation link</b> to this exact address. You open it, Claude.ai asks you to accept, and the board opens as normal.</p>
+      <p class="acct-warn"><b>This email must be connected to a Claude.ai account that you own.</b> If it is not, the invitation will not work on your account and you will not be able to open the board.</p>
       <p class="acct-tip">Not sure? Open claude.ai, go to your settings and look at the email shown there. Use that one.</p>
     </div>
     <p class="acct-wait" id="acctWait" aria-live="polite">Please read this. The buttons unlock in <b id="acctSec">10</b> seconds.</p>
@@ -279,7 +279,7 @@ if(document.readyState==="complete")go();else addEventListener("load",go);setTim
     <div class="spots"><span class="dots" data-dots aria-hidden="true"></span><strong data-open-text>10 of 10 spots open</strong></div>
     <ol class="path">
       <li><h3>Apply</h3><p>Fill in the short form below. Tell me what you study and what device you use.</p></li>
-      <li><h3>Get your invitation</h3><p>If there's a spot, Claude.ai emails an invitation to the Claude.ai email you applied with. Accept it and the board opens, signed in as you.</p></li>
+      <li><h3>Get your invitation</h3><p>If there's a spot, I email you an invitation link. Open it, accept on Claude.ai, and the board opens.</p></li>
       <li><h3>Study as usual</h3><p>Use it for real homework and revision. You start with 30 Atlas questions a day.</p></li>
       <li><h3>Tell me what's confusing</h3><p>Tap Send feedback in the board when something's unclear or breaks. That's the whole job.</p></li>
     </ol>
@@ -297,9 +297,9 @@ if(document.readyState==="complete")go();else addEventListener("load",go);setTim
     <form id="applyForm" novalidate>
       <div class="two">
         <label>First name<input name="name" autocomplete="given-name" required></label>
-        <label>Email of your Claude.ai account<small>The email you sign in to Claude.ai with. Your invitation is sent here.</small><input name="contact" id="contactIn" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required></label>
+        <label>Email of your Claude.ai account<small>The email you sign in to Claude.ai with. Your invitation link is sent here.</small><input name="contact" id="contactIn" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required></label>
       </div>
-      <div id="spamNote" class="spamnote" hidden><strong>Check your spam or junk folder.</strong> My reply and the Claude.ai invitation can land there. If you see them, press “Not spam”.</div>
+      <div id="spamNote" class="spamnote" hidden><strong>Check your spam or junk folder.</strong> My reply and your invitation link can land there. If you see them, press “Not spam”.</div>
       <label class="check"><input type="checkbox" name="confirm" id="confirmAcct" required><span>This is the email of my own Claude.ai account<small>No Claude.ai account yet? Create one at claude.ai with this email first, then apply.</small></span></label>
       <label>Another way to reach you<small>Optional. For example Instagram or WhatsApp, in case email fails.</small><input name="where" id="whereIn" placeholder="For example: Instagram @name"></label>
       <label>What do you study?<small>Your year and the subjects you most want help with.</small><input name="study" placeholder="Grade 11: chemistry, physics, Arabic"></label>
@@ -319,7 +319,7 @@ if(document.readyState==="complete")go();else addEventListener("load",go);setTim
     <details><summary>Does it cost anything?</summary><p>Testing is free.</p></details>
     <details><summary>What do I need?</summary><p>A modern browser. A tablet with a pen is the best fit, but a finger, a mouse or a laptop trackpad also work.</p></details>
     <details><summary>Who can see my boards?</summary><p>Your boards are saved under your own Claude.ai account and other testers can't open them.</p></details>
-    <details><summary>Why do you need my Claude.ai email?</summary><p>Law7 runs inside Claude.ai. I invite you with the email your Claude account uses, and when you accept, the board knows it is you. If you use a different email than your Claude account, the invitation never reaches your account.</p></details>
+    <details><summary>Why do you need my Claude.ai email?</summary><p>Law7 runs inside Claude.ai. I invite you with the email your Claude account uses, and Claude.ai asks you to accept when you open the link. If you use a different email than your Claude account, the invitation will not work on your account.</p></details>
     <details><summary>Will Atlas just do my homework?</summary><p>It shows its steps on your page so you can follow them. How much you ask for is up to you. I'd say use it when you're stuck, not instead of trying first.</p></details>
     <details><summary>Why only 10 people?</summary><p>I'm paying for the Atlas questions myself, and a small group lets me fix things fast and keeps everyone's daily allowance generous.</p></details>
     <details><summary>How do I leave the test?</summary><p>Stop using it whenever you like. If you want your access closed, message me and I'll do it.</p></details>

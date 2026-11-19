@@ -1,7 +1,7 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Invite email</title>
 <style>body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#eee;color:#1b1b2f}.bar{padding:14px;background:#fff;border-bottom:1px solid #ddd}.bar label{display:block;font-weight:bold;font-size:14px;margin:8px 0 4px}.bar input{width:100%;box-sizing:border-box;font-size:17px;padding:11px;border:1px solid #bbb;border-radius:8px}.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.row button{flex:1 1 140px;font-size:17px;font-weight:bold;padding:14px;border:0;border-radius:10px;background:#4b2fb3;color:#fff}.row button.alt{background:#1b1b2f}#msg{margin-top:10px;font-size:15px;min-height:20px;color:#0a7a43;font-weight:bold}.help{font-size:14px;line-height:1.5;color:#444;margin-top:8px}#mail{padding:14px 0}</style></head><body>
 <div class="bar"><strong>Invite email for a tester</strong>
-<label for="n">Their name</label><input id="n" autocomplete="off"><label for="c">Their code</label><input id="c" autocomplete="off" autocapitalize="off" spellcheck="false">
+<label for="n">Their name</label><input id="n" autocomplete="off"><label for="l">Invitation link from claude.ai</label><input id="l" type="url" inputmode="url" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Paste the link you get after adding them as Editor"><label for="c">Their code (backup)</label><input id="c" autocomplete="off" autocapitalize="off" spellcheck="false">
 <div class="row"><button id="cp">1. Copy the email</button><button class="alt" id="cs">2. Copy the subject</button></div><div id="msg" role="status"></div>
 <div class="help">In Gmail: Compose, paste the subject, tap in the body and paste. Add their address and press Send. Nothing is sent from this page, and nothing you type here leaves your device.</div></div>
 <div id="mail"><div style="background:#F4F7FD;padding:14px 8px;font-family:'Segoe UI',Helvetica,Arial,sans-serif;color:#0F1B3D;-webkit-text-size-adjust:100%">
@@ -16,17 +16,17 @@
 <div style="font:800 22px/1.2 'Trebuchet MS','Segoe UI',Arial,sans-serif;letter-spacing:-.2px;color:#0F1B3D">{{head}}</div>
 <div style="padding-top:8px;font-size:15px;line-height:1.5;color:#46526F">{{lead}}</div>
 </td></tr>
-<tr><td style="padding:14px 18px 0"><table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#FFF6C7" style="background:#FFF6C7;border-left:5px solid #FFD93D;border-radius:10px"><tr><td style="padding:11px 13px;font-size:14px;line-height:1.5;color:#3a2e00"><b>Claude.ai also emails you an invitation.</b> Accept it first, then open the board. Check spam if you do not see it.</td></tr></table></td></tr>
+<tr><td style="padding:14px 18px 0"><table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#FFF6C7" style="background:#FFF6C7;border-left:5px solid #FFD93D;border-radius:10px"><tr><td style="padding:11px 13px;font-size:14px;line-height:1.5;color:#3a2e00"><b>This link is made for you.</b> Open it while signed in to the Claude.ai account with the email you applied with.</td></tr></table></td></tr>
 <tr><td style="padding:14px 18px 0"><table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0"><tr><td align="center" bgcolor="#F4F7FD" style="background:#F4F7FD;border:2px dashed #2A44F5;border-radius:12px;padding:12px 8px">
 <div style="font-size:12px;color:#46526F;padding-bottom:4px">{{codelabel}}</div>
 <div style="font-family:'Courier New',Courier,monospace;font-size:18px;line-height:1.3;font-weight:bold;letter-spacing:.5px;color:#0F1B3D;word-break:break-all">{{code}}</div>
 </td></tr></table></td></tr>
-<tr><td align="center" style="padding:14px 18px 2px"><table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr><td bgcolor="#2A44F5" style="background:#2A44F5;border-radius:999px;text-align:center"><a href="https://claude.ai/artifact/TeYXMuGKbj52CMTpcpLGDZ" style="display:inline-block;padding:12px 24px;font:700 15px/1 'Trebuchet MS','Segoe UI',Arial,sans-serif;color:#FFFFFF;text-decoration:none">Open the board</a></td></tr></table></td></tr>
+<tr><td align="center" style="padding:14px 18px 2px"><table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr><td bgcolor="#2A44F5" style="background:#2A44F5;border-radius:999px;text-align:center"><a href="{{link}}" style="display:inline-block;padding:12px 24px;font:700 15px/1 'Trebuchet MS','Segoe UI',Arial,sans-serif;color:#FFFFFF;text-decoration:none">Accept and open the board</a></td></tr></table></td></tr>
 <tr><td style="padding:16px 18px 0">
 <div style="font:800 16px/1.2 'Trebuchet MS','Segoe UI',Arial,sans-serif;padding-bottom:6px">How to start</div>
 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
-<tr><td width="30" valign="top" style="padding:4px 0"><table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr><td width="22" height="22" align="center" valign="middle" bgcolor="#2A44F5" style="width:22px;height:22px;background:#2A44F5;border-radius:11px;color:#FFFFFF;font:700 12px/22px Arial,sans-serif">1</td></tr></table></td><td valign="top" style="padding:3px 0 6px;font-size:15px;line-height:1.45"><b>Accept the invitation</b> from Claude.ai.</td></tr>
-<tr><td width="30" valign="top" style="padding:4px 0"><table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr><td width="22" height="22" align="center" valign="middle" bgcolor="#2A44F5" style="width:22px;height:22px;background:#2A44F5;border-radius:11px;color:#FFFFFF;font:700 12px/22px Arial,sans-serif">2</td></tr></table></td><td valign="top" style="padding:3px 0 6px;font-size:15px;line-height:1.45">Tap <b>Open the board</b>. If it asks for a code, type the one above once. You may need to sign in to Claude first.</td></tr>
+<tr><td width="30" valign="top" style="padding:4px 0"><table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr><td width="22" height="22" align="center" valign="middle" bgcolor="#2A44F5" style="width:22px;height:22px;background:#2A44F5;border-radius:11px;color:#FFFFFF;font:700 12px/22px Arial,sans-serif">1</td></tr></table></td><td valign="top" style="padding:3px 0 6px;font-size:15px;line-height:1.45"><b>Tap Accept and open the board.</b> Claude.ai asks you to accept the invitation. Sign in to Claude first if it asks.</td></tr>
+<tr><td width="30" valign="top" style="padding:4px 0"><table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr><td width="22" height="22" align="center" valign="middle" bgcolor="#2A44F5" style="width:22px;height:22px;background:#2A44F5;border-radius:11px;color:#FFFFFF;font:700 12px/22px Arial,sans-serif">2</td></tr></table></td><td valign="top" style="padding:3px 0 6px;font-size:15px;line-height:1.45"><b>The board opens.</b> If it asks for a code, type the one above once.</td></tr>
 <tr><td width="30" valign="top" style="padding:4px 0"><table role="presentation" cellspacing="0" cellpadding="0" border="0"><tr><td width="22" height="22" align="center" valign="middle" bgcolor="#2A44F5" style="width:22px;height:22px;background:#2A44F5;border-radius:11px;color:#FFFFFF;font:700 12px/22px Arial,sans-serif">3</td></tr></table></td><td valign="top" style="padding:3px 0 6px;font-size:15px;line-height:1.45">{{third}}</td></tr>
 </table></td></tr>
 <tr><td style="padding:10px 18px 0">
@@ -44,21 +44,22 @@
 </div>
 <script>
 (function(){
-var n=document.getElementById("n"),c=document.getElementById("c"),mail=document.getElementById("mail"),msg=document.getElementById("msg");
+var n=document.getElementById("n"),l=document.getElementById("l"),c=document.getElementById("c"),mail=document.getElementById("mail"),msg=document.getElementById("msg");
 var src=mail.innerHTML;
 function esc(s){return String(s).replace(/[&<>"]/g,function(x){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[x]})}
 var same=false;
 var TXT={
-  fresh:{head:"{{name}}, you have been accepted. 🎉",lead:"There is a spot for you in the trial. Here is your backup code.",codelabel:"Your backup code",third:"The board knows it is you and gives you your own private boards. Write on a page, then ask Atlas about it."},
-  same:{head:"{{name}}, Law7 has moved to a new address.",lead:"Your code is the same as before. Because the board moved, you need a new invitation.",codelabel:"Your code (unchanged)",third:"You start with a fresh board: the pages from the old address did not come over. Write on a page, then ask Atlas about it."}
+  fresh:{head:"{{name}}, you have been accepted. 🎉",lead:"There is a spot for you in the trial. Open the button below to join.",codelabel:"Your backup code",third:"You get your own private boards. Write on a page, then ask Atlas about it."},
+  same:{head:"{{name}}, Law7 has moved to a new address.",lead:"Your code is the same as before. Because the board moved, you need to accept a new invitation. Open the button below.",codelabel:"Your code (unchanged)",third:"You start with a fresh board: the pages from the old address did not come over. Write on a page, then ask Atlas about it."}
 };
-function draw(){var t=same?TXT.same:TXT.fresh,out=src;["head","lead","codelabel","third"].forEach(function(k){out=out.split("{{"+k+"}}").join(esc(t[k]))});mail.innerHTML=out.split("{{name}}").join(esc(n.value||"Name")).split("{{code}}").join(esc(c.value||"CODE"))}
-var h=location.hash.replace(/^#/,"").split("&");h.forEach(function(p){var kv=p.split("=");try{var v=decodeURIComponent(kv[1]||"");if(kv[0]==="n")n.value=v;if(kv[0]==="c")c.value=v;if(kv[0]==="s")same=v==="1"}catch(e){}});
+function draw(){var t=same?TXT.same:TXT.fresh,out=src;["head","lead","codelabel","third"].forEach(function(k){out=out.split("{{"+k+"}}").join(esc(t[k]))});mail.innerHTML=out.split("{{name}}").join(esc(n.value||"Name")).split("{{code}}").join(esc(c.value||"CODE")).split("{{link}}").join(esc(l.value.trim()||"https://claude.ai"))}
+var h=location.hash.replace(/^#/,"").split("&");h.forEach(function(p){var kv=p.split("=");try{var v=decodeURIComponent(kv[1]||"");if(kv[0]==="n")n.value=v;if(kv[0]==="c")c.value=v;if(kv[0]==="l")l.value=v;if(kv[0]==="s")same=v==="1"}catch(e){}});
 if(location.hash)history.replaceState(null,"",location.pathname);
-n.addEventListener("input",draw);c.addEventListener("input",draw);draw();
+n.addEventListener("input",draw);l.addEventListener("input",draw);c.addEventListener("input",draw);draw();
 function say(t){msg.textContent=t;setTimeout(function(){msg.textContent=""},4000)}
 function legacy(node){var r=document.createRange();r.selectNodeContents(node);var s=getSelection();s.removeAllRanges();s.addRange(r);var ok=false;try{ok=document.execCommand("copy")}catch(e){}s.removeAllRanges();return ok}
 document.getElementById("cp").addEventListener("click",function(){
+  if(!/^https:\/\/\S+$/.test(l.value.trim())){say("Paste the invitation link first. It starts with https://");return}
   if(!c.value.trim()){say("Type their code first.");return}
   var node=mail.firstElementChild;
   if(navigator.clipboard&&window.ClipboardItem){
@@ -66,6 +67,6 @@ document.getElementById("cp").addEventListener("click",function(){
     navigator.clipboard.write([new ClipboardItem({"text/html":new Blob([html],{type:"text/html"}),"text/plain":new Blob([node.innerText],{type:"text/plain"})})]).then(function(){say("Copied. Now paste it into Gmail.")},function(){say(legacy(node)?"Copied. Now paste it into Gmail.":"Could not copy. Touch and hold the email, Select all, Copy.")});
   }else say(legacy(node)?"Copied. Now paste it into Gmail.":"Could not copy. Touch and hold the email, Select all, Copy.");
 });
-document.getElementById("cs").addEventListener("click",function(){var s=same?"Law7 has a new address: your code is unchanged":"You're in: your Law7 invitation and code";(navigator.clipboard?navigator.clipboard.writeText(s):Promise.reject()).then(function(){say("Subject copied.")},function(){say("Subject: "+s)})});
+document.getElementById("cs").addEventListener("click",function(){var s=same?"Law7 has a new address: your code is unchanged":"You're in: accept your Law7 invitation";(navigator.clipboard?navigator.clipboard.writeText(s):Promise.reject()).then(function(){say("Subject copied.")},function(){say("Subject: "+s)})});
 })();
 </script></body></html>

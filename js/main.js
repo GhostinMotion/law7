@@ -147,13 +147,13 @@
         return fetch("https://api.emailjs.com/api/v1.0/email/send",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({service_id:ej.service,template_id:tpl,user_id:ej.key,template_params:pr})}).then(function(r){if(!r.ok)throw 0})};
       var jobs=[send(ej.notify,{})];
       if(ej.reply&&isMail(contact))jobs.push(send(ej.reply,{to_email:contact}).catch(function(){}));
-      Promise.all(jobs).then(function(){msg.innerHTML='<div class="msg ok">Thanks, '+esc(name)+'. '+(jobs.length>1?"A confirmation is on its way to <b>"+esc(contact)+"</b>. ":"")+'I read every application myself. If there is a spot, <b>Claude.ai will email an invitation to that address</b>. Accept it and the board opens.'+(jobs.length>1?SPAM:"")+'</div>';form.reset();syncContact()})
+      Promise.all(jobs).then(function(){msg.innerHTML='<div class="msg ok">Thanks, '+esc(name)+'. '+(jobs.length>1?"A confirmation is on its way to <b>"+esc(contact)+"</b>. ":"")+'I read every application myself. If there is a spot, <b>I will email an invitation link to that address</b>. Open it, accept on Claude.ai, and the board opens.'+(jobs.length>1?SPAM:"")+'</div>';form.reset();syncContact()})
         .catch(function(){msg.innerHTML='<div class="msg warn">That did not send. Check your connection and try again.</div>'})
         .then(function(){btn.disabled=false});
     }else if(ap.formEndpoint){
       btn.disabled=true;
       fetch(ap.formEndpoint,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({name:name,contact:contact,study:f.get("study"),device:f.get("device"),why:f.get("why"),message:text})})
-        .then(function(r){if(!r.ok)throw 0;msg.innerHTML='<div class="msg ok">Thanks, '+esc(name)+'. I read every application myself. If there is a spot, Claude.ai will email an invitation to <b>'+esc(contact)+'</b>.</div>';form.reset()})
+        .then(function(r){if(!r.ok)throw 0;msg.innerHTML='<div class="msg ok">Thanks, '+esc(name)+'. I read every application myself. If there is a spot, I will email an invitation link to <b>'+esc(contact)+'</b>.</div>';form.reset()})
         .catch(function(){msg.innerHTML='<div class="msg warn">That did not send. Check your connection and try again.</div>'})
         .then(function(){btn.disabled=false});
     }else if(ap.email){
