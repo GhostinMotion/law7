@@ -5,7 +5,7 @@ window.LAW7 = {
 
   /* the tester programme */
   slotsTotal: 10,
-  slotsTaken: 1,          // raise this as people join; the dots and the text update by themselves
+  slotsTaken: 3,          // raise this as people join; the dots and the text update by themselves
 
   /* How applications reach you. Fill in ONE of these. The first one that is filled in is used.
      formEndpoint: a form service address, for example "https://formspree.io/f/xxxxxxx"
