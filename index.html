@@ -15,6 +15,28 @@
 <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
+<!-- Law7 splash: shared by the board and the landing page -->
+<div id="l7s" aria-hidden="true" data-once="1"><div class="l7s-in"><svg viewBox="0 0 64 64" width="92" height="92"><rect width="64" height="64" rx="16" fill="#0F1B3D" stroke="#2A44F5" stroke-width="1.5"/><path class="l7s-a" d="M17 20c9-1.6 19-1.4 30-.6-5 10-11 22-17.5 33" fill="none" stroke="#FFD93D" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round" pathLength="1"/><path class="l7s-b" d="M25.5 36c5-.6 10-.9 14-.8" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" pathLength="1"/><circle class="l7s-c" cx="48" cy="48" r="4.2" fill="#5B73FF"/></svg><b>Law<i>7</i></b><span>write it by hand, ask Atlas when you're stuck</span></div></div>
+<style>
+#l7s{position:fixed;inset:0;z-index:99999;background:#0F1B3D;display:grid;place-items:center;pointer-events:none;transition:opacity .45s ease,visibility .45s;color:#fff;font-family:var(--display,Inter),system-ui,sans-serif}
+#l7s.out{opacity:0;visibility:hidden}
+#l7s .l7s-in{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:24px}
+#l7s b{font-size:34px;font-weight:800;letter-spacing:-.02em;line-height:1}
+#l7s i{font-style:normal;color:#FFD93D}
+#l7s span{font:600 15px/1.4 var(--hand,Caveat),cursive;font-size:19px;color:#9FB0EA;opacity:0;animation:l7sf .5s .9s forwards}
+#l7s .l7s-a{stroke-dasharray:1;stroke-dashoffset:1;animation:l7sd .7s .15s cubic-bezier(.5,0,.2,1) forwards}
+#l7s .l7s-b{stroke-dasharray:1;stroke-dashoffset:1;animation:l7sd .35s .75s ease-out forwards}
+#l7s .l7s-c{opacity:0;transform-origin:48px 48px;animation:l7sp .45s 1s forwards}
+@keyframes l7sd{to{stroke-dashoffset:0}}@keyframes l7sf{to{opacity:1}}@keyframes l7sp{0%{opacity:0;transform:scale(.2)}70%{opacity:1;transform:scale(1.5)}100%{opacity:1;transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){#l7s .l7s-a,#l7s .l7s-b{animation:none;stroke-dashoffset:0}#l7s .l7s-c,#l7s span{animation:none;opacity:1}}
+</style>
+<script>
+(function(){var s=document.getElementById("l7s");if(!s)return;
+try{if(s.getAttribute("data-once")==="1"){if(sessionStorage.getItem("l7s")){s.remove();return}sessionStorage.setItem("l7s","1")}}catch(e){}
+var t0=Date.now(),done=false;function go(){if(done)return;done=true;setTimeout(function(){s.classList.add("out");setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s)},600)},Math.max(0,1500-(Date.now()-t0)))}
+if(document.readyState==="complete")go();else addEventListener("load",go);setTimeout(go,5000)})();
+</script>
+
 <div class="paper-grid" id="paperGrid" aria-hidden="true"></div>
 
 <header class="bar" id="bar">
@@ -235,7 +257,7 @@
 <section class="projects" id="projects" aria-labelledby="projH">
   <div class="wrap">
     <h2 id="projH">My other projects</h2>
-    <p class="sub">Law7 is one of the things I build. These are the rest: most of them work already, one is still a prototype and one is just a plan.</p>
+    <p class="sub">Law7 is one of the things I build. These are the rest. Some are live, some are only on my own PC, and one is still just an idea.</p>
     <div class="pgrid" id="pgrid"></div>
   </div>
 </section>
