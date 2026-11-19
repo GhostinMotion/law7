@@ -9,7 +9,7 @@
   function media(p){
     if(p.media){
       if(/\.(mp4|webm)$/i.test(p.media))return '<video src="'+esc(p.media)+'" autoplay muted loop playsinline aria-label="'+esc(p.alt||p.name)+'"></video>';
-      return '<img src="'+esc(p.media)+'" alt="'+esc(p.alt||p.name)+'" loading="lazy" decoding="async">';
+      return '<img src="'+esc(p.media)+'" alt="'+esc(p.alt||p.name)+'" decoding="async">';
     }
     return "";
   }

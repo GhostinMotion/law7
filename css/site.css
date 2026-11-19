@@ -412,7 +412,7 @@ html.still .chap-in{position:static;padding-top:48px;padding-bottom:48px}
 .story-side .subjects li:nth-child(3n+2){background:#DCE5FF;border-color:var(--ink);color:var(--ink)}
 
 /* old card: portrait picture on the left */
-.pcard.old .pmedia img{aspect-ratio:auto;height:100%;min-height:220px;object-fit:cover;object-position:center top}
+
 .pcard.nopic{background:var(--tint,#DCE5FF)}
 /* the "door" at the very end of the landing page */
 .door{background:var(--night);color:#fff;padding:clamp(54px,8vw,96px) 0;margin-top:0;position:relative;overflow:hidden}
@@ -455,8 +455,9 @@ body.pj{background:var(--night);color:#fff}
 .pbody p{margin-bottom:0}
 .pgo{margin-top:auto;padding-top:14px}
 .pcard.old .pbody{justify-content:center}
-.pcard.old .pmedia img{min-height:0}
-.pcard.six .pmedia img{aspect-ratio:16/9;object-position:center top}
+.pcard.old .pmedia{display:block;position:relative;aspect-ratio:16/10;align-self:stretch;height:auto}
+.pcard.old .pmedia img{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;object-fit:cover;object-position:center}
+.pmedia img,.pmedia video{aspect-ratio:16/10;object-fit:cover;object-position:center top}
 .pcard.strip{flex-direction:row;align-items:center;gap:clamp(16px,3vw,40px)}
 .pcard.strip .pbody{flex-direction:row;align-items:center;flex-wrap:wrap;gap:12px 32px;padding:clamp(18px,2.4vw,26px) clamp(20px,3vw,34px)}
 .pcard.strip .ptop{flex:none;gap:14px}
