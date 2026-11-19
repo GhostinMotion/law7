@@ -1,7 +1,7 @@
 /* The only file you need to edit. Change the values, save, upload again. */
 window.LAW7 = {
   /* where the "Open the board" buttons go */
-  boardUrl: "https://claude.ai/artifact/4MKXkLsQcVqZDZgBd9gdY9",
+  boardUrl: "https://claude.ai/artifact/TeYXMuGKbj52CMTpcpLGDZ",
 
   /* the tester programme */
   slotsTotal: 10,

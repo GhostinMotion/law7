@@ -8,18 +8,18 @@
 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="width:100%;max-width:560px;margin:0 auto;background:#ffffff;border-radius:14px">
 <tr><td style="background:#4b2fb3;padding:20px 16px;color:#ffffff;font-size:20px;line-height:1.3;font-weight:bold;text-align:center;border-radius:14px 14px 0 0">Law7 Testers Edition<br><span style="font-size:15px;font-weight:normal">By GhostlyMatters</span></td></tr>
 <tr><td style="padding:22px 18px">
-<p style="margin:0 0 14px;font-size:20px;line-height:1.35;font-weight:bold">{{name}}, you have been accepted. 🎉</p>
-<p style="margin:0 0 18px;font-size:17px;line-height:1.55">There is a spot for you in the trial. Here is your personal code.</p>
+<p style="margin:0 0 14px;font-size:20px;line-height:1.35;font-weight:bold">{{head}}</p>
+<p style="margin:0 0 18px;font-size:17px;line-height:1.55">{{lead}}</p>
 <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="width:100%;margin:0 0 20px"><tr><td style="background:#f4f1fb;border:3px dashed #4b2fb3;border-radius:12px;padding:18px 12px;text-align:center">
-<div style="font-size:14px;color:#5b5b73;margin-bottom:6px">Your code</div>
+<div style="font-size:14px;color:#5b5b73;margin-bottom:6px">{{codelabel}}</div>
 <div style="font-family:'Courier New',Courier,monospace;font-size:24px;line-height:1.3;font-weight:bold;letter-spacing:1px;color:#1b1b2f;word-break:break-all">{{code}}</div>
 </td></tr></table>
-<table role="presentation" cellspacing="0" cellpadding="0" style="margin:0 auto 22px"><tr><td style="background:#4b2fb3;border-radius:10px;text-align:center"><a href="https://claude.ai/artifact/4MKXkLsQcVqZDZgBd9gdY9" style="display:inline-block;padding:15px 26px;font-size:18px;font-weight:bold;color:#ffffff;text-decoration:none">Open the board</a></td></tr></table>
+<table role="presentation" cellspacing="0" cellpadding="0" style="margin:0 auto 22px"><tr><td style="background:#4b2fb3;border-radius:10px;text-align:center"><a href="https://claude.ai/artifact/TeYXMuGKbj52CMTpcpLGDZ" style="display:inline-block;padding:15px 26px;font-size:18px;font-weight:bold;color:#ffffff;text-decoration:none">Open the board</a></td></tr></table>
 <p style="margin:0 0 8px;font-size:18px;line-height:1.4"><strong>How to start</strong></p>
 <ol style="margin:0 0 18px;padding-left:22px;font-size:17px;line-height:1.6">
 <li>Tap <strong>Open the board</strong>. You may need to sign in to Claude first.</li>
 <li>Type your code once when it asks.</li>
-<li>You now have your own private boards. Write on a page, then ask Atlas about it.</li>
+<li>{{third}}</li>
 </ol>
 <p style="margin:0 0 8px;font-size:18px;line-height:1.4"><strong>Good to know</strong></p>
 <ul style="margin:0 0 18px;padding-left:22px;font-size:17px;line-height:1.6">
@@ -38,8 +38,13 @@
 var n=document.getElementById("n"),c=document.getElementById("c"),mail=document.getElementById("mail"),msg=document.getElementById("msg");
 var src=mail.innerHTML;
 function esc(s){return String(s).replace(/[&<>"]/g,function(x){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[x]})}
-function draw(){mail.innerHTML=src.split("{{name}}").join(esc(n.value||"Name")).split("{{code}}").join(esc(c.value||"CODE"))}
-var h=location.hash.replace(/^#/,"").split("&");h.forEach(function(p){var kv=p.split("=");try{var v=decodeURIComponent(kv[1]||"");if(kv[0]==="n")n.value=v;if(kv[0]==="c")c.value=v}catch(e){}});
+var same=false;
+var TXT={
+  fresh:{head:"{{name}}, you have been accepted. 🎉",lead:"There is a spot for you in the trial. Here is your personal code.",codelabel:"Your code",third:"You now have your own private boards. Write on a page, then ask Atlas about it."},
+  same:{head:"{{name}}, Law7 has moved to a new address.",lead:"Your code is the same as before, so there is nothing new to remember. Just open the new link and type it once.",codelabel:"Your code (unchanged)",third:"You start with a fresh board: the pages from the old address did not come over. Write on a page, then ask Atlas about it."}
+};
+function draw(){var t=same?TXT.same:TXT.fresh,out=src;["head","lead","codelabel","third"].forEach(function(k){out=out.split("{{"+k+"}}").join(esc(t[k]))});mail.innerHTML=out.split("{{name}}").join(esc(n.value||"Name")).split("{{code}}").join(esc(c.value||"CODE"))}
+var h=location.hash.replace(/^#/,"").split("&");h.forEach(function(p){var kv=p.split("=");try{var v=decodeURIComponent(kv[1]||"");if(kv[0]==="n")n.value=v;if(kv[0]==="c")c.value=v;if(kv[0]==="s")same=v==="1"}catch(e){}});
 if(location.hash)history.replaceState(null,"",location.pathname);
 n.addEventListener("input",draw);c.addEventListener("input",draw);draw();
 function say(t){msg.textContent=t;setTimeout(function(){msg.textContent=""},4000)}
@@ -52,6 +57,6 @@ document.getElementById("cp").addEventListener("click",function(){
     navigator.clipboard.write([new ClipboardItem({"text/html":new Blob([html],{type:"text/html"}),"text/plain":new Blob([node.innerText],{type:"text/plain"})})]).then(function(){say("Copied. Now paste it into Gmail.")},function(){say(legacy(node)?"Copied. Now paste it into Gmail.":"Could not copy. Touch and hold the email, Select all, Copy.")});
   }else say(legacy(node)?"Copied. Now paste it into Gmail.":"Could not copy. Touch and hold the email, Select all, Copy.");
 });
-document.getElementById("cs").addEventListener("click",function(){var s="You're in: your Law7 code";(navigator.clipboard?navigator.clipboard.writeText(s):Promise.reject()).then(function(){say("Subject copied.")},function(){say("Subject: "+s)})});
+document.getElementById("cs").addEventListener("click",function(){var s=same?"Law7 has a new address: your code is unchanged":"You're in: your Law7 code";(navigator.clipboard?navigator.clipboard.writeText(s):Promise.reject()).then(function(){say("Subject copied.")},function(){say("Subject: "+s)})});
 })();
 </script></body></html>
