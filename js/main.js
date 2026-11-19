@@ -103,33 +103,57 @@
   /* apply form */
   var form=$("#applyForm"),msg=$("#formMsg"),btn=$("#sendBtn");
   function esc(s){return String(s).replace(/[&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c]})}
-  var cIn=$("#contactIn"),spam=$("#spamNote"),nc=$("#noContact"),wr=$("#whereRow"),wi=$("#whereIn");
-  var isMail=function(v){return /^\S+@\S+\.\S+$/.test(String(v||"").trim())};
-  function syncContact(){
-    var none=nc.checked;cIn.required=!none;cIn.disabled=none;wr.hidden=!none;
-    spam.hidden=none||!isMail(cIn.value);
-  }
-  cIn.addEventListener("input",syncContact);nc.addEventListener("change",syncContact);syncContact();
+  var cIn=$("#contactIn"),spam=$("#spamNote"),wi=$("#whereIn"),conf=$("#confirmAcct");
+  var isMail=function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(v||"").trim())};
+  function syncContact(){spam.hidden=!isMail(cIn.value)}
+  cIn.addEventListener("input",syncContact);syncContact();
   var SPAM='<div class="spamnote"><strong>Check your spam or junk folder.</strong> My reply can land there. If you see it, press “Not spam”.</div>';
+  /* The popup. It cannot be closed, by button, Escape or backdrop, until 10 seconds have passed, so the person reads that the email must belong to their own Claude.ai account. */
+  var dlg=$("#acctDlg"),dMail=$("#acctMail"),dYes=$("#acctYes"),dNo=$("#acctNo"),dSec=$("#acctSec"),dWait=$("#acctWait");
+  var HOLD_MS=10000,holdEnd=0,holdTimer=null,pending=null;
+  function holdLeft(){return Math.max(0,Math.ceil((holdEnd-Date.now())/1000))}
+  function tick(){
+    var left=holdLeft();dSec.textContent=left;
+    if(left<=0){clearInterval(holdTimer);holdTimer=null;dYes.disabled=false;dNo.disabled=false;dWait.classList.add("done");dWait.textContent="You can choose now.";if(document.activeElement===document.body||dlg.contains(document.activeElement))dNo.focus()}
+  }
+  function askEmail(email,go){
+    pending=go;dMail.textContent=email;dYes.disabled=true;dNo.disabled=true;dWait.classList.remove("done");
+    dWait.innerHTML='Please read this. The buttons unlock in <b id="acctSec">10</b> seconds.';dSec=$("#acctSec");
+    holdEnd=Date.now()+HOLD_MS;
+    if(typeof dlg.showModal==="function"){if(!dlg.open)dlg.showModal()}else dlg.setAttribute("open","");
+    clearInterval(holdTimer);holdTimer=setInterval(tick,250);tick();
+  }
+  /* Escape, or anything else that closes it early, just opens it again */
+  dlg.addEventListener("cancel",function(e){e.preventDefault()});
+  dlg.addEventListener("close",function(){if(holdLeft()>0&&typeof dlg.showModal==="function")dlg.showModal()});
+  dlg.addEventListener("click",function(e){if(e.target===dlg&&holdLeft()>0)e.stopPropagation()});
+  function closeDlg(){holdEnd=0;if(dlg.open&&dlg.close)dlg.close();else dlg.removeAttribute("open")}
+  dNo.addEventListener("click",function(){if(holdLeft()>0)return;closeDlg();pending=null;cIn.focus();cIn.select&&cIn.select()});
+  dYes.addEventListener("click",function(){if(holdLeft()>0)return;var go=pending;pending=null;closeDlg();if(go)go()});
   form.addEventListener("submit",function(e){
-    e.preventDefault();var f=new FormData(form),name=(f.get("name")||"").trim(),contact=(f.get("contact")||"").trim();
-    if(nc.checked)contact="None: you already have my contact"+((wi.value||"").trim()?" ("+wi.value.trim()+")":"");
-    if(!name||!contact){msg.innerHTML='<div class="msg warn">Add your first name and how we can reach you.</div>';return}
-    var lines=["Law7 tester application","Name: "+name,"Reach me at: "+contact,"I study: "+(f.get("study")||"").trim(),"Device: "+f.get("device"),"I'd use it for: "+(f.get("why")||"").trim()],text=lines.join("\n");
+    e.preventDefault();var f=new FormData(form),name=(f.get("name")||"").trim(),contact=(f.get("contact")||"").trim(),extra=(wi.value||"").trim();
+    if(!name){msg.innerHTML='<div class="msg warn">Add your first name.</div>';return}
+    if(!isMail(contact)){msg.innerHTML='<div class="msg warn">Type the email of your Claude.ai account, for example you@example.com.</div>';cIn.focus();return}
+    if(!conf.checked){msg.innerHTML='<div class="msg warn">Tick the box to say this is the email of your own Claude.ai account.</div>';return}
+    msg.innerHTML="";
+    askEmail(contact,function(){send(f,name,contact,extra)});
+  });
+  function send(f,name,contact,extra){
+    var lines=["Law7 tester application","Name: "+name,"Claude.ai account email: "+contact+" (confirmed by the applicant in the popup)"].concat(extra?["Other way to reach: "+extra]:[],["I study: "+(f.get("study")||"").trim(),"Device: "+f.get("device"),"I'd use it for: "+(f.get("why")||"").trim()]),text=lines.join("\n");
     var ap=cfg.apply||{};
     if(ap.emailjs&&ap.emailjs.key&&ap.emailjs.service&&ap.emailjs.notify){
       btn.disabled=true;var ej=ap.emailjs;
       var send=function(tpl,extra){var pr={name:name,contact:contact,study:f.get("study")||"",device:f.get("device")||"",why:f.get("why")||"",message:text};for(var k in extra)pr[k]=extra[k];
         return fetch("https://api.emailjs.com/api/v1.0/email/send",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({service_id:ej.service,template_id:tpl,user_id:ej.key,template_params:pr})}).then(function(r){if(!r.ok)throw 0})};
       var jobs=[send(ej.notify,{})];
-      if(ej.reply&&/^\S+@\S+\.\S+$/.test(contact))jobs.push(send(ej.reply,{to_email:contact}).catch(function(){}));
-      Promise.all(jobs).then(function(){msg.innerHTML='<div class="msg ok">Thanks, '+esc(name)+'. '+(jobs.length>1?"A confirmation is on its way to your email. ":"")+'I read every application and will reply if there is a spot.'+(jobs.length>1?SPAM:"")+'</div>';form.reset();syncContact()})
+      if(ej.reply&&isMail(contact))jobs.push(send(ej.reply,{to_email:contact}).catch(function(){}));
+      Promise.all(jobs).then(function(){msg.innerHTML='<div class="msg ok">Thanks, '+esc(name)+'. '+(jobs.length>1?"A confirmation is on its way to <b>"+esc(contact)+"</b>. ":"")+'I read every application myself. If there is a spot, <b>Claude.ai will email an invitation to that address</b>. Accept it and the board opens.'+(jobs.length>1?SPAM:"")+'</div>';form.reset();syncContact()})
         .catch(function(){msg.innerHTML='<div class="msg warn">That did not send. Check your connection and try again.</div>'})
         .then(function(){btn.disabled=false});
     }else if(ap.formEndpoint){
       btn.disabled=true;
       fetch(ap.formEndpoint,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({name:name,contact:contact,study:f.get("study"),device:f.get("device"),why:f.get("why"),message:text})})
-        .then(function(r){if(!r.ok)throw 0;msg.innerHTML='<div class="msg ok">Thanks, '+esc(name)+'. I read every application and will reply if there is a spot.</div>';form.reset()})
+        .then(function(r){if(!r.ok)throw 0;msg.innerHTML='<div class="msg ok">Thanks, '+esc(name)+'. I read every application myself. If there is a spot, Claude.ai will email an invitation to <b>'+esc(contact)+'</b>.</div>';form.reset()})
         .catch(function(){msg.innerHTML='<div class="msg warn">That did not send. Check your connection and try again.</div>'})
         .then(function(){btn.disabled=false});
     }else if(ap.email){
@@ -139,5 +163,5 @@
       var done=function(ok){msg.innerHTML='<div class="msg ok">'+(ok?"Copied. ":"")+'Send this message to the person who shared this page:<pre>'+esc(text)+'</pre></div>'};
       if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).then(function(){done(true)},function(){done(false)});else done(false);
     }
-  });
+  }
 })();

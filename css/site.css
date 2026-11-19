@@ -557,3 +557,17 @@ html.popping body>*:not(.pullpanel):not(.pullcurtain):not(.pullcue){transition:t
 @keyframes pcb{50%{transform:translateY(5px)}}@keyframes pct{50%{transform:translateY(-5px)}}
 html.pulling .pullcue{opacity:0}
 @media(prefers-reduced-motion:reduce){.pc-a{animation:none}}
+
+/* the "use your Claude.ai email" popup: it cannot be closed for its first 10 seconds */
+.acctdlg{border:2px solid var(--ink);border-radius:26px;padding:0;width:min(560px,94vw);max-height:92svh;background:#fff;color:var(--ink);box-shadow:0 30px 80px rgba(11,18,48,.4);overflow:auto}
+.acctdlg::backdrop{background:rgba(11,18,48,.72);backdrop-filter:blur(3px)}
+.acctdlg-in{padding:clamp(22px,4vw,34px)}
+.acctdlg h3{font-size:clamp(1.5rem,3.4vw,2rem);line-height:1.15}
+.acct-typed{margin:14px 0 0;padding:10px 14px;border-radius:12px;background:var(--paper);word-break:break-all}
+.acctdlg p{margin:12px 0 0;line-height:1.5}
+.acct-warn{padding:14px 16px;border-radius:14px;background:#FFE24A;border:3px solid #1b1b1b;color:#3a2e00;font-size:1.05rem}
+.acct-tip{color:var(--ink2);font-size:.95rem}
+.acct-wait{font-weight:600;color:var(--marker)}
+.acct-wait.done{color:var(--mint)}
+.acct-btns{display:grid;gap:10px;margin-top:18px}
+.acct-btns .btn{justify-content:center;text-align:center;line-height:1.25}

@@ -30,6 +30,23 @@
 @keyframes l7sd{to{stroke-dashoffset:0}}@keyframes l7sf{to{opacity:1}}@keyframes l7sp{0%{opacity:0;transform:scale(.2)}70%{opacity:1;transform:scale(1.5)}100%{opacity:1;transform:scale(1)}}
 @media(prefers-reduced-motion:reduce){#l7s .l7s-a,#l7s .l7s-b{animation:none;stroke-dashoffset:0}#l7s .l7s-c,#l7s span{animation:none;opacity:1}}
 </style>
+
+<dialog class="acctdlg" id="acctDlg" aria-labelledby="acctH" aria-describedby="acctB">
+  <div class="acctdlg-in">
+    <h3 id="acctH">Use the email of your Claude.ai account</h3>
+    <p class="acct-typed">You typed: <b id="acctMail"></b></p>
+    <div id="acctB">
+      <p>If I have a spot for you, <b>Claude.ai itself sends an invitation</b> to this exact address. You accept it on claude.ai, it opens the board, and the board knows it is you.</p>
+      <p class="acct-warn"><b>This email must be connected to a Claude.ai account that you own.</b> If it is not, the invitation will not reach your account and you will not be able to open the board.</p>
+      <p class="acct-tip">Not sure? Open claude.ai, go to your settings and look at the email shown there. Use that one.</p>
+    </div>
+    <p class="acct-wait" id="acctWait" aria-live="polite">Please read this. The buttons unlock in <b id="acctSec">10</b> seconds.</p>
+    <div class="acct-btns">
+      <button class="btn main" type="button" id="acctYes" disabled>Yes, that is my Claude.ai email. Send.</button>
+      <button class="btn" type="button" id="acctNo" disabled>No, let me change it</button>
+    </div>
+  </div>
+</dialog>
 <script>
 (function(){var s=document.getElementById("l7s");if(!s)return;
 try{if(s.getAttribute("data-once")==="1"){if(sessionStorage.getItem("l7s")){s.remove();return}sessionStorage.setItem("l7s","1")}}catch(e){}
@@ -227,10 +244,10 @@ if(document.readyState==="complete")go();else addEventListener("load",go);setTim
     <div class="story-side">
       <h3>What I promise</h3>
       <ul class="promise">
-        <li><b>Your boards are yours.</b> Every tester has a private code and a private space. Other testers can't open yours.</li>
+        <li><b>Your boards are yours.</b> Every tester signs in with their own Claude.ai account and has a private space. Other testers can't open yours.</li>
         <li><b>Atlas teaches, it doesn't think for you.</b> Hints first if you want them, the full answer whenever you ask.</li>
         <li><b>I read your feedback.</b> It comes straight to me, and I fix what confuses you.</li>
-        <li><b>You can leave any time.</b> Tell me and I close your code.</li>
+        <li><b>You can leave any time.</b> Tell me and I close your access.</li>
       </ul>
       <p class="made">I made it while studying</p>
       <ul class="subjects"><li>Chemistry</li><li>Physics</li><li>Biology</li><li>Environmental science</li><li>Arabic</li><li>Islamic studies</li><li>English</li></ul>
@@ -258,11 +275,11 @@ if(document.readyState==="complete")go();else addEventListener("load",go);setTim
 <section class="test" id="test" aria-labelledby="testH">
   <div class="wrap">
     <h2 id="testH">Be one of the first 10 people to try it.</h2>
-    <p class="sub">Law7 is in a small test, just 10 people, so I can actually fix what's confusing. Every tester gets their own private code, their own boards and a daily allowance of Atlas questions.</p>
+    <p class="sub">Law7 is in a small test, just 10 people, so I can actually fix what's confusing. Every tester gets their own boards and a daily allowance of Atlas questions.</p>
     <div class="spots"><span class="dots" data-dots aria-hidden="true"></span><strong data-open-text>10 of 10 spots open</strong></div>
     <ol class="path">
       <li><h3>Apply</h3><p>Fill in the short form below. Tell me what you study and what device you use.</p></li>
-      <li><h3>Get your code</h3><p>If there's a spot, I send you a private code. It opens your own boards.</p></li>
+      <li><h3>Get your invitation</h3><p>If there's a spot, Claude.ai emails an invitation to the Claude.ai email you applied with. Accept it and the board opens, signed in as you.</p></li>
       <li><h3>Study as usual</h3><p>Use it for real homework and revision. You start with 30 Atlas questions a day.</p></li>
       <li><h3>Tell me what's confusing</h3><p>Tap Send feedback in the board when something's unclear or breaks. That's the whole job.</p></li>
     </ol>
@@ -275,22 +292,22 @@ if(document.readyState==="complete")go();else addEventListener("load",go);setTim
     <div>
       <h2 id="applyH">Apply to test</h2>
       <p>It takes about a minute. I read every application myself and reply to the people I can fit in.</p>
-      <p style="margin-top:28px"><a class="btn small" data-board href="#">I already have a code: open the board</a></p>
+      <p style="margin-top:28px"><a class="btn small" data-board href="#">I already have access: open the board</a></p>
     </div>
     <form id="applyForm" novalidate>
       <div class="two">
         <label>First name<input name="name" autocomplete="given-name" required></label>
-        <label>How can we reach you?<input name="contact" id="contactIn" autocomplete="email" placeholder="Email or phone" required></label>
+        <label>Email of your Claude.ai account<small>The email you sign in to Claude.ai with. Your invitation is sent here.</small><input name="contact" id="contactIn" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" required></label>
       </div>
-      <div id="spamNote" class="spamnote" hidden><strong>Check your spam or junk folder.</strong> My reply and your code can land there. If you see it, press “Not spam”.</div>
-      <label class="check"><input type="checkbox" name="nocontact" id="noContact"><span>None: you already have my contact<small>Tick this if we talk somewhere else, like Instagram, WhatsApp, school or in person.</small></span></label>
-      <label id="whereRow" hidden>Where should we find you?<small>Optional. Leave it empty and I'll already know.</small><input name="where" id="whereIn" placeholder="For example: Instagram @name, or we are in the same class"></label>
+      <div id="spamNote" class="spamnote" hidden><strong>Check your spam or junk folder.</strong> My reply and the Claude.ai invitation can land there. If you see them, press “Not spam”.</div>
+      <label class="check"><input type="checkbox" name="confirm" id="confirmAcct" required><span>This is the email of my own Claude.ai account<small>No Claude.ai account yet? Create one at claude.ai with this email first, then apply.</small></span></label>
+      <label>Another way to reach you<small>Optional. For example Instagram or WhatsApp, in case email fails.</small><input name="where" id="whereIn" placeholder="For example: Instagram @name"></label>
       <label>What do you study?<small>Your year and the subjects you most want help with.</small><input name="study" placeholder="Grade 11: chemistry, physics, Arabic"></label>
       <label>Your device<select name="device"><option>Tablet with a pen</option><option>Tablet, finger only</option><option>Laptop</option><option>Phone</option><option>Something else</option></select></label>
       <label>What would you use it for?<textarea name="why" placeholder="For example: working through chemistry problems before a test"></textarea></label>
       <button class="btn main" type="submit" id="sendBtn">Send my application</button>
       <div id="formMsg" role="status" aria-live="polite"></div>
-      <p class="fine">I only use this to pick testers and send you a code.</p>
+      <p class="fine">I only use this to pick testers and to invite you.</p>
     </form>
   </div></div>
 </section>
@@ -301,10 +318,11 @@ if(document.readyState==="complete")go();else addEventListener("load",go);setTim
     <h2 id="faqH">Questions</h2>
     <details><summary>Does it cost anything?</summary><p>Testing is free.</p></details>
     <details><summary>What do I need?</summary><p>A modern browser. A tablet with a pen is the best fit, but a finger, a mouse or a laptop trackpad also work.</p></details>
-    <details><summary>Who can see my boards?</summary><p>Your boards are saved under your own code and other testers can't open them.</p></details>
+    <details><summary>Who can see my boards?</summary><p>Your boards are saved under your own Claude.ai account and other testers can't open them.</p></details>
+    <details><summary>Why do you need my Claude.ai email?</summary><p>Law7 runs inside Claude.ai. I invite you with the email your Claude account uses, and when you accept, the board knows it is you. If you use a different email than your Claude account, the invitation never reaches your account.</p></details>
     <details><summary>Will Atlas just do my homework?</summary><p>It shows its steps on your page so you can follow them. How much you ask for is up to you. I'd say use it when you're stuck, not instead of trying first.</p></details>
     <details><summary>Why only 10 people?</summary><p>I'm paying for the Atlas questions myself, and a small group lets me fix things fast and keeps everyone's daily allowance generous.</p></details>
-    <details><summary>How do I leave the test?</summary><p>Stop using it whenever you like. If you want your code closed, message me and I'll do it.</p></details>
+    <details><summary>How do I leave the test?</summary><p>Stop using it whenever you like. If you want your access closed, message me and I'll do it.</p></details>
   </div></div>
 </section>
 <aside class="door" aria-labelledby="doorH"><div class="wrap">
