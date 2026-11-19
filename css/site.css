@@ -462,3 +462,59 @@ body.pj{background:var(--night);color:#fff}
 .pcard.strip .pbody{flex-direction:row;align-items:center;flex-wrap:wrap;gap:12px 32px;padding:clamp(18px,2.4vw,26px) clamp(20px,3vw,34px)}
 .pcard.strip .ptop{flex:none;gap:14px}
 .pcard.strip p{margin:0;flex:1 1 280px}
+
+/* ---------- hover life on the projects page (mouse only) ---------- */
+.pgo .arr{display:inline-block;transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+.pcard .pmedia img,.pcard .pmedia video{transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.pcard .pst{transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+.pcard.old .pmedia{transition:filter .4s}
+.bbus .core,.bbus li{transition:transform .3s cubic-bezier(.3,1.5,.5,1),background .3s}
+@media(hover:hover){
+  .pcard:hover{transform:translate(-2px,-4px) rotate(var(--tilt,0deg));box-shadow:9px 13px 0 -2px var(--ink)}
+  .pj .pcard:hover{box-shadow:9px 13px 0 -2px var(--hi)}
+  .pj .pcard.base:hover{box-shadow:9px 13px 0 -2px var(--cobalt)}
+  .pj .pcard.old:hover{box-shadow:9px 13px 0 -2px rgba(255,255,255,.18)}
+  .pcard.link:hover .pmedia img{transform:scale(1.06)}
+  .pcard:hover .pst{transform:scale(1.1) rotate(-3deg)}
+  .pcard.link:hover .pgo .arr{transform:translate(4px,-4px)}
+  .pcard.old.link:hover .pmedia{filter:saturate(1)}
+  .pcard.base:hover .core{transform:rotate(5deg) scale(1.08)}
+  .pcard.base:hover .bbus li{transform:translateX(8px)}
+  .pcard.base:hover .bbus li:nth-child(2){transition-delay:.04s}
+  .pcard.base:hover .bbus li:nth-child(3){transition-delay:.08s}
+  .pcard.base:hover .bbus li:nth-child(4){transition-delay:.12s}
+  .pcard.base:hover .bbus li:nth-child(5){transition-delay:.16s}
+  .pcard.nopic:hover h3{letter-spacing:.01em}
+}
+.pcard h3{transition:letter-spacing .25s}
+@media(prefers-reduced-motion:reduce){.pcard,.pcard *{transition:none!important}.pcard:hover{transform:none!important}}
+
+/* ---------- the resistant pull between the two rooms ---------- */
+.pullpanel{position:fixed;left:0;right:0;z-index:300;height:100vh;pointer-events:none;visibility:hidden;color:#fff;
+  --h:0px;transition:none;will-change:transform}
+.pullpanel.on,.pullpanel.pop,.pullpanel.back{visibility:visible}
+.pullpanel.bottom{bottom:0;transform:translateY(calc(100% - var(--h)));border-radius:30px 30px 0 0;
+  background:radial-gradient(circle at 20% 0%,rgba(42,68,245,.4),transparent 55%),radial-gradient(circle at 90% 100%,rgba(232,69,107,.22),transparent 50%),var(--night);
+  box-shadow:0 -10px 40px rgba(11,18,48,.35)}
+.pullpanel.top{top:0;transform:translateY(calc(var(--h) - 100%));border-radius:0 0 30px 30px;
+  background:linear-gradient(var(--paper),var(--paper));color:var(--ink);box-shadow:0 10px 40px rgba(11,18,48,.3)}
+.pullpanel.back{transition:transform .38s cubic-bezier(.3,1.4,.5,1)}
+.pullpanel.pop{transition:transform .26s cubic-bezier(.2,1.5,.4,1),border-radius .26s;transform:translateY(0);border-radius:0}
+.pp-in{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;padding:0 20px}
+.pullpanel.bottom .pp-in{top:20px}.pullpanel.top .pp-in{bottom:20px}
+.pp-in b{font:600 clamp(1.25rem,3.2vw,1.7rem)/1.1 var(--hand);color:var(--hi);letter-spacing:.01em}
+.pullpanel.top .pp-in b{color:var(--cobalt)}
+.pp-arr{font:700 1.5rem/1 var(--body);animation:ppb 1s ease-in-out infinite}
+.pullpanel.bottom .pp-arr{color:#fff}.pullpanel.top .pp-arr{color:var(--ink)}
+.pullpanel.near .pp-in b{transform:scale(1.08);transition:transform .2s}
+@keyframes ppb{50%{transform:translateY(5px)}}
+.pullpanel.top .pp-arr{animation-name:ppt}@keyframes ppt{50%{transform:translateY(-5px)}}
+.pullcurtain{position:fixed;inset:0;z-index:400;pointer-events:none;opacity:1}
+.pullcurtain.night{background:var(--night)}.pullcurtain.paper{background:var(--paper)}
+.pullcurtain.go{opacity:0;transition:opacity .55s .05s ease-out}
+.popin main,.popin .door{animation:popin .6s cubic-bezier(.2,1.4,.4,1) both}
+@keyframes popin{from{transform:scale(.94);opacity:.4}to{transform:none;opacity:1}}
+.pullhint{display:block;margin-top:14px;font:600 1.2rem/1 var(--hand);color:var(--hi);opacity:.85}
+@media(prefers-reduced-motion:reduce){.pullpanel,.pullcurtain{display:none}.popin main,.popin .door{animation:none}}
+.pj .pcard.old .pgo{color:var(--hi);margin-top:14px}
+.pcard.old .pbody{justify-content:center;gap:0}

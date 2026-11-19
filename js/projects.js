@@ -20,7 +20,7 @@
     if(p.url){el.href=p.url;el.target="_blank";el.rel="noopener"}
     var head='<div class="ptop"><h3>'+esc(p.name)+'</h3><span class="pst '+st+'">'+esc(p.status||"Building")+'</span></div>';
     var tags="";
-    var go=p.url?'<span class="pgo">'+esc(p.go||"Open")+' ↗</span>':"";
+    var go=p.url?'<span class="pgo">'+esc(p.go||"Open")+' <span class="arr">↗</span></span>':"";
     if(lay==="base"){
       var serves=(p.serves||[]).map(function(n){return '<li>'+esc(n)+'</li>'}).join("");
       el.innerHTML='<div class="pbody">'+head+'<p>'+esc(p.blurb)+'</p>'+tags+'</div>'
