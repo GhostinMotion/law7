@@ -40,7 +40,7 @@ window.LAW7 = {
       url: "https://ghostlymatters.duckdns.org/building-a-community", go: "Visit the site" },
     { name: "GhostlyTools", layout: "six", status: "In testing", tint: "blue",
       blurb: "A toolbox of small Windows tools. Not public yet.",
-      media: "assets/projects/ghostlytools-1.jpg", bg: "#1a1a1a", alt: "The GhostlyToolBox menu in a terminal, listing 25 tools" },
+      media: "assets/projects/ghostlytools-1.jpg", hover: "assets/projects/ghostlytools-hover.webp", bg: "#1a1a1a", alt: "The GhostlyToolBox menu in a terminal, listing 25 tools" },
     { name: "GhostlyScreen", layout: "six", status: "In testing", tint: "yellow",
       blurb: "A screensaver that locks my PC when I'm away. Ctrl+Shift+Alt+L locks it straight away, like Win+L. Only on my PC for now.",
       media: "assets/projects/ghostlyscreen-1.jpg", hover: "assets/projects/ghostlyscreen-hover.webp", bg: "#101014", alt: "GhostlyScreen running: a big clock and the date over a moving wallpaper, with the small ghost countdown ring in the corner" },
