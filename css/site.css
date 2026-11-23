@@ -414,15 +414,6 @@ html.still .chap-in{position:static;padding-top:48px;padding-bottom:48px}
 /* old card: portrait picture on the left */
 
 .pcard.nopic{background:var(--tint,#DCE5FF)}
-/* the "door" at the very end of the landing page */
-.door{background:var(--night);color:#fff;padding:clamp(54px,8vw,96px) 0;margin-top:0;position:relative;overflow:hidden}
-.door::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 0%,rgba(42,68,245,.35),transparent 55%),radial-gradient(circle at 90% 100%,rgba(232,69,107,.2),transparent 50%);pointer-events:none}
-.door .wrap{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px 48px}
-.door p{margin:0;max-width:30em;color:#C3CCEA}
-.door h2{font-size:clamp(1.6rem,3.4vw,2.5rem);margin-bottom:10px}
-.door .hand{font:600 1.5rem/1 var(--hand);color:var(--hi);display:block;margin-bottom:8px}
-.door .btn{background:var(--hi);border-color:var(--hi);color:var(--ink);box-shadow:5px 6px 0 -1px rgba(255,255,255,.3)}
-.door .btn:hover{box-shadow:7px 9px 0 -1px rgba(255,255,255,.35)}
 footer{margin-top:0}
 /* the projects page: a different room (night) */
 body.pj{background:var(--night);color:#fff}
@@ -489,33 +480,6 @@ body.pj{background:var(--night);color:#fff}
 .pcard h3{transition:letter-spacing .25s}
 @media(prefers-reduced-motion:reduce){.pcard,.pcard *{transition:none!important}.pcard:hover{transform:none!important}}
 
-/* ---------- the resistant pull between the two rooms ---------- */
-.pullpanel{position:fixed;left:0;right:0;z-index:300;height:100vh;pointer-events:none;visibility:hidden;color:#fff;
-  --h:0px;transition:none;will-change:transform}
-.pullpanel.on,.pullpanel.pop,.pullpanel.back{visibility:visible}
-.pullpanel.bottom{bottom:0;transform:translateY(calc(100% - var(--h)));border-radius:30px 30px 0 0;
-  background:radial-gradient(circle at 20% 0%,rgba(42,68,245,.4),transparent 55%),radial-gradient(circle at 90% 100%,rgba(232,69,107,.22),transparent 50%),var(--night);
-  box-shadow:0 -10px 40px rgba(11,18,48,.35)}
-.pullpanel.top{top:0;transform:translateY(calc(var(--h) - 100%));border-radius:0 0 30px 30px;
-  background:linear-gradient(var(--paper),var(--paper));color:var(--ink);box-shadow:0 10px 40px rgba(11,18,48,.3)}
-.pullpanel.back{transition:transform .38s cubic-bezier(.3,1.4,.5,1)}
-.pullpanel.pop{transition:transform .26s cubic-bezier(.2,1.5,.4,1),border-radius .26s;transform:translateY(0);border-radius:0}
-.pp-in{position:absolute;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;padding:0 20px}
-.pullpanel.bottom .pp-in{top:20px}.pullpanel.top .pp-in{bottom:20px}
-.pp-in b{font:600 clamp(1.25rem,3.2vw,1.7rem)/1.1 var(--hand);color:var(--hi);letter-spacing:.01em}
-.pullpanel.top .pp-in b{color:var(--cobalt)}
-.pp-arr{font:700 1.5rem/1 var(--body);animation:ppb 1s ease-in-out infinite}
-.pullpanel.bottom .pp-arr{color:#fff}.pullpanel.top .pp-arr{color:var(--ink)}
-.pullpanel.near .pp-in b{transform:scale(1.08);transition:transform .2s}
-@keyframes ppb{50%{transform:translateY(5px)}}
-.pullpanel.top .pp-arr{animation-name:ppt}@keyframes ppt{50%{transform:translateY(-5px)}}
-.pullcurtain{position:fixed;inset:0;z-index:400;pointer-events:none;opacity:1}
-.pullcurtain.night{background:var(--night)}.pullcurtain.paper{background:var(--paper)}
-.pullcurtain.go{opacity:0;transition:opacity .55s .05s ease-out}
-.popin main,.popin .door{animation:popin .6s cubic-bezier(.2,1.4,.4,1) both}
-@keyframes popin{from{transform:scale(.94);opacity:.4}to{transform:none;opacity:1}}
-.pullhint{display:block;margin-top:14px;font:600 1.2rem/1 var(--hand);color:var(--hi);opacity:.85}
-@media(prefers-reduced-motion:reduce){.pullpanel,.pullcurtain{display:none}.popin main,.popin .door{animation:none}}
 .pj .pcard.old .pgo{color:var(--hi);margin-top:14px}
 .pcard.old .pbody{justify-content:center;gap:0}
 
@@ -528,35 +492,6 @@ body.pj{background:var(--night);color:#fff}
 .pcard.hasgif.playing .pmedia::after{opacity:0}
 @media(hover:none){.pcard.hasgif .pmedia::after{display:none}}
 
-/* ---------- stretchy pull v2 ---------- */
-.pullpanel{height:100vh;--h:0px}
-.pullpanel.bottom{transform:translateY(calc(100% - var(--pull,0px)));
-  border-radius:50% 50% 0 0 / calc(var(--pull,0px)*.42) calc(var(--pull,0px)*.42) 0 0}
-.pullpanel.top{transform:translateY(calc(var(--pull,0px) - 100%));
-  border-radius:0 0 50% 50% / 0 0 calc(var(--pull,0px)*.42) calc(var(--pull,0px)*.42)}
-.pullpanel.pop{transform:translateY(0)!important;border-radius:0!important;transition:transform .28s cubic-bezier(.2,1.3,.4,1),border-radius .28s}
-.pullpanel.back{transition:transform .5s cubic-bezier(.3,1.6,.5,1),border-radius .5s}
-.pullpanel.bottom .pp-in{top:26px}.pullpanel.top .pp-in{bottom:26px}
-/* the page itself stretches along with the pull */
-html.pulling body>*:not(.pullpanel):not(.pullcurtain):not(.pullcue){transform:translateY(calc(var(--pull,0px)*-.28)) scaleY(calc(1 + var(--ps,0)*.07));transform-origin:50% 100%}
-html.pulling.top-pull body>*:not(.pullpanel):not(.pullcurtain):not(.pullcue){transform-origin:50% 0}
-body.pj{--dir:1}
-html.pulling body.pj>*:not(.pullpanel):not(.pullcurtain):not(.pullcue){transform:translateY(calc(var(--pull,0px)*.28)) scaleY(calc(1 + var(--ps,0)*.07));transform-origin:50% 0}
-html.snap body>*:not(.pullpanel):not(.pullcurtain):not(.pullcue){transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
-html.popping body>*:not(.pullpanel):not(.pullcurtain):not(.pullcue){transition:transform .28s}
-/* the pill that tells you the pull exists */
-.pullcue{position:fixed;left:50%;z-index:250;transform:translate(-50%,24px);opacity:0;pointer-events:none;display:flex;align-items:center;gap:10px;
-  padding:.75em 1.3em;border-radius:99px;font:700 1rem/1 var(--body);text-decoration:none;white-space:nowrap;
-  transition:opacity .35s,transform .45s cubic-bezier(.3,1.6,.5,1)}
-.pullcue.show{opacity:1;pointer-events:auto;transform:translate(-50%,0)}
-.pullcue.down{bottom:20px;background:var(--night);color:#fff;border:2px solid var(--hi);box-shadow:0 8px 28px rgba(11,18,48,.45)}
-.pullcue.up{top:76px;background:var(--paper);color:var(--ink);border:2px solid var(--ink);box-shadow:0 8px 28px rgba(0,0,0,.4);transform:translate(-50%,-24px)}
-.pullcue.up.show{transform:translate(-50%,0)}
-.pc-a{display:inline-block;animation:pcb 1.1s ease-in-out infinite;color:var(--hi);font-size:1.15em}
-.pullcue.up .pc-a{color:var(--cobalt);animation-name:pct}
-@keyframes pcb{50%{transform:translateY(5px)}}@keyframes pct{50%{transform:translateY(-5px)}}
-html.pulling .pullcue{opacity:0}
-@media(prefers-reduced-motion:reduce){.pc-a{animation:none}}
 
 /* the "use your Claude.ai email" popup: it cannot be closed for its first 10 seconds */
 .acctdlg{border:2px solid var(--ink);border-radius:26px;padding:0;width:min(560px,94vw);max-height:92svh;background:#fff;color:var(--ink);box-shadow:0 30px 80px rgba(11,18,48,.4);overflow:auto}
@@ -583,3 +518,123 @@ label.check.confirm small{font-weight:400;color:#5a4a00}
 #applyForm .spamnote{background:#EAF0FF;color:var(--ink);border:0;border-left:6px solid var(--cobalt);border-radius:12px;box-shadow:none;padding:12px 15px;font-size:.95rem;line-height:1.5}
 #applyForm .spamnote strong{display:inline;font-size:inherit;margin:0}
 .apply .btn.small{line-height:1.3;text-align:left}
+
+/* ===== the way down to the projects room: dusk, the door, falling stars (js/door.js) ===== */
+/* ------------------------------------------------------------ dusk */
+.dusk { position: relative; height: 70vh; overflow: hidden; }
+.dusk::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 70% 38% at 50% 62%, rgba(232,69,107,.22), transparent 70%),
+    linear-gradient(180deg, rgba(11, 18, 48, 0) 0%, rgba(11, 18, 48, .18) 22%, rgba(11, 18, 48, .7) 58%, var(--night) 100%);
+}
+.dusk-stars { position: absolute; inset: 0; }
+.dusk-note {
+  position: absolute; left: 50%; top: 16%; z-index: 1; margin: 0; padding: 10px 16px; max-width: 88vw; white-space: nowrap;
+  font: 1.45rem/1.1 var(--hand); color: var(--ink); background: #FFF3A8; box-shadow: 3px 3px 0 rgba(15,27,61,.25);
+  transform: translateX(-50%) rotate(-2.5deg);
+}
+/* three chevrons that light up one after another, downward */
+.dusk-chev { position: absolute; left: 50%; top: 46%; z-index: 1; display: grid; gap: 2px; transform: translateX(-50%); }
+.dusk-chev svg { width: 46px; height: 22px; color: var(--hi); opacity: .15; animation: chev 1.8s ease-in-out infinite; }
+.dusk-chev svg:nth-child(2) { animation-delay: .2s; }
+.dusk-chev svg:nth-child(3) { animation-delay: .4s; }
+@keyframes chev { 0%, 100% { opacity: .15; transform: translateY(-4px); } 40% { opacity: 1; transform: translateY(4px); } }
+
+/* ------------------------------------------------------------ the door */
+.door { --p: 1; --copy: 1; position: relative; height: 190vh; color: #fff; background: var(--night); }
+.door-stage { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; place-items: center; }
+.door-sky {
+  position: absolute; inset: 0; background-color: var(--night);
+  background-image:
+    linear-gradient(var(--night), rgba(11, 18, 48, 0) 28%),
+    radial-gradient(circle at 20% 42%, rgba(42,68,245,.3), transparent 50%),
+    radial-gradient(circle at 85% 90%, rgba(232,69,107,.14), transparent 45%),
+    linear-gradient(rgba(159, 176, 234, .06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(159, 176, 234, .06) 1px, transparent 1px);
+  background-size: auto, auto, auto, 34px 34px, 34px 34px;
+}
+
+/* stars: the wrapper carries the scroll parallax, the <i> inside twinkles and falls */
+.door-stars, .door-cards { position: absolute; inset: 0; pointer-events: none; }
+.star { position: absolute; left: var(--x); top: var(--y); width: var(--s); height: var(--s); color: var(--c); transform: translateY(calc((1 - var(--p, 1)) * var(--z) * 45vh)); }
+.star i { display: block; width: 100%; height: 100%; border-radius: 50%; background: currentColor; animation: twinkle var(--t) ease-in-out var(--d) infinite; }
+.star.sp i { background: none; filter: drop-shadow(0 0 6px currentColor); }
+.star.sp svg { display: block; width: 100%; height: 100%; }
+.star.falls i { animation: twinkle var(--t) ease-in-out var(--d) infinite, fall var(--fall) linear var(--d) infinite; }
+@keyframes twinkle { 0%, 100% { opacity: .35; scale: .75; } 50% { opacity: 1; scale: 1.1; } }
+@keyframes fall { from { translate: 0 -30px; } to { translate: 0 90px; } }
+
+/* now and then a star shoots past, down and to the left */
+.shoot { position: absolute; left: var(--x); top: var(--y); width: 150px; height: 2px; border-radius: 2px; opacity: 0;
+  background: linear-gradient(90deg, #fff, rgba(255,217,61,.6) 30%, transparent); transform: rotate(145deg); transform-origin: 0 50%;
+  animation: shoot 11s ease-in var(--d) infinite; }
+@keyframes shoot { 0% { opacity: 0; translate: 0 0; } 2% { opacity: 1; } 9% { opacity: 0; translate: -260px 190px; } 100% { opacity: 0; translate: -260px 190px; } }
+
+/* the project pictures: each rises from below at its own speed and settles when --p reaches 1 */
+.dc {
+  position: absolute; left: var(--x); top: var(--y); width: min(31vw, 420px); margin: 0;
+  transform: translate(-50%, -50%) translateY(calc((1 - var(--p)) * var(--z) * 100vh)) rotate(calc(var(--r) * (1 + (1 - var(--p)) * 2.5)));
+  will-change: transform;
+}
+.dc-frame { display: block; overflow: hidden; border: 2.5px solid #fff; border-radius: 16px; box-shadow: 7px 9px 0 -2px var(--hi); background: var(--bg, #14132a); }
+.dc img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: contain; }
+.dc figcaption { margin-top: 10px; font: 1.4rem/1 var(--hand); color: var(--hi); text-align: center; opacity: var(--copy); }
+
+/* the words and the one way in */
+.door-copy {
+  position: relative; z-index: 1; max-width: 29rem; padding: 0 24px; text-align: center;
+  opacity: var(--copy); transform: translateY(calc((1 - var(--copy)) * 40px));
+}
+.door-copy .door-note { display: block; margin-bottom: 10px; font: 1.5rem/1 var(--hand); color: var(--hi); }
+.door-copy h2 { font-size: clamp(2rem, 4.6vw, 3.4rem); text-shadow: 0 2px 24px var(--night); }
+.door-copy p { margin: 14px auto 0; color: #c3ccea; }
+.door-copy .btn { margin-top: 24px; background: var(--hi); border-color: var(--hi); color: var(--ink); box-shadow: 5px 6px 0 -1px rgba(255, 255, 255, .3); }
+.door-copy .btn:hover { box-shadow: 3px 4px 0 -1px rgba(255, 255, 255, .3); }
+
+/* the page footer lives at the bottom of the room */
+.door .door-foot {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; max-width: none; margin: 0; border: 0; gap: 2px; background: none;
+  padding: 14px clamp(16px, 4vw, 40px) max(14px, env(safe-area-inset-bottom)); text-align: center; font-size: .85rem;
+  color: #9fb0ea; opacity: var(--copy);
+}
+.door .door-foot .fine { color: #9fb0ea; max-width: none; }
+.door .door-foot a { color: #fff; }
+
+/* ------------------------------------------------------------ the "psst" pill */
+.door-cue {
+  position: fixed; left: 50%; bottom: 18px; z-index: 30; display: flex; align-items: center; gap: 10px;
+  padding: .75em 1.25em; border-radius: 99px; border: 2px solid var(--hi); cursor: pointer; white-space: nowrap;
+  font: 700 1rem/1 var(--body); color: #fff; background: var(--night); box-shadow: 0 8px 28px rgba(11, 18, 48, .45);
+  opacity: 0; pointer-events: none; transform: translate(-50%, 30px) rotate(-1deg);
+  transition: opacity .35s, transform .5s cubic-bezier(.3, 1.6, .5, 1);
+}
+.door-cue span { color: var(--hi); font-size: 1.2em; animation: bob 1.1s ease-in-out infinite; }
+.door-cue.show { opacity: 1; pointer-events: auto; transform: translate(-50%, 0) rotate(-1deg); }
+@keyframes bob { 50% { transform: translateY(5px); } }
+
+.door .door-foot p { margin: 0 auto; }
+
+/* tablets in landscape: corners only, so the pictures never cover the words */
+@media (min-width: 821px) and (max-width: 1100px) {
+  .dc { width: 27vw; }
+  .door-copy { max-width: 24rem; }
+}
+@media (max-width: 820px) {
+  .door { height: 170vh; }
+  .dc { width: 44vw; }
+  .dc figcaption { font-size: 1.05rem; margin-top: 6px; }
+  .dusk { height: 60vh; }
+  .dusk-note { font-size: 1.2rem; }
+  .door-cue { font-size: .92rem; }
+  .door-copy p { font-size: 1rem; }
+}
+
+/* no motion: stars stay still, no tall scroll, pictures in a row under the words */
+@media (prefers-reduced-motion: reduce) {
+  .star i, .star.falls i, .dusk-chev svg, .door-cue span { animation: none; opacity: .8; }
+  .door { height: auto; --p: 1 !important; --copy: 1 !important; }
+  .door-stage { position: relative; height: auto; display: flex; flex-direction: column; gap: 36px; padding: 80px 20px 120px; }
+  .door-cards { position: relative; inset: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; order: 2; }
+  .dc { position: static; transform: rotate(var(--r)); width: min(42vw, 280px); }
+}

@@ -326,14 +326,35 @@ if(document.readyState==="complete")go();else addEventListener("load",go);setTim
     <details><summary>How do I leave the test?</summary><p>Stop using it whenever you like. If you want your access closed, message me and I'll do it.</p></details>
   </div></div>
 </section>
-<aside class="door" aria-labelledby="doorH"><div class="wrap">
-  <div><span class="hand">psst, one more thing</span><h2 id="doorH">I build other stuff too</h2><p>A home server, a Discord community, a screensaver that locks my PC and more. They live in their own room, away from Law7.</p></div>
-  <div><a class="btn" href="projects.html">See my other projects</a><span class="pullhint">or just keep scrolling down</span></div>
-</div></aside>
 
 </main>
 
-<footer><div class="wrap"><span>Law7: an early test, made by Ghost. Atlas runs on Claude, made by Anthropic; Law7 is an independent project.<br>© 2026 GhostlyMatters</span><a href="#top">Back to top</a></div></footer>
+<!-- The way down, at the end: the paper fades to night (dusk), then the door: the other projects rise in at different
+     depths and the footer sits at the bottom of that room. The projects themselves live on projects.html.
+     Stars, pictures and the "psst" pill come from js/door.js. -->
+<div class="dusk" id="dusk" aria-hidden="true">
+  <div class="dusk-stars"></div>
+  <p class="dusk-note">it gets darker down here… keep going</p>
+  <div class="dusk-chev">
+    <svg viewBox="0 0 46 22"><path d="M4 4l19 14L42 4" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <svg viewBox="0 0 46 22"><path d="M4 4l19 14L42 4" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <svg viewBox="0 0 46 22"><path d="M4 4l19 14L42 4" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+</div>
+<aside class="door" id="door" aria-labelledby="doorH">
+  <div class="door-stage">
+    <div class="door-sky" aria-hidden="true"></div>
+    <div class="door-stars" aria-hidden="true"></div>
+    <div class="door-cards" aria-hidden="true"></div>
+    <div class="door-copy">
+      <span class="door-note">psst, one more thing</span>
+      <h2 id="doorH">I build other stuff too</h2>
+      <p>A home server, Accountable, a Discord community, a screensaver that locks my PC and more. They live in their own room, away from Law7.</p>
+      <a class="btn" href="projects.html">See my other projects</a>
+    </div>
+    <footer class="door-foot"><span>Law7: an early test, made by Ghost. Atlas runs on Claude, made by Anthropic; Law7 is an independent project. © 2026 GhostlyMatters</span> <a href="#top">Back to top</a></footer>
+  </div>
+</aside>
 
 <script src="js/config.js"></script>
 <script src="js/demo.js"></script>
@@ -341,6 +362,6 @@ if(document.readyState==="complete")go();else addEventListener("load",go);setTim
 <script src="js/showcase.js"></script>
 <script src="js/tiles.js"></script>
 <script src="js/main.js"></script>
-<script src="js/pull.js"></script>
+<script src="js/door.js"></script>
 </body>
 </html>
