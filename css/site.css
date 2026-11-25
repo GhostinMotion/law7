@@ -638,3 +638,13 @@ label.check.confirm small{font-weight:400;color:#5a4a00}
   .door-cards { position: relative; inset: auto; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; order: 2; }
   .dc { position: static; transform: rotate(var(--r)); width: min(42vw, 280px); }
 }
+/* hero: real board screenshot, what-you-get list, single apply button */
+.hero .get{list-style:none;margin:22px 0 0;padding:0;display:grid;gap:10px;max-width:34em}
+.hero .get li{position:relative;padding-left:26px;color:var(--ink2);line-height:1.4;font-size:1rem}
+.hero .get li::before{content:"";position:absolute;left:0;top:.38em;width:12px;height:12px;border-radius:50%;background:var(--hi);border:2px solid var(--ink)}
+.hero .get b{color:var(--ink)}
+.hero .ctas{margin-top:26px}
+.seelink{font-weight:600;color:var(--ink2);text-underline-offset:4px}.seelink:hover{color:var(--ink)}
+.hero .slots{margin-top:22px}
+.deck{aspect-ratio:16/10;max-width:640px}
+.deck img.board{inset:0 2% 0 0;width:98%;height:100%;object-fit:cover;object-position:left top;border-radius:18px;border:4px solid var(--night);background:var(--night);transform:rotate(-1.6deg);filter:drop-shadow(0 30px 40px rgba(15,27,61,.28))}
