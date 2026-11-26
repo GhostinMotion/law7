@@ -13,7 +13,7 @@ window.LAW7 = {
      If both are empty the form shows the answers as a message to copy and send you another way. */
   apply: {
     formEndpoint: "",
-    email: "Ima.gghost7@gmail.com",
+    email: "hello.ghostlymatters@gmail.com",
     /* Free automatic mail with EmailJS (emailjs.com). Fill all four and the form sends you the application
        and emails the applicant a confirmation, with no mail app opening. The key is a public key, safe here.
        service: your Email Service ID. notify: template that goes to you. reply: template that goes to the applicant. */
